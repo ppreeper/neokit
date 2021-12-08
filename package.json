@@ -8,7 +8,8 @@
     "sass": "^1.44.0"
   },
   "name": "neokit",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "files": ["/dist"],
   "scripts": {
     "sass-build": "npx sass -s compressed ./src/scss/neokit.scss:./dist/neokit.min.css",
     "sass-watch": "npx sass ./src/scss/neokit.scss:./dist/neokit.css --watch",

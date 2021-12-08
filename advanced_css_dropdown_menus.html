@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .body {
+        margin: 0;
+      }
+      .header {
+        background-color: #f3f3f3;
+        display: flex;
+        align-items: baseline;
+        padding: 0.5rem;
+        gap: 1rem;
+      }
+      .link {
+        background: none;
+        border: none;
+        text-decoration: none;
+        color: #777;
+        font-family: inherit;
+        font-size: inherit;
+        cursor: pointer;
+        padding: 0;
+      }
+      .dropdown.active > .link,
+      .link:hover {
+        color: black;
+      }
+      .dropdown {
+        position: relative;
+      }
+      .dropdown-menu {
+        position: absolute;
+        left: 0;
+        top: calc(100%+0.25rem);
+        background-color: white;
+        padding: 0.75rem;
+        border-radius: 0.25rem;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+      }
+      .dropdown.active > .link + .dropdown-menu {
+        opacity: 1;
+        transform: translateY(0px);
+        pointer-events: auto;
+      }
+
+      .information-grid {
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        gap: 2rem;
+      }
+
+      .dropdown-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .login-form > input {
+        margin-bottom: 0.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="dropdown" data-dropdown>
+        <button class="link" data-dropdown-button>Information</button>
+        <div class="dropdown-menu information-grid">
+          <div>
+            <div class="dropdown-heading">Free Tutorials</div>
+            <div class="dropdown-links">
+              <a href="#" class="link">All</a>
+              <a href="#" class="link">Latest</a>
+              <a href="#" class="link">Popular</a>
+            </div>
+          </div>
+          <div>
+            <div class="dropdown-heading">Courses</div>
+            <div class="dropdown-links">
+              <a href="#" class="link">All</a>
+              <a href="#" class="link">Latest</a>
+              <a href="#" class="link">Popular</a>
+            </div>
+          </div>
+          <div>
+            <div class="dropdown-heading">Blog</div>
+            <div class="dropdown-links">
+              <a href="#" class="link">JavaScript</a>
+              <a href="#" class="link">CSS</a>
+              <a href="#" class="link">React</a>
+            </div>
+          </div>
+          <div>
+            <div class="dropdown-heading">Other</div>
+            <div class="dropdown-links">
+              <a href="#" class="link">Twitter</a>
+              <a href="#" class="link">Newsletter</a>
+              <a href="#" class="link">Discord</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="link" data-dropdown-button>Pricing</a>
+      <div class="dropdown" data-dropdown>
+        <button class="link" data-dropdown-button>Login</button>
+        <div class="dropdown-menu">
+          <form class="login-form">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" />
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" />
+            <button type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('click', (e) => {
+        const isDropDownButton = e.target.matches('[data-dropdown-button')
+        if (!isDropDownButton && e.target.closest('[data-dropdown]') != null)
+          return
+
+        let currentDropDown
+        if (isDropDownButton) {
+          currentDropDown = e.target.closest('[data-dropdown]')
+          currentDropDown.classList.toggle('active')
+        }
+
+        document
+          .querySelectorAll('[data-dropdown].active')
+          .forEach((dropdown) => {
+            if (dropdown === currentDropDown) return
+            dropdown.classList.remove('active')
+          })
+      })
+    </script>
+  </body>
+</html>

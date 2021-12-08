@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nav Bar - Horizontal</title>
+    <link href="dist/neokit.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav>
+      <div class="neo-menu">
+        <ul>
+          <li><a href="/" class="active">Index</a></li>
+          <li><a href="navbar.html">Nav Bar</a></li>
+          <li>
+            <span>
+              Dropdown
+              <i class="arrow"></i>
+            </span>
+            <ul class="dropdown">
+              <li><a href="#">Regular Link</a></li>
+              <li>
+                <span>
+                  Item with arrow
+                  <i class="arrow"></i>
+                </span>
+                <ul class="dropdown">
+                  <li><a href="#">Etiam vestibulum</a></li>
+                  <li><a href="#">Integer efficitur</a></li>
+                  <li><a href="#">Finibus nibh</a></li>
+                </ul>
+              </li>
+              <li>
+                <span>Eget</span>
+                <ul class="dropdown">
+                  <li><a href="#">Nam elementum</a></li>
+                  <li><a href="#">Magna pharetra</a></li>
+                  <li><a href="#">Pulvinar mi eget</a></li>
+                  <li><a href="#">Tincidunt orci</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="full-width">
+            <span>Mega Menu</span>
+            <div class="dropdown">
+              <div class="column">
+                <h3>Integer</h3>
+                <a href="#">Lacus iaculis</a>
+                <a href="#">Eu tortor</a>
+                <a href="#">Luctus varius</a>
+              </div>
+              <div class="column">
+                <h3>Efficitur Viverra</h3>
+                <a href="#">Praesent</a>
+                <h3>At Eros</h3>
+                <a href="#">Pellentesque</a>
+                <a href="#">Dignissim pulvinar</a>
+              </div>
+              <div class="column">
+                <a href="#">image</a>
+              </div>
+              <div class="column">
+                <a href="#">image</a>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span>Dropdown Right</span>
+            <ul class="dropdown right0">
+              <li><a href="#">Nam elementum</a></li>
+              <li><a href="#">Magna pharetra</a></li>
+              <li><a href="#">Pulvinar mi eget</a></li>
+              <li><a href="#">Tincidunt orci</a></li>
+              <li>
+                <span>
+                  Eget
+                  <i class="arrow"></i>
+                </span>
+                <ul class="dropdown right0">
+                  <li><a href="#">Nam elementum</a></li>
+                  <li><a href="#">Magna pharetra</a></li>
+                  <li><a href="#">Pulvinar mi eget</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="neo-menu--right"><a href="#">Sign In</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div style="height: 1000px;">
+      <h2>Horizontal Nav</h2>
+      <h3>
+        Try to scroll this area, and see how the sidenav sticks to the page
+      </h3>
+      <p>
+        Notice that this div element has a left margin of 25%. This is because
+        the side navigation is set to 25% width. If you remove the margin, the
+        sidenav will overlay/sit on top of this div.
+      </p>
+      <p>
+        Also notice that we have set overflow:auto to sidenav. This will add a
+        scrollbar when the sidenav is too long (for example if it has over 50
+        links inside of it).
+      </p>
+      <p>Some text..</p>
+      <p>Some text..</p>
+      <p>Some text..</p>
+      <p>Some text..</p>
+      <p>Some text..</p>
+      <p>Some text..</p>
+      <p>Some text..</p>
+    </div>
+    <script src="dist/neokit.js"></script>
+  </body>
+</html>

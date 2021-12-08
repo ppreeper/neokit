@@ -10,7 +10,7 @@ export default {
     },
     {
       file: './dist/neokit.min.js',
-      format: 'iife',
+      format: 'es',
       name: 'version',
       plugins: [terser()],
     },

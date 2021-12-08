@@ -1,0 +1,227 @@
+@use "../abstracts" as *;
+
+$btntypes: primary, secondary, success, error, warning, info;
+$btnshades: light, dark;
+
+// extends
+%button--defaults {
+  display: inline-block;
+  border-radius: 0.1rem;
+  margin: 0;
+  padding: 0.7rem 1rem;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.9em;
+  font-weight: 500;
+  letter-spacing: 0rem;
+  text-decoration: none;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 1px solid hsl(0, 0%, 73%);
+  cursor: pointer;
+  box-sizing: border-box;
+  color: var(--color-light);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+%button__hover-focus {
+  color: hsl(0, 0%, 20%);
+  border-color: hsl(0, 0%, 53%);
+  outline: 0;
+}
+
+// button colors
+%button__color--primary {
+  color: --color-light;
+  background: --color-primary;
+  border-color: --color-primary;
+}
+
+%button__color--primary__hover-focus {
+  color: --color-light;
+  background: rgba(var(--color-primary), 0.5);
+  border-color: rgba(var(--color-primary), 0.5);
+}
+
+%button__group__border_radius {
+  border-radius: 0rem;
+  &:first-child {
+    border-radius: 0.3rem 0 0 0.3rem;
+  }
+  &:last-child {
+    border-radius: 0 0.3rem 0.3rem 0;
+  }
+}
+
+.btn {
+  @extend %button--defaults;
+
+  &--disabled {
+    filter: brightness(0.6);
+    pointer-events: none;
+    &:hover,
+    &:focus {
+      filter: brightness(1);
+    }
+  }
+
+  &--outline {
+    color: var(--color-primary);
+    background: var(--color-light);
+    border-color: var(--color-primary);
+  }
+
+  &--round {
+    border-radius: 2rem;
+    &--outline {
+      border-radius: 2rem;
+      color: var(--color-primary);
+      background: var(--color-light);
+      border-color: var(--color-primary);
+    }
+  }
+
+  &--icon {
+    max-width: 3rem;
+    max-height: 3rem;
+    &--round {
+      border-radius: 2rem;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    filter: brightness(0.9);
+  }
+
+  @each $btntype in $btntypes {
+    &--#{$btntype} {
+      color: var(--color-#{$btntype}-accent);
+      background: var(--color-#{$btntype});
+      border-color: var(--color-#{$btntype});
+      &--outline {
+        color: var(--color-#{$btntype});
+        background: var(--color-#{$btntype}-accent);
+        border-color: var(--color-#{$btntype});
+      }
+      &--no-outline {
+        color: var(--color-#{$btntype});
+        background: var(--color-#{$btntype}-accent);
+        border-color: var(--color-#{$btntype}-accent);
+      }
+    }
+  }
+
+  @each $btnshade in $btnshades {
+    &--#{$btnshade} {
+      color: var(--color-#{$btnshade}-accent);
+      background: var(--color-#{$btnshade});
+      border-color: var(--color-#{$btnshade});
+      &--outline {
+        color: var(--color-#{$btnshade}-accent);
+        background: var(--color-#{$btnshade});
+        border-color: var(--color-#{$btnshade}-accent);
+      }
+    }
+  }
+
+  @each $color, $value in $social {
+    &--#{$color} {
+      color: var(--color-light);
+      background: #{$value};
+      border-color: #{$value};
+      &--outline {
+        color: #{$value};
+        background: var(--color-light);
+        border-color: #{$value};
+      }
+      &--no-outline {
+        color: #{$value};
+        background: var(--color-light);
+        border-color: var(--color-light);
+      }
+    }
+  }
+
+  &--xsmall {
+    font-size: 60%;
+    padding: 0.42rem 0.6rem;
+  }
+
+  &--small {
+    font-size: 80%;
+    padding: 0.56rem 0.8rem;
+  }
+
+  &--large {
+    font-size: 110%;
+    padding: 0.77rem 1.1rem;
+  }
+
+  &--xlarge {
+    font-size: 125%;
+    padding: 0.875rem 1.25rem;
+  }
+  &--group {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    button {
+      @extend %button__group__border_radius;
+    }
+    &--small {
+      button {
+        font-size: 85%;
+        padding: 0.6rem 0.85rem;
+        @extend %button__group__border_radius;
+      }
+    }
+    &--large {
+      button {
+        font-size: 110%;
+        padding: 0.77rem 1.1rem;
+        @extend %button__group__border_radius;
+      }
+    }
+  }
+}
+
+%link--defaults {
+  background: transparent;
+  text-decoration: none;
+}
+.primary {
+  @extend %link--defaults;
+  color: var(--color-primary);
+}
+.secondary {
+  @extend %link--defaults;
+  color: var(--color-secondary);
+}
+.success {
+  @extend %link--defaults;
+  color: var(--color-success);
+}
+.error {
+  @extend %link--defaults;
+  color: var(--color-error);
+}
+.warning {
+  @extend %link--defaults;
+  color: var(--color-warning);
+}
+.info {
+  @extend %link--defaults;
+  color: var(--color-info);
+}
+.light {
+  @extend %link--defaults;
+  color: var(--color-light);
+}
+.dark {
+  @extend %link--defaults;
+  color: var(--color-dark);
+}

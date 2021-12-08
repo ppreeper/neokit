@@ -1,0 +1,45 @@
+@use "../abstracts" as *;
+
+:root {
+  // @each $shade, $value in $shades {
+  //   --clr-#{$shade}: #{$value};
+  // }
+  @each $color, $value in $themecolors {
+    --color-#{$color}: #{$value};
+  }
+  // @each $basecolor, $value in $basecolors {
+  //   --clr-#{$basecolor}: #{$value};
+  // }
+  // @each $color, $shades in $colors {
+  //   @each $shade, $value in $shades {
+  //     --clr-#{$color}-#{$shade}: #{$value};
+  //   }
+  // }
+  @each $screen-size, $font-size in $type-scale {
+    @if $screen-size == small {
+      @each $size, $value in $font-size {
+        --fs-#{$size}: #{$value};
+      }
+    } @else {
+      @include mq(small) {
+        @each $size, $value in $font-size {
+          --fs-#{$size}: #{$value};
+        }
+      }
+    }
+  }
+
+  @extend %font-family--sans-serif;
+  font-weight: 400;
+}
+
+// @each $color, $shades in $colors {
+//   @each $shade, $value in $shades {
+//     .text-#{$color}-#{$shade} {
+//       color: var(--clr-#{$color}-#{$shade});
+//     }
+//     .bg-#{$color}-#{$shade} {
+//       background-color: var(--clr-#{$color}-#{$shade});
+//     }
+//   }
+// }

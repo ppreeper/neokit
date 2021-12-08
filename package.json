@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "concurrently": "^6.4.0",
+    "live-server": "^1.2.1",
+    "rollup": "^2.60.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.44.0"
+  },
+  "name": "neokit",
+  "version": "1.0.0",
+  "scripts": {
+    "sass-build": "npx sass -s compressed ./src/scss/neokit.scss:./dist/neokit.min.css",
+    "sass-watch": "npx sass ./src/scss/neokit.scss:./dist/neokit.css --watch",
+    "build": "npm run sass-build && npm run js-build",
+    "js-build": "rollup -c",
+    "js-watch": "rollup -c --watch",
+    "live-server": "live-server",
+    "dev": "concurrently 'npm:sass-watch' 'npm:js-watch' 'npm:live-server'"
+  },
+  "keywords": [],
+  "author": "Peter Preeper",
+  "license": "MIT",
+  "description": "A full css/js mini-framework with some basic components and funcationality for webapps."
+}

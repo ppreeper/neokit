@@ -1,0 +1,34 @@
+$type-scale: (
+  small: (
+    300: 1rem,
+    400: clamp(1rem, 10vw + 1rem, 1.125rem),
+    500: clamp(1.125rem, 10vw + 1rem, 1.266rem),
+    600: clamp(1.266rem, 10vw + 1rem, 1.424rem),
+    700: clamp(1.424rem, 10vw + 1rem, 1.602rem),
+    800: clamp(1.602rem, 10vw + 1rem, 1.802rem),
+    xl: clamp(1.802rem, 10vw + 1rem, 3.604rem),
+  ),
+  large: (
+    300: 1rem,
+    400: clamp(1rem, 10vw + 1rem, 1.25rem),
+    500: clamp(1.25rem, 10vw + 1rem, 1.563rem),
+    600: clamp(1.563rem, 10vw + 1rem, 1.953rem),
+    700: clamp(1.953rem, 10vw + 1rem, 2.441rem),
+    800: clamp(2.441rem, 10vw + 1rem, 3.052rem),
+    xl: clamp(3.052rem, 10vw + 1rem, 6.104rem),
+  ),
+);
+
+// extends
+%font-family--sans-serif {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+%font-family--serif {
+  font-family: serif;
+}
+
+%font-family--mono {
+  font-family: monospace, monospace;
+}

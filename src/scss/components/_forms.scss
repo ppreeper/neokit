@@ -1,0 +1,261 @@
+%input__default-styling {
+  height: 2rem;
+  padding: 0.375rem 0.625rem;
+  background-color: var(--color-input-back);
+  border: 1px solid var(--color-grey-dark);
+  border-radius: 0.25rem;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+%input__focus {
+  border: 1px solid #33c3f0;
+  outline: 0;
+}
+
+%input__appearance {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+%label__defaults {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+label {
+  @extend %label__defaults;
+}
+
+legend {
+  @extend %label__defaults;
+}
+
+fieldset {
+  padding: 0;
+  border-width: 1;
+}
+
+label > .label-body {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-weight: normal;
+}
+
+input {
+  [type="email"] {
+    @extend %input__default-styling;
+    @extend %input__appearance;
+
+    &:focus {
+      @extend %input__focus;
+    }
+  }
+
+  [type="number"] {
+    @extend %input__default-styling;
+    @extend %input__appearance;
+
+    &:focus {
+      @extend %input__focus;
+    }
+  }
+
+  [type="search"] {
+    @extend %input__default-styling;
+    @extend %input__appearance;
+
+    &:focus {
+      @extend %input__focus;
+    }
+  }
+
+  [type="text"] {
+    @extend %input__default-styling;
+    @extend %input__appearance;
+
+    &:focus {
+      @extend %input__focus;
+    }
+  }
+
+  [type="tel"] {
+    @extend %input__default-styling;
+    @extend %input__appearance;
+
+    &:focus {
+      @extend %input__focus;
+    }
+  }
+
+  [type="url"] {
+    @extend %input__default-styling;
+    @extend %input__appearance;
+
+    &:focus {
+      @extend %input__focus;
+    }
+  }
+
+  [type="password"] {
+    @extend %input__default-styling;
+    @extend %input__appearance;
+
+    &:focus {
+      @extend %input__focus;
+    }
+  }
+
+  &[type="checkbox"] {
+    display: inline;
+  }
+
+  &[type="radio"] {
+    display: inline;
+  }
+}
+
+textarea {
+  @extend %input__default-styling;
+  @extend %input__appearance;
+  min-height: 65px;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+
+select {
+  @extend %input__default-styling;
+
+  &:focus {
+    @extend %input__focus;
+  }
+}
+
+.multiselect-wrapper {
+  white-space: nowrap;
+  label {
+    display: block;
+    font-size: 1.1rem;
+    &:focus {
+      outline: none;
+    }
+    &:active {
+      outline: none;
+    }
+  }
+  .multiselect-input {
+    padding: 0rem;
+  }
+  .multiselect-list {
+    z-index: 10;
+    position: absolute;
+    display: none;
+    background-color: var(--color-input-back);
+    border: 1px solid var(--color-grey-dark);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    margin-top: -2px;
+    padding: 5px;
+    > span {
+      font-size: 1.2rem;
+      cursor: default;
+    }
+    ul {
+      list-style: none;
+      display: block;
+      position: relative;
+      padding: 0px;
+      margin: 0px;
+      max-height: 30vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      li {
+        display: block;
+        &.active {
+          background-color: var(--color-primary);
+          color: white;
+        }
+        &:hover {
+          background-color: var(--color-primary);
+          color: white;
+        }
+        label {
+          margin: 0;
+        }
+      }
+    }
+    li {
+      cursor: default;
+      padding-right: 2rem;
+    }
+    .multiselect-checkbox {
+      margin-right: 2px;
+    }
+    hr {
+      margin: 0.3rem 0rem;
+      padding: 0rem;
+    }
+  }
+  &:focus-within .multiselect-list {
+    display: block;
+  }
+  &.disabled {
+    .multiselect-dropdown-arrow {
+      border-top: 5px solid var(--color-grey-light);
+    }
+    .multiselect-count {
+      background-color: var(--color-grey-light);
+    }
+  }
+}
+
+.multiselect-input {
+  width: clamp(5rem, 10rem, 15rem);
+  border-radius: 0.2rem;
+}
+
+.multiselect-input-div {
+  input {
+    border: 1px solid black;
+    background: var(--color-input-back);
+    height: 2rem;
+    vertical-align: middle;
+    padding-left: 0.25rem;
+  }
+  .multiselect-input {
+    border: 1px solid var(--color-grey-dark);
+    padding-left: 0.25rem;
+    padding-top: 0.1rem;
+  }
+}
+
+.multiselect-count {
+  position: relative;
+  text-align: center;
+  border-radius: 0.2rem;
+  background-color: var(--color-info);
+  display: inline-block !important;
+  padding: 0.125rem 0.45rem;
+  left: -2.5rem;
+}
+
+.multiselect-dropdown-arrow {
+  width: 0;
+  height: 0;
+  border-left: 0.25rem solid transparent;
+  border-right: 0.25rem solid transparent;
+  border-top: 0.25rem solid black;
+  position: absolute;
+  line-height: 1.5rem;
+  text-align: center;
+  display: inline-block !important;
+  margin-top: 1rem;
+  margin-left: -2.5rem;
+}
+
+.multiselect-text {
+  margin: 0;
+  padding: 0;
+}

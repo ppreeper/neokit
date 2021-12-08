@@ -1,0 +1,17 @@
+@use "breakpoints";
+
+@mixin mq($key) {
+  $size: map-get(breakpoints.$breakpoints, $key);
+  @media only screen and (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin user-select($property) {
+  -webkit-touch-callout: $property;
+  -webkit-user-select: $property;
+  -khtml-user-select: $property;
+  -moz-user-select: $property;
+  -ms-user-select: $property;
+  user-select: $property;
+}

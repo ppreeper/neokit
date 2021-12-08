@@ -1,0 +1,23 @@
+%list--defaults{
+  display: block;
+  counter-reset: list-item;
+  padding-inline-start: 2.5rem;
+}
+
+ol {
+  @extend %list--defaults;
+}
+ul {
+  @extend %list--defaults;
+}
+li{
+  display: list-item;
+  text-align: match-parent;
+}
+
+:is(dir, menu, ol, ul) :is(dir, menu, ul) {
+  list-style-type: circle;
+}
+:is(dir, menu, ol, ul) :is(dir, menu, ol, ul) :is(dir, menu, ul) {
+  list-style-type: square;
+}

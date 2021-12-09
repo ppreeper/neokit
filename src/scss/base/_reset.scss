@@ -26,8 +26,11 @@ ol[role="list"] {
 }
 
 /* Set core root defaults */
-html:focus-within {
-  scroll-behavior: smooth;
+html {
+  font-size: 16px;
+  &:focus-within {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Set core body defaults */

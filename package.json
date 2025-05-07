@@ -3,8 +3,8 @@
     "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-terser": "^0.4.4",
     "concurrently": "^6.5.1",
-    "sass": "^1.85.1",
-    "vite": "^6.2.0"
+    "sass": "^1.87.0",
+    "vite": "^6.3.5"
   },
   "name": "neokit",
   "version": "1.0.2",
@@ -12,7 +12,8 @@
     "/dist"
   ],
   "scripts": {
-    "sass-build": "npx sass -s compressed ./src/scss/neokit.scss:./dist/neokit.min.css",
+    "sass-build": "npx sass ./src/scss/neokit.scss:./dist/neokit.css",
+    "sass-build-min": "npx sass -s compressed ./src/scss/neokit.scss:./dist/neokit.min.css",
     "sass-watch": "npx sass ./src/scss/neokit.scss:./dist/neokit.css --watch",
     "build": "npm run sass-build && npm run js-build",
     "js-build": "npx vite buld",

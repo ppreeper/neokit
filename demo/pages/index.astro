@@ -1,13 +1,232 @@
 ---
-import AppLayout from "../layouts/AppLayout.astro";
-// import BaseLayout from "../layouts/BaseLayout.astro";
-// import Sidemenu from "../modules/Sidemenu.astro";
-// import Navbar from "../modules/Navbar.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../modules/Navbar.astro";
 
-const { title } = Astro.props;
+const version = "1.0.3";
+
+const categories = [
+    {
+        label: "Actions",
+        icon: "⚡",
+        description: "Buttons, dropdowns, modals, swaps",
+        href: "/ui/button",
+        count: 5,
+    },
+    {
+        label: "Data Display",
+        icon: "📊",
+        description: "Cards, tables, badges, stats, timelines",
+        href: "/ui/accordion",
+        count: 15,
+    },
+    {
+        label: "Navigation",
+        icon: "🧭",
+        description: "Menus, tabs, breadcrumbs, pagination",
+        href: "/ui/breadcrumb",
+        count: 7,
+    },
+    {
+        label: "Feedback",
+        icon: "💬",
+        description: "Alerts, toasts, loading, progress",
+        href: "/ui/alert",
+        count: 6,
+    },
+    {
+        label: "Data Input",
+        icon: "✏️",
+        description: "Inputs, selects, checkboxes, toggles",
+        href: "/ui/checkbox",
+        count: 9,
+    },
+    {
+        label: "Layout",
+        icon: "🏗️",
+        description: "Hero, drawer, divider, footer, stack",
+        href: "/ui/artboard",
+        count: 9,
+    },
+    {
+        label: "Mockup",
+        icon: "🖥️",
+        description: "Browser, phone, code, window frames",
+        href: "/ui/browser",
+        count: 4,
+    },
+];
+
+const features = [
+    {
+        title: "Astro Integration",
+        description:
+            "One-line setup. Add neokit() to your astro.config.mjs and Tailwind v4 + DaisyUI are automatically injected — no manual CSS imports.",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+    },
+    {
+        title: "DaisyUI Components",
+        description:
+            "61 components across 7 categories — all built on DaisyUI v5 with semantic class names and full theme support out of the box.",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>`,
+    },
+    {
+        title: "Tailwind v4",
+        description:
+            "Built on Tailwind CSS v4 with the Vite plugin. Lightning-fast builds, zero config, no tailwind.config.js required.",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+    },
+    {
+        title: "Themeable",
+        description:
+            "Light and dark mode built in. All 30+ DaisyUI themes available with a single config option — no extra setup needed.",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`,
+    },
+];
 ---
 
-<AppLayout title={title}>
+<BaseLayout title="Astro component library">
+    <Navbar />
 
+    <main class="flex-1">
+        <!-- Hero -->
+        <section class="bg-base-100 border-b border-base-300">
+            <div class="max-w-5xl mx-auto px-6 py-20 text-center">
+                <div class="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-6 border border-primary/20">
+                    <span>v{version}</span>
+                    <span class="opacity-40">·</span>
+                    <span>61 components</span>
+                    <span class="opacity-40">·</span>
+                    <span>DaisyUI v5</span>
+                </div>
 
-</AppLayout>
+                <h1 class="text-5xl sm:text-6xl font-black tracking-tight text-base-content mb-4">
+                    neokit
+                </h1>
+                <p class="text-xl text-base-content/60 max-w-xl mx-auto mb-10 leading-relaxed">
+                    An Astro component library built on DaisyUI and Tailwind CSS v4.<br />
+                    Zero-config integration. Drop in and go.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
+                    <a href="/ui/button" class="btn btn-primary btn-lg">
+                        Browse components
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a
+                        href="https://github.com/ppreeper/neokit"
+                        target="_blank"
+                        rel="noopener"
+                        class="btn btn-outline btn-lg"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+
+                <!-- Install command -->
+                <div class="inline-flex items-center gap-3 bg-base-200 border border-base-300 rounded-xl px-5 py-3 font-mono text-sm text-base-content/70">
+                    <span class="text-primary font-bold select-none">$</span>
+                    <span>bun add neokit</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="max-w-5xl mx-auto px-6 py-16">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-base-content/40 mb-8 text-center">
+                What's included
+            </h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {features.map((f) => (
+                    <div class="bg-base-100 rounded-xl border border-base-300 p-5">
+                        <div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4" set:html={f.icon} />
+                        <h3 class="font-bold text-base-content mb-1.5">{f.title}</h3>
+                        <p class="text-sm text-base-content/60 leading-relaxed">{f.description}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        <!-- Quick start -->
+        <section class="bg-base-100 border-y border-base-300">
+            <div class="max-w-5xl mx-auto px-6 py-16">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-base-content/40 mb-8 text-center">
+                    Quick start
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 rounded-full bg-primary text-primary-content text-sm font-bold flex items-center justify-center shrink-0 mt-0.5">1</div>
+                        <div>
+                            <h3 class="font-semibold text-base-content mb-1">Install</h3>
+                            <div class="mockup-code text-xs !bg-base-200 !text-base-content border border-base-300 rounded-lg p-3 font-mono">
+                                <pre><code>bun add neokit</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 rounded-full bg-primary text-primary-content text-sm font-bold flex items-center justify-center shrink-0 mt-0.5">2</div>
+                        <div>
+                            <h3 class="font-semibold text-base-content mb-1">Configure</h3>
+                            <div class="mockup-code text-xs !bg-base-200 !text-base-content border border-base-300 rounded-lg p-3 font-mono leading-relaxed">
+                                <pre><code>{"// astro.config.mjs\nimport neokit from 'neokit'\n\nexport default defineConfig({\n  integrations: [neokit()]\n})"}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 rounded-full bg-primary text-primary-content text-sm font-bold flex items-center justify-center shrink-0 mt-0.5">3</div>
+                        <div>
+                            <h3 class="font-semibold text-base-content mb-1">Use</h3>
+                            <div class="mockup-code text-xs !bg-base-200 !text-base-content border border-base-300 rounded-lg p-3 font-mono leading-relaxed">
+                                <pre><code>{"import Button from\n  'neokit/components/Button.astro'\n\n<Button color=\"primary\">\n  Hello world\n</Button>"}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Component categories -->
+        <section class="max-w-5xl mx-auto px-6 py-16">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-base-content/40 mb-8 text-center">
+                Component categories
+            </h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {categories.map((cat) => (
+                    <a
+                        href={cat.href}
+                        class="group bg-base-100 border border-base-300 rounded-xl p-5 hover:border-primary/40 hover:shadow-sm transition-all"
+                    >
+                        <div class="text-2xl mb-3">{cat.icon}</div>
+                        <h3 class="font-bold text-base-content group-hover:text-primary transition-colors mb-1">
+                            {cat.label}
+                        </h3>
+                        <p class="text-xs text-base-content/50 mb-3 leading-relaxed">{cat.description}</p>
+                        <span class="text-xs font-semibold text-primary/70">{cat.count} components →</span>
+                    </a>
+                ))}
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-base-300 bg-base-100">
+        <div class="max-w-5xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-base-content/40">
+            <div class="flex items-center gap-2">
+                <div class="w-5 h-5 rounded bg-primary flex items-center justify-center">
+                    <span class="text-primary-content text-xs font-black leading-none">N</span>
+                </div>
+                <span>neokit v{version}</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://github.com/ppreeper/neokit" target="_blank" rel="noopener" class="hover:text-base-content transition-colors">GitHub</a>
+                <a href="https://daisyui.com" target="_blank" rel="noopener" class="hover:text-base-content transition-colors">DaisyUI</a>
+                <a href="https://tailwindcss.com" target="_blank" rel="noopener" class="hover:text-base-content transition-colors">Tailwind CSS</a>
+                <a href="https://astro.build" target="_blank" rel="noopener" class="hover:text-base-content transition-colors">Astro</a>
+            </div>
+        </div>
+    </footer>
+</BaseLayout>

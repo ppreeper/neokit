@@ -1,125 +1,128 @@
 ---
+const pathname = Astro.url.pathname.replace(/\/$/, "");
 
+const groups: { label: string; items: { href: string; label: string }[] }[] = [
+    {
+        label: "Actions",
+        items: [
+            { href: "/ui/button", label: "Button" },
+            { href: "/ui/dropdown", label: "Dropdown" },
+            { href: "/ui/modal", label: "Modal" },
+            { href: "/ui/swap", label: "Swap" },
+            { href: "/ui/theme-controller", label: "Theme Controller" },
+        ],
+    },
+    {
+        label: "Data Display",
+        items: [
+            { href: "/ui/accordion", label: "Accordion" },
+            { href: "/ui/avatar", label: "Avatar" },
+            { href: "/ui/badge", label: "Badge" },
+            { href: "/ui/card", label: "Card" },
+            { href: "/ui/carousel", label: "Carousel" },
+            { href: "/ui/chat-bubble", label: "Chat Bubble" },
+            { href: "/ui/collapse", label: "Collapse" },
+            { href: "/ui/countdown", label: "Countdown" },
+            { href: "/ui/diff", label: "Diff" },
+            { href: "/ui/kbd", label: "KBD" },
+            { href: "/ui/list", label: "List" },
+            { href: "/ui/stat", label: "Stat" },
+            { href: "/ui/status", label: "Status" },
+            { href: "/ui/table", label: "Table" },
+            { href: "/ui/timeline", label: "Timeline" },
+        ],
+    },
+    {
+        label: "Navigation",
+        items: [
+            { href: "/ui/breadcrumb", label: "Breadcrumbs" },
+            { href: "/ui/dock", label: "Dock" },
+            { href: "/ui/menu", label: "Menu" },
+            { href: "/ui/navbar", label: "Navbar" },
+            { href: "/ui/pagination", label: "Pagination" },
+            { href: "/ui/steps", label: "Steps" },
+            { href: "/ui/tabs", label: "Tabs" },
+        ],
+    },
+    {
+        label: "Feedback",
+        items: [
+            { href: "/ui/alert", label: "Alert" },
+            { href: "/ui/loading", label: "Loading" },
+            { href: "/ui/progress", label: "Progress" },
+            { href: "/ui/skeleton", label: "Skeleton" },
+            { href: "/ui/toast", label: "Toast" },
+            { href: "/ui/tooltip", label: "Tooltip" },
+        ],
+    },
+    {
+        label: "Data Input",
+        items: [
+            { href: "/ui/checkbox", label: "Checkbox" },
+            { href: "/ui/fileinput", label: "File Input" },
+            { href: "/ui/input", label: "Input" },
+            { href: "/ui/radio", label: "Radio" },
+            { href: "/ui/range", label: "Range" },
+            { href: "/ui/rating", label: "Rating" },
+            { href: "/ui/select", label: "Select" },
+            { href: "/ui/textarea", label: "Textarea" },
+            { href: "/ui/toggle", label: "Toggle" },
+        ],
+    },
+    {
+        label: "Layout",
+        items: [
+            { href: "/ui/artboard", label: "Artboard" },
+            { href: "/ui/divider", label: "Divider" },
+            { href: "/ui/drawer", label: "Drawer" },
+            { href: "/ui/footer", label: "Footer" },
+            { href: "/ui/hero", label: "Hero" },
+            { href: "/ui/indicator", label: "Indicator" },
+            { href: "/ui/join", label: "Join" },
+            { href: "/ui/mask", label: "Mask" },
+            { href: "/ui/stack", label: "Stack" },
+        ],
+    },
+    {
+        label: "Mockup",
+        items: [
+            { href: "/ui/browser", label: "Browser" },
+            { href: "/ui/code", label: "Code" },
+            { href: "/ui/phone", label: "Phone" },
+            { href: "/ui/window", label: "Window" },
+        ],
+    },
+];
 ---
 
-<div class="drawer border-2 h-[calc(100vh-3rem)] overflow-y-auto p-2">
-  <div class="flex justify-center">
-    <h2>Partsbin</h2>
-  </div>
-    <div><a href="/ui/installation">Installation</a></div>
-    <div><a href="/ui/usage">Usage</a></div>
-    <div><a href="/ui/configuration">Configuration</a></div>
-    <div><a href="/ui/customization">Customization</a></div>
-    <div><a href="/ui/plugins">Plugins</a></div>
-    <div><a href="/ui/transitions">Transitions</a></div>
-    <div><a href="/ui/faq">FAQ</a></div>
-    <div><a href="/ui/colors">Colors</a></div>
-    <div><a href="/ui/typography">Typography</a></div>
-    <div><a href="/ui/button">Button</a></div>
-    <div><a href="/ui/checkbox">Checkbox</a></div>
-    <div><a href="/ui/color-picker">Color Picker</a></div>
-    <div><a href="/ui/combo-box">Combo Box</a></div>
-    <div><a href="/ui/datepicker">Date Picker</a></div>
-    <div><a href="/ui/dropdown">Dropdown</a></div>
-    <div><a href="/ui/file-upload">File Upload</a></div>
-    <div><a href="/ui/fileinput">File Input</a></div>
-    <div><a href="/ui/form">Form</a></div>
-    <div><a href="/ui/input">Input</a></div>
-    <div><a href="/ui/multiselect">Multiselect</a></div>
-    <div><a href="/ui/password-strong">Password Strong</a></div>
-    <div><a href="/ui/password-toggle">Password Toggle</a></div>
-    <div><a href="/ui/radio">Radio</a></div>
-    <div><a href="/ui/range">Range</a></div>
-    <div><a href="/ui/range-slider">Range Slider</a></div>
-    <div><a href="/ui/search">Search</a></div>
-    <div><a href="/ui/searchbox">Search Box</a></div>
-    <div><a href="/ui/select">Select</a></div>
-    <div><a href="/ui/select-advanced">Advanced Select</a></div>
-    <div><a href="/ui/select-box">Select Box</a></div>
-    <div><a href="/ui/slider">Slider</a></div>
-    <div><a href="/ui/switch">Switch</a></div>
-    <div><a href="/ui/time-picker">Time Picker</a></div>
-    <div><a href="/ui/text">Text</a></div>
-    <div><a href="/ui/textarea">Textarea</a></div>
-    <div><a href="/ui/toggle">Toggle</a></div>
-    <div><a href="/ui/accordion">Accordion</a></div>
-    <div><a href="/ui/alert">Alert</a></div>
-    <div><a href="/ui/artboard">Artboard</a></div>
-    <div><a href="/ui/avatar">Avatar</a></div>
-    <div><a href="/ui/badge">Badge</a></div>
-    <div><a href="/ui/banner">Banner</a></div>
-    <div><a href="/ui/browser">Browser</a></div>
-    <div><a href="/ui/blockquote">Blockquote</a></div>
-    <div><a href="/ui/calendar">Calendar</a></div>
-    <div><a href="/ui/card">Card</a></div>
-    <div><a href="/ui/carousel">Carousel</a></div>
-    <div><a href="/ui/chart">Chart</a></div>
-    <div><a href="/ui/chat-bubble">Chat Bubble</a></div>
-    <div><a href="/ui/code">Code</a></div>
-    <div><a href="/ui/collapse">Collapse</a></div>
-    <div><a href="/ui/countdown">Countdown</a></div>
-    <div><a href="/ui/diff">Diff</a></div>
-    <div><a href="/ui/divider">Divider</a></div>
-    <div><a href="/ui/dashboard">Dashboard</a></div>
-    <div><a href="/ui/fieldset">Fieldset</a></div>
-    <div><a href="/ui/gallery">Gallery</a></div>
-    <div><a href="/ui/grid">Grid</a></div>
-    <div><a href="/ui/heading">Heading</a></div>
-    <div><a href="/ui/hero">Hero</a></div>
-    <div><a href="/ui/icon">Icon</a></div>
-    <div><a href="/ui/images">Images</a></div>
-    <div><a href="/ui/indicator">Indicator</a></div>
-    <div><a href="/ui/jumbotron">Jumbotron</a></div>
-    <div><a href="/ui/join">Join</a></div>
-    <div><a href="/ui/kbd">KBD</a></div>
-    <div><a href="/ui/label">Label</a></div>
-    <div><a href="/ui/legend">Legend Indicator</a></div>
-    <div><a href="/ui/list">List</a></div>
-    <div><a href="/ui/loading">Loading</a></div>
-    <div><a href="/ui/mask">Mask</a></div>
-    <div><a href="/ui/phone">Phone</a></div>
-    <div><a href="/ui/popover">Popover</a></div>
-    <div><a href="/ui/progress">Progress</a></div>
-    <div><a href="/ui/progress-radial">Progress Radial</a></div>
-    <div><a href="/ui/rating">Rating</a></div>
-    <div><a href="/ui/rtl">RTL</a></div>
-    <div><a href="/ui/scrollspy">Scrollspy</a></div>
-    <div><a href="/ui/separator">Separator</a></div>
-    <div><a href="/ui/skeleton">Skeleton</a></div>
-    <div><a href="/ui/speed-dial">Speed Dial</a></div>
-    <div><a href="/ui/spinner">Spinner</a></div>
-    <div><a href="/ui/stack">Stack</a></div>
-    <div><a href="/ui/stat">Stat</a></div>
-    <div><a href="/ui/status">Status</a></div>
-    <div><a href="/ui/stepper">Stepper</a></div>
-    <div><a href="/ui/steps">Steps</a></div>
-    <div><a href="/ui/swap">Swap</a></div>
-    <div><a href="/ui/theme-controller">Theme Controller</a></div>
-    <div><a href="/ui/table">Table</a></div>
-    <div><a href="/ui/tabs">Tabs</a></div>
-    <div><a href="/ui/timeline">Timeline</a></div>
-    <div><a href="/ui/toast">Toast</a></div>
-    <div><a href="/ui/toggle-count">Toggle Count</a></div>
-    <div><a href="/ui/tooltip">Tooltip</a></div>
-    <div><a href="/ui/tree-view">Tree View</a></div>
-    <div><a href="/ui/typography">Typography</a></div>
-    <div><a href="/ui/video">Video</a></div>
-    <div><a href="/ui/window">Window</a></div>
-    <div><a href="/ui/navigation-bottom">Bottom Navigation</a></div>
-    <div><a href="/ui/breadcrumb">Breadcrumb</a></div>
-    <div><a href="/ui/context-menu">Context Menu</a></div>
-    <div><a href="/ui/dock">Dock</a></div>
-    <div><a href="/ui/drawer">Drawer</a></div>
-    <div><a href="/ui/footer">Footer</a></div>
-    <div><a href="/ui/header">Header</a></div>
-    <div><a href="/ui/link">Link</a></div>
-    <div><a href="/ui/mega-menu">Mega Menu</a></div>
-    <div><a href="/ui/menu">Menu</a></div>
-    <div><a href="/ui/modal">Modal</a></div>
-    <div><a href="/ui/navbar">Navbar</a></div>
-    <div><a href="/ui/navs">Navs</a></div>
-    <div><a href="/ui/pagination">Pagination</a></div>
-    <div><a href="/ui/side-menu">Side Menu</a></div>
-    <div><a href="/ui/sidebar">Sidebar</a></div>
-    <div><a href="/ui/vertical-menu">Vertical Menu</a></div>
-</div>
+<nav class="w-56 shrink-0 border-r border-base-300 h-[calc(100vh-3.5rem)] overflow-y-auto bg-base-100">
+    <div class="px-3 py-4 space-y-5">
+        {groups.map((group) => (
+            <div>
+                <p class="px-2 mb-1 text-xs font-bold uppercase tracking-wider text-base-content/40 select-none">
+                    {group.label}
+                </p>
+                <ul class="space-y-0.5">
+                    {group.items.map((item) => {
+                        const active = pathname === item.href || pathname === item.href + "/index";
+                        return (
+                            <li>
+                                <a
+                                    href={item.href}
+                                    class:list={[
+                                        "block px-2 py-1.5 rounded text-sm transition-colors",
+                                        active
+                                            ? "bg-primary text-primary-content font-medium"
+                                            : "text-base-content/80 hover:bg-base-200 hover:text-base-content",
+                                    ]}
+                                >
+                                    {item.label}
+                                </a>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
+        ))}
+    </div>
+</nav>

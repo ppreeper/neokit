@@ -2,86 +2,37 @@
 
 ---
 
-<label class="swap swap-rotate btn btn-ghost btn-circle">
-    <input id="theme-button" type="checkbox" class="theme-controller" />
+<label class="swap swap-rotate btn btn-ghost btn-sm btn-circle" title="Toggle theme" aria-label="Toggle theme">
+    <input id="theme-button" type="checkbox" />
 
-    <svg
-        class="swap-off h-8 w-8 fill-current"
-        aria-label="sun"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-    >
-        <g
-            stroke-linejoin="round"
-            stroke-linecap="round"
-            stroke-width="2"
-            fill="none"
-            stroke="currentColor"
-        >
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2"></path>
-            <path d="M12 20v2"></path>
-            <path d="m4.93 4.93 1.41 1.41"></path>
-            <path d="m17.66 17.66 1.41 1.41"></path>
-            <path d="M2 12h2"></path>
-            <path d="M20 12h2"></path>
-            <path d="m6.34 17.66-1.41 1.41"></path>
-            <path d="m19.07 4.93-1.41 1.41"></path>
-        </g>
+    <!-- Sun icon (light mode) -->
+    <svg class="swap-off h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
     </svg>
 
-    <svg
-        class="swap-on h-8 w-8 fill-current"
-        aria-label="moon"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-    >
-        <g
-            stroke-linejoin="round"
-            stroke-linecap="round"
-            stroke-width="2"
-            fill="none"
-            stroke="currentColor"
-        >
-            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-        </g>
+    <!-- Moon icon (dark mode) -->
+    <svg class="swap-on h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
     </svg>
 </label>
 
-<script >
+<script>
     const lightTheme = "corporate";
     const darkTheme = "business";
 
-    const handleToggle = () => {
-        // const currentTheme =
-        //     document.documentElement.getAttribute("data-theme");
-        // const nextTheme = currentTheme === lightTheme ? darkTheme : lightTheme;
-
-        // document.documentElement.setAttribute("data-theme", nextTheme);
-        // localStorage.setItem("theme", nextTheme);
-        const toggle = document.querySelector(
-            "#theme-button",
-        ) as HTMLInputElement;
+    function init() {
+        const toggle = document.querySelector("#theme-button") as HTMLInputElement;
         if (!toggle) return;
-
-        // 1. Sync checkbox state with current actual theme on load
-        const currentTheme =
-            document.documentElement.getAttribute("data-theme");
-        toggle.checked = currentTheme === darkTheme;
-
-        // 2. Listen for changes
+        const current = document.documentElement.getAttribute("data-theme");
+        toggle.checked = current === darkTheme;
         toggle.addEventListener("change", () => {
-            const nextTheme = toggle.checked ? darkTheme : lightTheme;
-            document.documentElement.setAttribute("data-theme", nextTheme);
-            localStorage.setItem("theme", nextTheme);
+            const next = toggle.checked ? darkTheme : lightTheme;
+            document.documentElement.setAttribute("data-theme", next);
+            localStorage.setItem("theme", next);
         });
-    };
-    // document
-    //     .getElementById("theme-button")
-    //     ?.addEventListener("click", handleToggle);
-    //
-    // Run on initial load
-    handleToggle();
-    // Run after Astro View Transitions swap
-    document.addEventListener("astro:after-swap", handleToggle);
+    }
+
+    init();
+    document.addEventListener("astro:after-swap", init);
 </script>

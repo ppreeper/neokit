@@ -54,8 +54,8 @@ const {
 
 const rootClass = twMerge(
     "range",
-    size !== "md" && `range-${size}`,
-    color && `range-${color}`,
+    size !== "md" && { xs: "range-xs", sm: "range-sm", lg: "range-lg", xl: "range-xl" }[size],
+    color && { primary: "range-primary", secondary: "range-secondary", accent: "range-accent", info: "range-info", success: "range-success", warning: "range-warning", error: "range-error", neutral: "range-neutral" }[color],
     classes,
 );
 ---

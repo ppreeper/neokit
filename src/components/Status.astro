@@ -39,10 +39,31 @@ const {
     classes,
 } = Astro.props;
 
+const colorClassMap = {
+    neutral:   "status-neutral",
+    primary:   "status-primary",
+    secondary: "status-secondary",
+    accent:    "status-accent",
+    info:      "status-info",
+    success:   "status-success",
+    warning:   "status-warning",
+    error:     "status-error",
+} as const;
+const sizeClassMap = {
+    xs: "status-xs",
+    sm: "status-sm",
+    md: "",
+    lg: "status-lg",
+    xl: "status-xl",
+} as const;
+
+const colorClass = color ? colorClassMap[color] : "";
+const sizeClass  = size  ? sizeClassMap[size]   : "";
+
 const dotClass = twMerge(
     "status",
-    color && `status-${color}`,
-    size && `status-${size}`,
+    colorClass,
+    sizeClass,
     animate === "bounce" && "animate-bounce",
     classes,
 );
@@ -55,9 +76,9 @@ const dotClass = twMerge(
         role={label ? "status" : undefined}
     >
         {/* outer ping layer */}
-        <span class={twMerge("status", color && `status-${color}`, size && `status-${size}`, "animate-ping opacity-75")} />
+        <span class={twMerge("status", colorClass, sizeClass, "animate-ping opacity-75")} />
         {/* solid inner dot */}
-        <span class={twMerge("status", color && `status-${color}`, size && `status-${size}`)} />
+        <span class={twMerge("status", colorClass, sizeClass)} />
     </span>
 ) : (
     <span

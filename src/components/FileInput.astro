@@ -53,9 +53,9 @@ const {
 
 const rootClass = twMerge(
     "file-input",
-    size !== "md" && `file-input-${size}`,
-    color && `file-input-${color}`,
-    variant && `file-input-${variant}`,
+    size !== "md" && { xs: "file-input-xs", sm: "file-input-sm", lg: "file-input-lg", xl: "file-input-xl" }[size],
+    color && { primary: "file-input-primary", secondary: "file-input-secondary", accent: "file-input-accent", info: "file-input-info", success: "file-input-success", warning: "file-input-warning", error: "file-input-error", neutral: "file-input-neutral" }[color],
+    variant && { bordered: "file-input-bordered", ghost: "file-input-ghost" }[variant],
     classes,
 );
 ---

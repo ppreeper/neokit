@@ -23,7 +23,18 @@ interface Props {
 
 const { position, classes, itemClasses } = Astro.props;
 
-const posClass = position ? `indicator-${position}` : "";
+const posClassMap = {
+    "top-start":    "indicator-top indicator-start",
+    "top-center":   "indicator-top indicator-center",
+    "top-end":      "indicator-top indicator-end",
+    "middle-start": "indicator-middle indicator-start",
+    "middle-center":"indicator-middle indicator-center",
+    "middle-end":   "indicator-middle indicator-end",
+    "bottom-start": "indicator-bottom indicator-start",
+    "bottom-center":"indicator-bottom indicator-center",
+    "bottom-end":   "indicator-bottom indicator-end",
+} as const;
+const posClass = position ? posClassMap[position] : "";
 const itemClass = twMerge("indicator-item", posClass, itemClasses);
 const wrapClass = twMerge("indicator", classes);
 ---

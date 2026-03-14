@@ -76,8 +76,20 @@ const {
     classes,
 } = Astro.props;
 
+// Static map so Tailwind v4's scanner sees each complete class literal
+const colorClassMap = {
+    neutral:   "chat-bubble-neutral",
+    primary:   "chat-bubble-primary",
+    secondary: "chat-bubble-secondary",
+    accent:    "chat-bubble-accent",
+    info:      "chat-bubble-info",
+    success:   "chat-bubble-success",
+    warning:   "chat-bubble-warning",
+    error:     "chat-bubble-error",
+} as const;
+
 const sideClass = side === "end" ? "chat-end" : "chat-start";
-const colorClass = color ? `chat-bubble-${color}` : "";
+const colorClass = color ? colorClassMap[color] : "";
 const rootClass = twMerge("chat", sideClass, classes);
 const bubbleClass = twMerge("chat-bubble", colorClass);
 ---

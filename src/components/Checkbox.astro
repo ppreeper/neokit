@@ -56,8 +56,8 @@ const {
 
 const rootClass = twMerge(
     "checkbox",
-    size !== "md" && `checkbox-${size}`,
-    color && `checkbox-${color}`,
+    size !== "md" && { xs: "checkbox-xs", sm: "checkbox-sm", lg: "checkbox-lg", xl: "checkbox-xl" }[size],
+    color && { primary: "checkbox-primary", secondary: "checkbox-secondary", accent: "checkbox-accent", info: "checkbox-info", success: "checkbox-success", warning: "checkbox-warning", error: "checkbox-error", neutral: "checkbox-neutral" }[color],
     classes,
 );
 ---

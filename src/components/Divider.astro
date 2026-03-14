@@ -27,7 +27,17 @@ interface Props {
 const { vertical = false, color, start = false, end = false, classes } = Astro.props;
 
 const verticalClass = vertical ? "divider-vertical" : "";
-const colorClass = color ? `divider-${color}` : "";
+const colorClassMap = {
+    neutral:   "divider-neutral",
+    primary:   "divider-primary",
+    secondary: "divider-secondary",
+    accent:    "divider-accent",
+    info:      "divider-info",
+    success:   "divider-success",
+    warning:   "divider-warning",
+    error:     "divider-error",
+} as const;
+const colorClass = color ? colorClassMap[color] : "";
 const positionClass = start ? "divider-start" : end ? "divider-end" : "";
 
 const classList = twMerge("divider", verticalClass, colorClass, positionClass, classes);

@@ -23,8 +23,8 @@ const { tip, position, color, open = false, classes } = Astro.props;
 
 const wrapClass = twMerge(
     "tooltip",
-    position && position !== "top" && `tooltip-${position}`,
-    color && `tooltip-${color}`,
+    position && position !== "top" && { bottom: "tooltip-bottom", left: "tooltip-left", right: "tooltip-right" }[position],
+    color && { primary: "tooltip-primary", secondary: "tooltip-secondary", accent: "tooltip-accent", info: "tooltip-info", success: "tooltip-success", warning: "tooltip-warning", error: "tooltip-error" }[color],
     open && "tooltip-open",
     classes
 );

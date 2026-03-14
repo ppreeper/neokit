@@ -42,8 +42,8 @@ const { variant, size, classes } = Astro.props;
 
 const rootClass = twMerge(
     "tabs",
-    variant && `tabs-${variant}`,
-    size && `tabs-${size}`,
+    variant && { bordered: "tabs-bordered", lifted: "tabs-lifted", box: "tabs-box" }[variant],
+    size && { xs: "tabs-xs", sm: "tabs-sm", md: "tabs-md", lg: "tabs-lg", xl: "tabs-xl" }[size],
     classes,
 );
 ---

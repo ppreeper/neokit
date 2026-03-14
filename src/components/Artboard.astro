@@ -16,7 +16,7 @@ interface Props {
 
 const { phone, horizontal = false, demo = false, classes } = Astro.props;
 
-const phoneClass = phone ? `artboard-phone-${phone}` : "";
+const phoneClass = phone ? ({ 1: "artboard-phone-1", 2: "artboard-phone-2", 3: "artboard-phone-3", 4: "artboard-phone-4", 5: "artboard-phone-5", 6: "artboard-phone-6" } as const)[phone] : "";
 const horizontalClass = horizontal ? "artboard-horizontal" : "";
 const demoClass = demo ? "artboard-demo" : "";
 

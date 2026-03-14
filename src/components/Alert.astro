@@ -41,8 +41,8 @@ const { color, variant, vertical, classes } = Astro.props;
 
 const rootClass = twMerge(
     "alert",
-    color && `alert-${color}`,
-    variant && `alert-${variant}`,
+    color && { info: "alert-info", success: "alert-success", warning: "alert-warning", error: "alert-error" }[color],
+    variant && { soft: "alert-soft", outline: "alert-outline", dash: "alert-dash" }[variant],
     vertical && "alert-vertical",
     classes,
 );

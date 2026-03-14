@@ -39,7 +39,7 @@ const { size, classes } = Astro.props;
 
 const rootClass = twMerge(
     "dock",
-    size && `dock-${size}`,
+    size && { xs: "dock-xs", sm: "dock-sm", md: "dock-md", lg: "dock-lg", xl: "dock-xl" }[size],
     classes,
 );
 ---

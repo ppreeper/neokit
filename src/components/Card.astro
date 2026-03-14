@@ -70,14 +70,14 @@ interface Props {
     imageOverlay?: boolean;
     /**
      * Background color token for the card.
-     * Maps to `bg-{color}` — e.g. `"base-100"`, `"primary"`, `"neutral"`.
+     * Maps to a `bg-{color}` class.
      */
-    bg?: string;
+    bg?: "base-100" | "base-200" | "base-300" | "primary" | "secondary" | "accent" | "neutral" | "info" | "success" | "warning" | "error";
     /**
      * Text color token for card content.
-     * Maps to `text-{color}` — e.g. `"primary-content"`, `"neutral-content"`.
+     * Maps to a `text-{color}` class.
      */
-    textColor?: string;
+    textColor?: "base-content" | "primary-content" | "secondary-content" | "accent-content" | "neutral-content" | "info-content" | "success-content" | "warning-content" | "error-content";
     /** Extra classes on the root card element. */
     classes?: string;
 }
@@ -104,8 +104,20 @@ const styleClass = {
 }[style];
 const sizeClass = size === "compact" ? "card-compact" : "";
 const overlayClass = imageOverlay ? "image-full" : "";
-const bgClass = bg ? `bg-${bg}` : "";
-const textClass = textColor ? `text-${textColor}` : "";
+const bgClassMap = {
+    "base-100": "bg-base-100", "base-200": "bg-base-200", "base-300": "bg-base-300",
+    primary: "bg-primary", secondary: "bg-secondary", accent: "bg-accent", neutral: "bg-neutral",
+    info: "bg-info", success: "bg-success", warning: "bg-warning", error: "bg-error",
+} as const;
+const textClassMap = {
+    "base-content": "text-base-content",
+    "primary-content": "text-primary-content", "secondary-content": "text-secondary-content",
+    "accent-content": "text-accent-content", "neutral-content": "text-neutral-content",
+    "info-content": "text-info-content", "success-content": "text-success-content",
+    "warning-content": "text-warning-content", "error-content": "text-error-content",
+} as const;
+const bgClass   = bg        ? bgClassMap[bg]         : "";
+const textClass = textColor ? textClassMap[textColor] : "";
 
 const rootClass = twMerge(
     "card",

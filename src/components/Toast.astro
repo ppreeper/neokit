@@ -41,8 +41,8 @@ const {
 
 const rootClass = twMerge(
     "toast",
-    horizontal !== "end" && `toast-${horizontal}`,
-    vertical !== "bottom" && `toast-${vertical}`,
+    horizontal !== "end" && { start: "toast-start", center: "toast-center" }[horizontal],
+    vertical !== "bottom" && { top: "toast-top", middle: "toast-middle" }[vertical],
     classes,
 );
 ---

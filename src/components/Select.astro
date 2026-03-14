@@ -54,9 +54,9 @@ const {
 
 const rootClass = twMerge(
     "select",
-    size !== "md" && `select-${size}`,
-    color && `select-${color}`,
-    variant && `select-${variant}`,
+    size !== "md" && { xs: "select-xs", sm: "select-sm", lg: "select-lg", xl: "select-xl" }[size],
+    color && { primary: "select-primary", secondary: "select-secondary", accent: "select-accent", info: "select-info", success: "select-success", warning: "select-warning", error: "select-error", neutral: "select-neutral" }[color],
+    variant && { bordered: "select-bordered", ghost: "select-ghost" }[variant],
     classes,
 );
 ---

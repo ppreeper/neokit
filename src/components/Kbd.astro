@@ -37,7 +37,7 @@ interface Props {
 
 const { size = "md", classes } = Astro.props;
 
-const sizeClass = size !== "md" ? `kbd-${size}` : "";
+const sizeClass = size !== "md" ? { xs: "kbd-xs", sm: "kbd-sm", lg: "kbd-lg", xl: "kbd-xl" }[size] ?? "" : "";
 const rootClass = twMerge("kbd", sizeClass, classes);
 ---
 

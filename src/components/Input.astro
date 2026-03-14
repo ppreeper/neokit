@@ -60,9 +60,9 @@ const {
 
 const rootClass = twMerge(
     "input",
-    size !== "md" && `input-${size}`,
-    color && `input-${color}`,
-    variant && `input-${variant}`,
+    size !== "md" && { xs: "input-xs", sm: "input-sm", lg: "input-lg", xl: "input-xl" }[size],
+    color && { primary: "input-primary", secondary: "input-secondary", accent: "input-accent", info: "input-info", success: "input-success", warning: "input-warning", error: "input-error", neutral: "input-neutral" }[color],
+    variant && { bordered: "input-bordered", ghost: "input-ghost" }[variant],
     classes,
 );
 ---

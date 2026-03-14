@@ -34,7 +34,7 @@ const { value, max = 100, color, classes } = Astro.props;
 
 const rootClass = twMerge(
     "progress",
-    color && `progress-${color}`,
+    color && { primary: "progress-primary", secondary: "progress-secondary", accent: "progress-accent", info: "progress-info", success: "progress-success", warning: "progress-warning", error: "progress-error", neutral: "progress-neutral" }[color],
     classes,
 );
 ---

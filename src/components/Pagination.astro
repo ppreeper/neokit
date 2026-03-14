@@ -73,7 +73,7 @@ function buildPages(total: number, current: number): (number | "...")[] {
 
 const pages = buildPages(total, current);
 
-const sizeClass = size ? `btn-${size}` : "";
+const sizeClass = size ? { xs: "btn-xs", sm: "btn-sm", md: "btn-md", lg: "btn-lg", xl: "btn-xl" }[size] : "";
 const baseItemClass = twMerge("join-item btn", sizeClass);
 const inactiveClass = twMerge(baseItemClass, variant === "outline" ? "btn-outline" : "");
 const activeClass = twMerge(baseItemClass, "btn-primary");

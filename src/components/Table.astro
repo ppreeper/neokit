@@ -50,7 +50,7 @@ const {
 
 const tableClass = twMerge(
     "table",
-    size && `table-${size}`,
+    size && { xs: "table-xs", sm: "table-sm", md: "table-md", lg: "table-lg", xl: "table-xl" }[size],
     zebra && "table-zebra",
     pinRows && "table-pin-rows",
     pinCols && "table-pin-cols",

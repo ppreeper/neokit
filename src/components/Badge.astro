@@ -23,7 +23,17 @@ const {
     classes,
 } = Astro.props;
 
-const colorClass = color ? `badge-${color}` : "";
+const colorClassMap = {
+    neutral:   "badge-neutral",
+    primary:   "badge-primary",
+    secondary: "badge-secondary",
+    accent:    "badge-accent",
+    info:      "badge-info",
+    success:   "badge-success",
+    warning:   "badge-warning",
+    error:     "badge-error",
+} as const;
+const colorClass = color ? colorClassMap[color] : "";
 const variantClass = {
     solid: "",
     outline: "badge-outline",
@@ -31,7 +41,13 @@ const variantClass = {
     dash: "badge-dash",
     ghost: "badge-ghost",
 }[variant];
-const sizeClass = size === "md" ? "" : `badge-${size}`;
+const sizeClass = {
+    xs: "badge-xs",
+    sm: "badge-sm",
+    md: "",
+    lg: "badge-lg",
+    xl: "badge-xl",
+}[size];
 
 const classList = twMerge("badge", colorClass, variantClass, sizeClass, classes);
 ---

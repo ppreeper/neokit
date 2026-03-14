@@ -55,8 +55,8 @@ const wrapperClass = twMerge("rating", half && "rating-half", classes);
 
 const maskBase = twMerge(
     "mask mask-star-2",
-    size !== "md" && `rating-${size}`,
-    color && `bg-${color}`,
+    size !== "md" && { xs: "rating-xs", sm: "rating-sm", lg: "rating-lg", xl: "rating-xl" }[size],
+    color && { primary: "bg-primary", secondary: "bg-secondary", accent: "bg-accent", info: "bg-info", success: "bg-success", warning: "bg-warning", error: "bg-error", neutral: "bg-neutral" }[color],
 );
 
 // Build the star inputs array

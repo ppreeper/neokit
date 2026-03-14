@@ -53,8 +53,8 @@ const {
 
 const rootClass = twMerge(
     "toggle",
-    size !== "md" && `toggle-${size}`,
-    color && `toggle-${color}`,
+    size !== "md" && { xs: "toggle-xs", sm: "toggle-sm", lg: "toggle-lg", xl: "toggle-xl" }[size],
+    color && { primary: "toggle-primary", secondary: "toggle-secondary", accent: "toggle-accent", info: "toggle-info", success: "toggle-success", warning: "toggle-warning", error: "toggle-error", neutral: "toggle-neutral" }[color],
     classes,
 );
 ---

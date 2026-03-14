@@ -58,9 +58,9 @@ const {
 
 const rootClass = twMerge(
     "textarea",
-    size !== "md" && `textarea-${size}`,
-    color && `textarea-${color}`,
-    variant && `textarea-${variant}`,
+    size !== "md" && { xs: "textarea-xs", sm: "textarea-sm", lg: "textarea-lg", xl: "textarea-xl" }[size],
+    color && { primary: "textarea-primary", secondary: "textarea-secondary", accent: "textarea-accent", info: "textarea-info", success: "textarea-success", warning: "textarea-warning", error: "textarea-error", neutral: "textarea-neutral" }[color],
+    variant && { bordered: "textarea-bordered", ghost: "textarea-ghost" }[variant],
     classes,
 );
 ---

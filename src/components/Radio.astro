@@ -53,8 +53,8 @@ const {
 
 const rootClass = twMerge(
     "radio",
-    size !== "md" && `radio-${size}`,
-    color && `radio-${color}`,
+    size !== "md" && { xs: "radio-xs", sm: "radio-sm", lg: "radio-lg", xl: "radio-xl" }[size],
+    color && { primary: "radio-primary", secondary: "radio-secondary", accent: "radio-accent", info: "radio-info", success: "radio-success", warning: "radio-warning", error: "radio-error", neutral: "radio-neutral" }[color],
     classes,
 );
 ---

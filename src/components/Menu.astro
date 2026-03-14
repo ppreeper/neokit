@@ -41,7 +41,7 @@ const { size, horizontal, classes } = Astro.props;
 
 const rootClass = twMerge(
     "menu",
-    size && `menu-${size}`,
+    size && { xs: "menu-xs", sm: "menu-sm", md: "menu-md", lg: "menu-lg", xl: "menu-xl" }[size],
     horizontal && "menu-horizontal",
     classes,
 );

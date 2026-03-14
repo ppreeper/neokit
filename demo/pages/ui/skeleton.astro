@@ -1,0 +1,208 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Skeleton from "neokit/components/Skeleton.astro";
+---
+
+<AppLayout title="Skeleton">
+    <h1 id="top" class="text-5xl">Skeleton</h1>
+    <p class="mt-2 opacity-70">
+        A loading placeholder that mimics content layout while data loads.
+        Built with DaisyUI's <code>skeleton</code> class on a{" "}
+        <code>&lt;div&gt;</code>. Size, shape, and layout are fully controlled
+        via Tailwind utilities in the <code>classes</code> prop.
+    </p>
+
+    <!-- ── Basic shapes ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic shapes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Circle, rounded rectangle, square, and single text line.
+    </p>
+
+    <fieldset>
+        <legend>skeleton shapes</legend>
+        <div class="flex flex-wrap items-end gap-6">
+            <div class="flex flex-col items-center gap-2">
+                <Skeleton classes="h-16 w-16 rounded-full" />
+                <span class="text-xs opacity-60">circle</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+                <Skeleton classes="h-16 w-32 rounded-xl" />
+                <span class="text-xs opacity-60">rounded rect</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+                <Skeleton classes="h-16 w-16 rounded-none" />
+                <span class="text-xs opacity-60">square</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+                <Skeleton classes="h-4 w-48" />
+                <span class="text-xs opacity-60">text line</span>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Text lines ─────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Text lines</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Stack multiple text-height skeletons to simulate a paragraph.
+    </p>
+
+    <fieldset>
+        <legend>skeleton text lines</legend>
+        <div class="flex flex-col gap-2 max-w-sm">
+            <Skeleton classes="h-4 w-full" />
+            <Skeleton classes="h-4 w-5/6" />
+            <Skeleton classes="h-4 w-full" />
+            <Skeleton classes="h-4 w-4/6" />
+        </div>
+    </fieldset>
+
+    <!-- ── Avatar + text ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Avatar + text</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Common pattern: circular avatar beside name and subtitle lines.
+    </p>
+
+    <fieldset>
+        <legend>skeleton avatar text</legend>
+        <div class="flex items-center gap-4 max-w-xs">
+            <Skeleton classes="h-12 w-12 rounded-full shrink-0" />
+            <div class="flex flex-col gap-2 flex-1">
+                <Skeleton classes="h-4 w-3/4" />
+                <Skeleton classes="h-3 w-1/2" />
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Card skeleton ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Card</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Image area + title + body text + action button placeholder.
+    </p>
+
+    <fieldset>
+        <legend>skeleton card</legend>
+        <div class="card bg-base-100 shadow w-64">
+            <Skeleton classes="h-40 w-full rounded-t-2xl rounded-b-none" />
+            <div class="card-body gap-3">
+                <Skeleton classes="h-5 w-3/4" />
+                <Skeleton classes="h-4 w-full" />
+                <Skeleton classes="h-4 w-5/6" />
+                <Skeleton classes="h-9 w-28 rounded-lg mt-2" />
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── List skeleton ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">List</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five list rows, each with a small icon placeholder and two text lines.
+    </p>
+
+    <fieldset>
+        <legend>skeleton list</legend>
+        <div class="flex flex-col gap-4 max-w-sm">
+            {Array.from({ length: 5 }).map(() => (
+                <div class="flex items-center gap-3">
+                    <Skeleton classes="h-10 w-10 rounded-lg shrink-0" />
+                    <div class="flex flex-col gap-1.5 flex-1">
+                        <Skeleton classes="h-4 w-2/3" />
+                        <Skeleton classes="h-3 w-1/2" />
+                    </div>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Profile page skeleton ──────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Profile page</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Full-page loading state: banner, avatar, stats row, and content paragraphs.
+    </p>
+
+    <fieldset>
+        <legend>skeleton profile page</legend>
+        <div class="max-w-lg flex flex-col gap-4">
+            {/* Banner */}
+            <Skeleton classes="h-32 w-full rounded-xl" />
+            {/* Avatar + name */}
+            <div class="flex items-end gap-4 -mt-10 px-4">
+                <Skeleton classes="h-20 w-20 rounded-full border-4 border-base-100 shrink-0" />
+                <div class="flex flex-col gap-2 pb-1 flex-1">
+                    <Skeleton classes="h-5 w-40" />
+                    <Skeleton classes="h-4 w-28" />
+                </div>
+            </div>
+            {/* Stats */}
+            <div class="flex gap-6 px-4">
+                {Array.from({ length: 3 }).map(() => (
+                    <div class="flex flex-col gap-1 items-center">
+                        <Skeleton classes="h-6 w-12" />
+                        <Skeleton classes="h-3 w-16" />
+                    </div>
+                ))}
+            </div>
+            {/* Bio */}
+            <div class="flex flex-col gap-2 px-4">
+                <Skeleton classes="h-4 w-full" />
+                <Skeleton classes="h-4 w-5/6" />
+                <Skeleton classes="h-4 w-4/6" />
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Before / After ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Before / After</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Compare the skeleton state to the loaded content side by side.
+    </p>
+
+    <fieldset>
+        <legend>skeleton before after</legend>
+        <div class="flex flex-wrap gap-8">
+            {/* Skeleton (loading) */}
+            <div class="flex flex-col gap-2">
+                <p class="text-xs font-semibold opacity-50 uppercase tracking-wide">Loading</p>
+                <div class="card bg-base-100 shadow w-52">
+                    <Skeleton classes="h-32 w-full rounded-t-2xl rounded-b-none" />
+                    <div class="card-body gap-2 py-4">
+                        <Skeleton classes="h-4 w-3/4" />
+                        <Skeleton classes="h-3 w-full" />
+                        <Skeleton classes="h-3 w-2/3" />
+                    </div>
+                </div>
+            </div>
+            {/* Loaded */}
+            <div class="flex flex-col gap-2">
+                <p class="text-xs font-semibold opacity-50 uppercase tracking-wide">Loaded</p>
+                <div class="card bg-base-100 shadow w-52">
+                    <figure class="h-32 bg-primary/20 rounded-t-2xl flex items-center justify-center text-4xl">
+                        🌄
+                    </figure>
+                    <div class="card-body py-4">
+                        <h3 class="card-title text-sm">Mountain Trail</h3>
+                        <p class="text-xs opacity-70">A beautiful hike through the alpine meadows.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Multiple cards grid ────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Grid of cards</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use in a grid layout when loading a list of items.
+    </p>
+
+    <fieldset>
+        <legend>skeleton grid</legend>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {Array.from({ length: 6 }).map(() => (
+                <div class="flex flex-col gap-2">
+                    <Skeleton classes="h-28 w-full rounded-xl" />
+                    <Skeleton classes="h-4 w-3/4" />
+                    <Skeleton classes="h-3 w-1/2" />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+</AppLayout>

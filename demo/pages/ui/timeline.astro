@@ -1,0 +1,332 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Timeline from "neokit/components/Timeline.astro";
+import Badge from "neokit/components/Badge.astro";
+
+// Reusable check icon used as the timeline middle dot
+const CheckIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>`;
+---
+
+<AppLayout title="Timeline">
+    <h1 id="top" class="text-5xl">Timeline</h1>
+    <p class="mt-2 opacity-70">
+        Display a sequence of events along a vertical or horizontal axis. Each{" "}
+        <code>&lt;li&gt;</code> item uses{" "}
+        <code>timeline-start</code>, <code>timeline-middle</code>, and{" "}
+        <code>timeline-end</code> slots with <code>&lt;hr&gt;</code> connectors.
+    </p>
+
+    <!-- ── Vertical (default) ────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Vertical (default)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Content alternates left and right of the central axis.
+    </p>
+
+    <fieldset>
+        <legend>timeline vertical</legend>
+        <Timeline>
+            <li>
+                <div class="timeline-start timeline-box">First Macintosh computer</div>
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end mb-10">1984</div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-start mb-10">1998</div>
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">iMac</div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-start timeline-box">iPod</div>
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end mb-10">2001</div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-start mb-10">2007</div>
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">iPhone</div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-start timeline-box">Apple Watch</div>
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end">2015</div>
+            </li>
+        </Timeline>
+    </fieldset>
+
+    <!-- ── Horizontal ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Horizontal</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add <code>timeline-horizontal</code> via <code>classes</code> to lay
+        items out left to right.
+    </p>
+
+    <fieldset>
+        <legend>timeline horizontal</legend>
+        <Timeline classes="timeline-horizontal overflow-x-auto w-full">
+            <li>
+                <div class="timeline-start">1984</div>
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">First Mac</div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-start">1998</div>
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">iMac</div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-start">2001</div>
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">iPod</div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-start">2007</div>
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">iPhone</div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-start">2015</div>
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">Watch</div>
+            </li>
+        </Timeline>
+    </fieldset>
+
+    <!-- ── Snap icon ─────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Snap icon</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>timeline-snap-icon</code> snaps the icon to the start of each
+        item so content only appears on one side.
+    </p>
+
+    <fieldset>
+        <legend>timeline snap-icon</legend>
+        <Timeline classes="timeline-snap-icon max-md:timeline-compact timeline-vertical">
+            <li>
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">
+                    <time class="font-mono italic">1984</time>
+                    <div class="text-lg font-black">First Macintosh computer</div>
+                    The Apple Macintosh, later rebranded as the Macintosh 128K, was the first successful mass-market personal computer to feature a mouse and a graphical user interface.
+                </div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">
+                    <time class="font-mono italic">1998</time>
+                    <div class="text-lg font-black">iMac</div>
+                    IMac is a family of all-in-one Mac desktop computers designed and built by Apple Inc. It has been the primary part of Apple's consumer desktop offerings since its debut in August 1998.
+                </div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">
+                    <time class="font-mono italic">2001</time>
+                    <div class="text-lg font-black">iPod</div>
+                    The iPod is a discontinued series of portable media players and multi-purpose mobile devices designed and marketed by Apple Inc.
+                </div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">
+                    <time class="font-mono italic">2007</time>
+                    <div class="text-lg font-black">iPhone</div>
+                    iPhone is a line of smartphones produced by Apple Inc. that use Apple's own iOS mobile operating system.
+                </div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-middle">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box">
+                    <time class="font-mono italic">2015</time>
+                    <div class="text-lg font-black">Apple Watch</div>
+                    The Apple Watch is a line of smartwatches produced by Apple Inc. It incorporates fitness tracking, health-oriented capabilities, and wireless telecommunication.
+                </div>
+            </li>
+        </Timeline>
+    </fieldset>
+
+    <!-- ── With colors ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colored connectors</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Color the <code>&lt;hr&gt;</code> connectors with DaisyUI bg utilities
+        to show progress or state.
+    </p>
+
+    <fieldset>
+        <legend>timeline colors</legend>
+        <Timeline classes="timeline-horizontal overflow-x-auto w-full">
+            <li>
+                <div class="timeline-start timeline-box border-primary text-primary font-bold">Order placed</div>
+                <div class="timeline-middle text-primary">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <hr class="bg-primary" />
+            </li>
+            <li>
+                <hr class="bg-primary" />
+                <div class="timeline-middle text-primary">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-end timeline-box border-primary text-primary font-bold">Payment confirmed</div>
+                <hr class="bg-primary" />
+            </li>
+            <li>
+                <hr class="bg-primary" />
+                <div class="timeline-middle text-primary">
+                    <Fragment set:html={CheckIcon} />
+                </div>
+                <div class="timeline-start timeline-box border-primary text-primary font-bold">Packed</div>
+                <hr class="bg-warning" />
+            </li>
+            <li>
+                <hr class="bg-warning" />
+                <div class="timeline-middle text-warning">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="timeline-end timeline-box font-bold">In transit</div>
+                <hr />
+            </li>
+            <li>
+                <hr />
+                <div class="timeline-middle opacity-40">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 110-12 6 6 0 010 12z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="timeline-start timeline-box opacity-40">Delivered</div>
+            </li>
+        </Timeline>
+    </fieldset>
+
+    <!-- ── Compact ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Compact</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>timeline-compact</code> places all content on the same side
+        (end). Good for a changelog or activity feed.
+    </p>
+
+    <fieldset>
+        <legend>timeline compact</legend>
+        <Timeline classes="timeline-compact timeline-snap-icon timeline-vertical">
+            {[
+                { date: "Mar 12, 2026", title: "v2.4.0 released", desc: "Added Table and Timeline components. Build time improved by 12%.", badge: "release" },
+                { date: "Mar 8, 2026",  title: "v2.3.2 patch",    desc: "Fixed Status ping animation in Safari. Corrected Stat figure slot z-index.", badge: "fix" },
+                { date: "Mar 1, 2026",  title: "v2.3.0 released", desc: "Added Stat, Stats, Status, and List components.", badge: "release" },
+                { date: "Feb 22, 2026", title: "v2.2.1 patch",    desc: "Resolved Kbd size='md' emitting unwanted class. Countdown --digits fix.", badge: "fix" },
+                { date: "Feb 14, 2026", title: "v2.2.0 released", desc: "Added Kbd, Diff, and Countdown components.", badge: "release" },
+            ].map(({ date, title, desc, badge }) => (
+                <li>
+                    <div class="timeline-middle">
+                        <Fragment set:html={CheckIcon} />
+                    </div>
+                    <div class="timeline-end timeline-box mb-4">
+                        <div class="flex items-center gap-2 mb-1">
+                            <time class="font-mono text-xs opacity-60">{date}</time>
+                            <Badge
+                                color={badge === "release" ? "primary" : "warning"}
+                                variant="soft"
+                                size="xs"
+                            >
+                                {badge}
+                            </Badge>
+                        </div>
+                        <div class="font-bold">{title}</div>
+                        <p class="text-sm opacity-70 mt-1">{desc}</p>
+                    </div>
+                    <hr />
+                </li>
+            ))}
+        </Timeline>
+    </fieldset>
+
+    <!-- ── With avatars ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With avatars</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use an avatar image as the <code>timeline-middle</code> icon for a
+        social activity feed style.
+    </p>
+
+    <fieldset>
+        <legend>timeline with avatars</legend>
+        <Timeline classes="timeline-snap-icon timeline-vertical">
+            {[
+                { img: "https://img.daisyui.com/images/profile/demo/1@94.webp", name: "Alice Chen",   action: "pushed 3 commits to", target: "main", time: "2 hours ago" },
+                { img: "https://img.daisyui.com/images/profile/demo/2@94.webp", name: "Bob Russo",    action: "opened a pull request in", target: "feat/timeline", time: "4 hours ago" },
+                { img: "https://img.daisyui.com/images/profile/demo/3@94.webp", name: "Carol Kim",    action: "merged", target: "feat/table → main", time: "yesterday" },
+                { img: "https://img.daisyui.com/images/profile/demo/4@94.webp", name: "Dan Mitchell", action: "created branch", target: "feat/tooltip", time: "2 days ago" },
+            ].map(({ img, name, action, target, time }) => (
+                <li>
+                    <div class="timeline-middle">
+                        <div class="avatar">
+                            <div class="w-8 rounded-full ring-2 ring-base-300">
+                                <img src={img} alt={name} />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-end timeline-box mb-4">
+                        <span class="font-semibold">{name}</span>{" "}
+                        <span class="opacity-70">{action}</span>{" "}
+                        <code class="text-primary">{target}</code>
+                        <div class="text-xs opacity-50 mt-0.5">{time}</div>
+                    </div>
+                    <hr />
+                </li>
+            ))}
+        </Timeline>
+    </fieldset>
+</AppLayout>

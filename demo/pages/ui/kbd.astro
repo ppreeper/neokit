@@ -1,0 +1,179 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Kbd from "neokit/components/Kbd.astro";
+---
+
+<AppLayout title="KBD">
+    <h1 id="top" class="text-5xl">KBD</h1>
+    <p class="mt-2 opacity-70">
+        Renders keyboard keys in a styled badge. Compose multiple <code>Kbd</code>
+        elements with <code>+</code> separators to show keyboard shortcuts.
+    </p>
+
+    <!-- ── Basic ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic</h2>
+    <p class="mt-1 text-sm opacity-70">A single key.</p>
+
+    <fieldset>
+        <legend>kbd</legend>
+        <Kbd>K</Kbd>
+    </fieldset>
+
+    <!-- ── Sizes ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes: <code>xs</code>, <code>sm</code>, <code>md</code> (default),
+        <code>lg</code>, <code>xl</code>.
+    </p>
+
+    <fieldset>
+        <legend>kbd sizes</legend>
+        <div class="flex items-end gap-2">
+            <Kbd size="xs">xs</Kbd>
+            <Kbd size="sm">sm</Kbd>
+            <Kbd size="md">md</Kbd>
+            <Kbd size="lg">lg</Kbd>
+            <Kbd size="xl">xl</Kbd>
+        </div>
+    </fieldset>
+
+    <!-- ── In text ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">In text</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use <code>size="sm"</code> to match surrounding body text height.
+    </p>
+
+    <fieldset>
+        <legend>kbd inline</legend>
+        <p>Press <Kbd size="sm">F</Kbd> to pay respects.</p>
+        <p class="mt-2">Use <Kbd size="sm">Tab</Kbd> to move focus between elements.</p>
+        <p class="mt-2">Hit <Kbd size="sm">Escape</Kbd> to close the modal.</p>
+    </fieldset>
+
+    <!-- ── Key combinations ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Key combinations</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Combine keys with <code>+</code> separators for shortcuts.
+    </p>
+
+    <fieldset>
+        <legend>kbd combos</legend>
+        <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-1">
+                <Kbd>ctrl</Kbd> + <Kbd>shift</Kbd> + <Kbd>del</Kbd>
+            </div>
+            <div class="flex items-center gap-1">
+                <Kbd>ctrl</Kbd> + <Kbd>C</Kbd>
+            </div>
+            <div class="flex items-center gap-1">
+                <Kbd>ctrl</Kbd> + <Kbd>Z</Kbd>
+            </div>
+            <div class="flex items-center gap-1">
+                <Kbd>alt</Kbd> + <Kbd>F4</Kbd>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Function / modifier keys ─────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Function & modifier keys</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Unicode symbols for macOS modifier keys.
+    </p>
+
+    <fieldset>
+        <legend>modifier keys</legend>
+        <div class="flex items-center gap-2 flex-wrap">
+            <Kbd>⌘</Kbd>
+            <Kbd>⌥</Kbd>
+            <Kbd>⇧</Kbd>
+            <Kbd>⌃</Kbd>
+            <Kbd>⌫</Kbd>
+            <Kbd>⏎</Kbd>
+            <Kbd>⇥</Kbd>
+            <Kbd>⎋</Kbd>
+        </div>
+    </fieldset>
+
+    <!-- ── Full keyboard layout ──────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Full keyboard</h2>
+    <p class="mt-1 text-sm opacity-70">
+        All keys rendered in a staggered QWERTY layout.
+    </p>
+
+    <fieldset>
+        <legend>full keyboard</legend>
+        <div class="space-y-1">
+            <div class="flex justify-center gap-1">
+                {["q","w","e","r","t","y","u","i","o","p"].map((k) => <Kbd>{k}</Kbd>)}
+            </div>
+            <div class="flex justify-center gap-1">
+                {["a","s","d","f","g","h","j","k","l"].map((k) => <Kbd>{k}</Kbd>)}
+            </div>
+            <div class="flex justify-center gap-1">
+                {["z","x","c","v","b","n","m","/"].map((k) => <Kbd>{k}</Kbd>)}
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Arrow keys ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Arrow keys</h2>
+    <p class="mt-1 text-sm opacity-70">WASD / arrow key cluster layout.</p>
+
+    <fieldset>
+        <legend>arrow keys</legend>
+        <div class="space-y-1">
+            <div class="flex justify-center">
+                <Kbd>▲</Kbd>
+            </div>
+            <div class="flex justify-center gap-12">
+                <Kbd>◀︎</Kbd>
+                <Kbd>▶︎</Kbd>
+            </div>
+            <div class="flex justify-center">
+                <Kbd>▼</Kbd>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Shortcut reference table ──────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Shortcut reference</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Common use case: a help panel listing keyboard shortcuts.
+    </p>
+
+    <fieldset>
+        <legend>shortcut table</legend>
+        <div class="overflow-x-auto max-w-md">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Shortcut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {[
+                        { action: "Save", keys: ["ctrl", "S"] },
+                        { action: "Undo", keys: ["ctrl", "Z"] },
+                        { action: "Redo", keys: ["ctrl", "Y"] },
+                        { action: "Find", keys: ["ctrl", "F"] },
+                        { action: "Select all", keys: ["ctrl", "A"] },
+                        { action: "Close tab", keys: ["ctrl", "W"] },
+                    ].map(({ action, keys }) => (
+                        <tr>
+                            <td>{action}</td>
+                            <td class="flex items-center gap-1">
+                                {keys.map((k, i) => (
+                                    <>
+                                        {i > 0 && <span>+</span>}
+                                        <Kbd size="sm">{k}</Kbd>
+                                    </>
+                                ))}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</AppLayout>

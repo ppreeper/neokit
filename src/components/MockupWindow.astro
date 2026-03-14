@@ -1,0 +1,13 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    classes?: string;
+}
+
+const { classes } = Astro.props;
+
+const wrapClass = twMerge("mockup-window", classes);
+---
+
+<div class={wrapClass}><slot /></div>

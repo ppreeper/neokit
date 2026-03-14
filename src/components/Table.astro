@@ -1,0 +1,71 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Table — DaisyUI `table` component.
+ *
+ * A styled `<table>` wrapper. Children should be standard HTML table elements
+ * (`<thead>`, `<tbody>`, `<tfoot>`, `<tr>`, `<th>`, `<td>`).
+ *
+ * DaisyUI modifier classes you can pass via `classes`:
+ * - `table-zebra`     — alternating row background
+ * - `table-pin-rows`  — sticky thead / tfoot
+ * - `table-pin-cols`  — sticky first/last columns
+ * - `table-xs` / `table-sm` / `table-md` / `table-lg` / `table-xl`
+ *
+ * Usage:
+ * ```astro
+ * <Table classes="table-zebra table-sm">
+ *   <thead><tr><th>Name</th><th>Role</th></tr></thead>
+ *   <tbody>
+ *     <tr><td>Alice</td><td>Designer</td></tr>
+ *   </tbody>
+ * </Table>
+ * ```
+ */
+
+interface Props {
+    /** Size modifier. Defaults to none (medium). */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Alternating row background. */
+    zebra?: boolean;
+    /** Sticky thead + tfoot. */
+    pinRows?: boolean;
+    /** Sticky first + last columns. */
+    pinCols?: boolean;
+    /** Wrap in an `overflow-x-auto` div. Default true. */
+    scrollable?: boolean;
+    /** Extra classes on the `<table>` element. */
+    classes?: string;
+}
+
+const {
+    size,
+    zebra = false,
+    pinRows = false,
+    pinCols = false,
+    scrollable = true,
+    classes,
+} = Astro.props;
+
+const tableClass = twMerge(
+    "table",
+    size && `table-${size}`,
+    zebra && "table-zebra",
+    pinRows && "table-pin-rows",
+    pinCols && "table-pin-cols",
+    classes,
+);
+---
+
+{scrollable ? (
+    <div class="overflow-x-auto">
+        <table class={tableClass}>
+            <slot />
+        </table>
+    </div>
+) : (
+    <table class={tableClass}>
+        <slot />
+    </table>
+)}

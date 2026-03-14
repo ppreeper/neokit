@@ -1,0 +1,135 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Breadcrumbs from "neokit/components/Breadcrumbs.astro";
+---
+
+<AppLayout title="Breadcrumbs">
+    <h1 id="top" class="text-5xl">Breadcrumbs</h1>
+    <p class="mt-2 opacity-70">
+        A navigation trail showing the user's location in the hierarchy.
+        DaisyUI adds › separators between <code>&lt;li&gt;</code> items via
+        CSS — no extra markup needed.
+    </p>
+
+    <!-- ── Basic ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Three levels with anchor links. The last item is the current page
+        (plain text, no link).
+    </p>
+
+    <fieldset>
+        <legend>breadcrumbs</legend>
+        <Breadcrumbs>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Documents</a></li>
+            <li>Add Document</li>
+        </Breadcrumbs>
+    </fieldset>
+
+    <!-- ── With icons ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With icons</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Place an SVG icon before the link text inside each <code>&lt;li&gt;</code>.
+    </p>
+
+    <fieldset>
+        <legend>breadcrumbs with icons</legend>
+        <Breadcrumbs>
+            <li>
+                <a href="#" class="flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                    </svg>
+                    Documents
+                </a>
+            </li>
+            <li class="flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Add Document
+            </li>
+        </Breadcrumbs>
+    </fieldset>
+
+    <!-- ── Max width + overflow ──────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Max-width with overflow</h2>
+    <p class="mt-1 text-sm opacity-70">
+        DaisyUI clips breadcrumbs with an ellipsis when constrained. Resize
+        the window to see truncation in action.
+    </p>
+
+    <fieldset>
+        <legend>breadcrumbs max-width</legend>
+        <Breadcrumbs classes="max-w-xs">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Documents</a></li>
+            <li><a href="#">Subdirectory</a></li>
+            <li><a href="#">Deep Folder</a></li>
+            <li>Add Document</li>
+        </Breadcrumbs>
+    </fieldset>
+
+    <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Control size via Tailwind text utilities on <code>classes</code>.
+    </p>
+
+    <fieldset>
+        <legend>breadcrumbs sizes</legend>
+        <div class="flex flex-col gap-4">
+            {(["text-xs", "text-sm", "text-base", "text-lg"] as const).map((size) => (
+                <div>
+                    <p class="text-xs opacity-50 mb-1">{size}</p>
+                    <Breadcrumbs classes={size}>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Documents</a></li>
+                        <li>Add Document</li>
+                    </Breadcrumbs>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── In a page header ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">In a page header</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Common pattern: breadcrumbs above a page title.
+    </p>
+
+    <fieldset>
+        <legend>breadcrumbs in header</legend>
+        <div class="bg-base-200 rounded-box p-6">
+            <Breadcrumbs classes="text-sm">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Settings</a></li>
+                <li>Profile</li>
+            </Breadcrumbs>
+            <h1 class="text-3xl font-bold mt-1">Profile Settings</h1>
+            <p class="opacity-60 mt-1 text-sm">Manage your account details and preferences.</p>
+        </div>
+    </fieldset>
+
+    <!-- ── Single item ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Single item</h2>
+    <p class="mt-1 text-sm opacity-70">
+        A breadcrumb with only one item renders without a separator.
+    </p>
+
+    <fieldset>
+        <legend>breadcrumbs single</legend>
+        <Breadcrumbs>
+            <li>Home</li>
+        </Breadcrumbs>
+    </fieldset>
+</AppLayout>

@@ -1,0 +1,186 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Steps from "neokit/components/Steps.astro";
+---
+
+<AppLayout title="Steps">
+    <h1 id="top" class="text-5xl">Steps</h1>
+    <p class="mt-2 opacity-70">
+        A progress indicator for multi-step flows. Each <code>&lt;li class="step"&gt;</code>{" "}
+        gets an auto-numbered circle. Add a color class like{" "}
+        <code>step-primary</code> to mark completed steps. Use{" "}
+        <code>data-content</code> to replace the number with a custom
+        character.
+    </p>
+
+    <!-- ── Basic ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Four steps — first two completed (filled), last two pending.
+    </p>
+
+    <fieldset>
+        <legend>steps</legend>
+        <Steps>
+            <li class="step step-primary">Register</li>
+            <li class="step step-primary">Choose plan</li>
+            <li class="step">Purchase</li>
+            <li class="step">Receive product</li>
+        </Steps>
+    </fieldset>
+
+    <!-- ── All colors ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Steps support all DaisyUI semantic color tokens.
+    </p>
+
+    <fieldset>
+        <legend>steps colors</legend>
+        <div class="flex flex-col gap-6">
+            {([
+                { color: "step-neutral",   label: "neutral"   },
+                { color: "step-primary",   label: "primary"   },
+                { color: "step-secondary", label: "secondary" },
+                { color: "step-accent",    label: "accent"    },
+                { color: "step-info",      label: "info"      },
+                { color: "step-success",   label: "success"   },
+                { color: "step-warning",   label: "warning"   },
+                { color: "step-error",     label: "error"     },
+            ] as const).map(({ color, label }) => (
+                <div>
+                    <p class="text-xs opacity-50 mb-1">{label}</p>
+                    <Steps>
+                        <li class={`step ${color}`}>Step 1</li>
+                        <li class={`step ${color}`}>Step 2</li>
+                        <li class="step">Step 3</li>
+                        <li class="step">Step 4</li>
+                    </Steps>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Custom data-content ────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Custom content</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use <code>data-content</code> to replace the auto-number with any
+        single character — a checkmark, question mark, star, etc.
+    </p>
+
+    <fieldset>
+        <legend>steps data-content</legend>
+        <Steps>
+            <li class="step step-success" data-content="✓">Details</li>
+            <li class="step step-success" data-content="✓">Payment</li>
+            <li class="step step-warning" data-content="!">Review</li>
+            <li class="step" data-content="★">Confirm</li>
+        </Steps>
+    </fieldset>
+
+    <!-- ── Vertical ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Vertical</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Pass <code>vertical</code> to stack steps top-to-bottom.
+    </p>
+
+    <fieldset>
+        <legend>steps vertical</legend>
+        <Steps vertical>
+            <li class="step step-primary">Create account</li>
+            <li class="step step-primary">Verify email</li>
+            <li class="step step-primary">Set up profile</li>
+            <li class="step">Add payment method</li>
+            <li class="step">Go live</li>
+        </Steps>
+    </fieldset>
+
+    <!-- ── With descriptions ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With descriptions</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add secondary text below the step label using a nested{" "}
+        <code>&lt;p&gt;</code> inside the <code>&lt;li&gt;</code>.
+    </p>
+
+    <fieldset>
+        <legend>steps with descriptions</legend>
+        <Steps classes="w-full">
+            <li class="step step-primary">
+                <span>
+                    Register
+                    <br />
+                    <span class="text-xs opacity-60">Create your account</span>
+                </span>
+            </li>
+            <li class="step step-primary">
+                <span>
+                    Choose plan
+                    <br />
+                    <span class="text-xs opacity-60">Pick what fits</span>
+                </span>
+            </li>
+            <li class="step">
+                <span>
+                    Purchase
+                    <br />
+                    <span class="text-xs opacity-60">Complete payment</span>
+                </span>
+            </li>
+            <li class="step">
+                <span>
+                    Receive product
+                    <br />
+                    <span class="text-xs opacity-60">Enjoy your order</span>
+                </span>
+            </li>
+        </Steps>
+    </fieldset>
+
+    <!-- ── Checkout flow ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Checkout flow</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Real-world example: an e-commerce checkout progress indicator with a
+        mix of completed, current, and upcoming steps.
+    </p>
+
+    <fieldset>
+        <legend>steps checkout</legend>
+        <div class="card bg-base-100 shadow-md p-6 max-w-lg">
+            <Steps classes="w-full mb-6">
+                <li class="step step-success" data-content="✓">Cart</li>
+                <li class="step step-success" data-content="✓">Shipping</li>
+                <li class="step step-primary">Payment</li>
+                <li class="step">Review</li>
+                <li class="step">Done</li>
+            </Steps>
+            <h2 class="text-xl font-bold">Payment details</h2>
+            <p class="text-sm opacity-60 mt-1">
+                Step 3 of 5 — Enter your card information below.
+            </p>
+            <div class="mt-4 flex gap-2">
+                <button class="btn btn-ghost btn-sm">Back</button>
+                <button class="btn btn-primary btn-sm">Continue</button>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Scrollable horizontal ──────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Many steps (scrollable)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        When there are many steps, wrap in an <code>overflow-x-auto</code>{" "}
+        container.
+    </p>
+
+    <fieldset>
+        <legend>steps scrollable</legend>
+        <div class="overflow-x-auto">
+            <Steps>
+                {Array.from({ length: 10 }, (_, i) => (
+                    <li class={`step${i < 6 ? " step-primary" : ""}`}>
+                        Step {i + 1}
+                    </li>
+                ))}
+            </Steps>
+        </div>
+    </fieldset>
+</AppLayout>

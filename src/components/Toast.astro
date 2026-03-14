@@ -1,0 +1,52 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Toast — DaisyUI `toast` positioning wrapper.
+ *
+ * Renders a `<div class="toast">` fixed-position container. Place
+ * `<div class="alert ...">` children (or `<Alert>` components) inside.
+ *
+ * Horizontal position: `"start"` | `"center"` | `"end"` (default `"end"`)
+ * Vertical position:   `"top"` | `"middle"` | `"bottom"` (default `"bottom"`)
+ *
+ * ```astro
+ * <Toast>
+ *   <div class="alert alert-success"><span>Saved!</span></div>
+ * </Toast>
+ *
+ * <Toast horizontal="center" vertical="top">
+ *   <div class="alert alert-error"><span>Something went wrong.</span></div>
+ * </Toast>
+ * ```
+ *
+ * Note: the `toast` class uses `position: fixed` — wrap in a
+ * `relative` container in demos to avoid viewport-level positioning.
+ */
+
+interface Props {
+    /** Horizontal alignment. Default: `"end"`. */
+    horizontal?: "start" | "center" | "end";
+    /** Vertical alignment. Default: `"bottom"`. */
+    vertical?: "top" | "middle" | "bottom";
+    /** Extra classes on the root `<div class="toast">`. */
+    classes?: string;
+}
+
+const {
+    horizontal = "end",
+    vertical = "bottom",
+    classes,
+} = Astro.props;
+
+const rootClass = twMerge(
+    "toast",
+    horizontal !== "end" && `toast-${horizontal}`,
+    vertical !== "bottom" && `toast-${vertical}`,
+    classes,
+);
+---
+
+<div class={rootClass}>
+    <slot />
+</div>

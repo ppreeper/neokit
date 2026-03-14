@@ -1,0 +1,140 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Tooltip from "neokit/components/Tooltip.astro";
+import Button from "neokit/components/Button.astro";
+import Badge from "neokit/components/Badge.astro";
+---
+
+<AppLayout title="Tooltip">
+    <h1 id="top" class="text-5xl">Tooltip</h1>
+    <p class="mt-2 opacity-70">
+        Shows a label near a trigger element on hover/focus.
+        Wraps children in <code>&lt;div class="tooltip" data-tip="..."&gt;</code>.
+    </p>
+
+    <!-- ── Default ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">
+        The tip appears above the trigger by default.
+    </p>
+
+    <fieldset>
+        <legend>Hover me</legend>
+        <div class="flex gap-4 flex-wrap">
+            <Tooltip tip="Hello there!">
+                <Button>Hover me</Button>
+            </Tooltip>
+        </div>
+    </fieldset>
+
+    <!-- ── Positions ─────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Positions</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use <code>position</code> to place the tip on any of the four sides.
+    </p>
+
+    <fieldset>
+        <legend>All four positions</legend>
+        <div class="flex gap-6 flex-wrap items-center justify-center py-4">
+            <Tooltip tip="Top (default)" position="top">
+                <Button variant="outline">Top</Button>
+            </Tooltip>
+            <Tooltip tip="Bottom tooltip" position="bottom">
+                <Button variant="outline">Bottom</Button>
+            </Tooltip>
+            <Tooltip tip="Left tooltip" position="left">
+                <Button variant="outline">Left</Button>
+            </Tooltip>
+            <Tooltip tip="Right tooltip" position="right">
+                <Button variant="outline">Right</Button>
+            </Tooltip>
+        </div>
+    </fieldset>
+
+    <!-- ── Colors ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">
+        The <code>color</code> prop applies a semantic color to the tip bubble.
+    </p>
+
+    <fieldset>
+        <legend>Semantic colors</legend>
+        <div class="flex gap-4 flex-wrap items-center py-2">
+            <Tooltip tip="Primary" color="primary">
+                <Button color="primary">Primary</Button>
+            </Tooltip>
+            <Tooltip tip="Secondary" color="secondary">
+                <Button color="secondary">Secondary</Button>
+            </Tooltip>
+            <Tooltip tip="Accent" color="accent">
+                <Button color="accent">Accent</Button>
+            </Tooltip>
+            <Tooltip tip="Info" color="info">
+                <Button color="info">Info</Button>
+            </Tooltip>
+            <Tooltip tip="Success" color="success">
+                <Button color="success">Success</Button>
+            </Tooltip>
+            <Tooltip tip="Warning" color="warning">
+                <Button color="warning">Warning</Button>
+            </Tooltip>
+            <Tooltip tip="Error" color="error">
+                <Button color="error">Error</Button>
+            </Tooltip>
+        </div>
+    </fieldset>
+
+    <!-- ── Always open ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Always open</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Set <code>open</code> to force the tooltip to be permanently visible — useful in docs or demos.
+    </p>
+
+    <fieldset>
+        <legend>tooltip-open</legend>
+        <div class="flex gap-8 flex-wrap items-center py-6">
+            <Tooltip tip="Always visible" open>
+                <Button>Open tooltip</Button>
+            </Tooltip>
+            <Tooltip tip="Always visible below" position="bottom" color="primary" open>
+                <Button color="primary">Open below</Button>
+            </Tooltip>
+        </div>
+    </fieldset>
+
+    <!-- ── On non-button elements ─────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">On any element</h2>
+    <p class="mt-1 text-sm opacity-70">
+        The tooltip wrapper works around any inline element — icons, badges, text, images.
+    </p>
+
+    <fieldset>
+        <legend>Tooltip on badge and text</legend>
+        <div class="flex gap-6 flex-wrap items-center py-2">
+            <Tooltip tip="This is a badge">
+                <Badge color="primary">Hover badge</Badge>
+            </Tooltip>
+            <Tooltip tip="Inline text can have tooltips too" position="right">
+                <span class="underline decoration-dotted cursor-help">What does this mean?</span>
+            </Tooltip>
+            <Tooltip tip="An avatar-like circle" position="bottom">
+                <div class="w-10 h-10 rounded-full bg-secondary text-secondary-content flex items-center justify-center text-sm font-bold cursor-default">
+                    AB
+                </div>
+            </Tooltip>
+        </div>
+    </fieldset>
+
+    <!-- ── Long tip text ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Long tip text</h2>
+    <p class="mt-1 text-sm opacity-70">
+        DaisyUI's tooltip wraps long strings naturally. Keep tips concise for best UX.
+    </p>
+
+    <fieldset>
+        <legend>Multi-word tip</legend>
+        <Tooltip tip="This tooltip has a longer description that spans multiple words">
+            <Button variant="outline">Long tip</Button>
+        </Tooltip>
+    </fieldset>
+</AppLayout>

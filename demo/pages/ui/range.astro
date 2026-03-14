@@ -1,0 +1,146 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Range from "neokit/components/Range.astro";
+---
+
+<AppLayout title="Range">
+    <h1 id="top" class="text-5xl">Range</h1>
+    <p class="mt-2 opacity-70">
+        A styled range slider input. Built on{" "}
+        <code>&lt;input type="range"&gt;</code> with DaisyUI's{" "}
+        <code>range</code> class. Supports sizes, color tokens, custom{" "}
+        <code>min</code> / <code>max</code> / <code>step</code>, and
+        step markers via a <code>&lt;datalist&gt;</code>.
+    </p>
+
+    <!-- ── Default ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">Basic range at 50%.</p>
+
+    <fieldset>
+        <legend>range default</legend>
+        <Range value={50} classes="w-full max-w-xs" />
+    </fieldset>
+
+    <!-- ── Colors ──────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">All eight DaisyUI color tokens.</p>
+
+    <fieldset>
+        <legend>range colors</legend>
+        <div class="flex flex-col gap-3 max-w-xs">
+            {(["primary","secondary","accent","info","success","warning","error","neutral"] as const).map((c) => (
+                <div class="flex items-center gap-3">
+                    <span class="w-20 text-xs capitalize opacity-60 shrink-0">{c}</span>
+                    <Range color={c} value={60} classes="flex-1" />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Sizes ───────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes: <code>xs</code> → <code>xl</code>.
+    </p>
+
+    <fieldset>
+        <legend>range sizes</legend>
+        <div class="flex flex-col gap-4 max-w-xs">
+            {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
+                <div class="flex items-center gap-3">
+                    <span class="w-6 text-xs opacity-60 shrink-0">{s}</span>
+                    <Range size={s} value={50} color="primary" classes="flex-1" />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Custom min / max / step ────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Custom min / max / step</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>min</code>, <code>max</code>, and <code>step</code> pass directly
+        to the native element.
+    </p>
+
+    <fieldset>
+        <legend>range custom bounds</legend>
+        <div class="flex flex-col gap-4 max-w-xs">
+            <div>
+                <p class="text-sm mb-1 opacity-70">0 – 200, step 25</p>
+                <Range min={0} max={200} step={25} value={100} color="primary" classes="w-full" />
+                <div class="flex justify-between text-xs opacity-50 mt-1">
+                    <span>0</span><span>50</span><span>100</span><span>150</span><span>200</span>
+                </div>
+            </div>
+            <div>
+                <p class="text-sm mb-1 opacity-70">-50 – 50</p>
+                <Range min={-50} max={50} value={0} color="accent" classes="w-full" />
+                <div class="flex justify-between text-xs opacity-50 mt-1">
+                    <span>-50</span><span>0</span><span>50</span>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Disabled ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Disabled</h2>
+    <p class="mt-1 text-sm opacity-70">Non-interactive state.</p>
+
+    <fieldset>
+        <legend>range disabled</legend>
+        <Range disabled value={40} classes="w-full max-w-xs" />
+    </fieldset>
+
+    <!-- ── With value label ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With value display</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Show the current value alongside the slider using a{" "}
+        <code>oninput</code> handler.
+    </p>
+
+    <fieldset>
+        <legend>range value display</legend>
+        <div class="flex items-center gap-4 max-w-xs">
+            <Range
+                id="vol-range"
+                value={70}
+                color="primary"
+                classes="flex-1"
+            />
+            <span id="vol-label" class="w-8 text-sm text-right font-mono">70</span>
+        </div>
+        <script>
+            const r = document.getElementById('vol-range') as HTMLInputElement;
+            const l = document.getElementById('vol-label')!;
+            r?.addEventListener('input', () => { l.textContent = r.value; });
+        </script>
+    </fieldset>
+
+    <!-- ── Volume control ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Volume control</h2>
+    <p class="mt-1 text-sm opacity-70">Real-world usage inside a media player card.</p>
+
+    <fieldset>
+        <legend>range volume control</legend>
+        <div class="card bg-base-100 shadow max-w-xs">
+            <div class="card-body gap-4">
+                <h3 class="font-bold">Now Playing</h3>
+                <div class="flex items-center gap-2 opacity-70 text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    <span>Midnight Reverie — Lo-fi Mix</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs opacity-50">1:23</span>
+                    <Range value={40} color="primary" classes="flex-1" />
+                    <span class="text-xs opacity-50">3:47</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+                    <Range value={75} size="xs" color="neutral" classes="flex-1" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M12 6a7 7 0 010 12M9 9a4 4 0 000 6"/></svg>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</AppLayout>

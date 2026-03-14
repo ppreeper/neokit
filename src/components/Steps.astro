@@ -1,0 +1,46 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Steps — DaisyUI `steps` progress-indicator component.
+ *
+ * Renders a `<ul class="steps">` wrapper. Each step is a `<li class="step">`
+ * child. DaisyUI draws the connecting line and numbered/icon circles
+ * automatically.
+ *
+ * Step modifiers (add to individual `<li>`):
+ * - `step-neutral` / `step-primary` / `step-secondary` / etc. — fills the
+ *   step circle and connector in that color
+ * - `data-content="✓"` — replaces the auto-number with custom text/icon
+ * - `data-content="?"` — same, any single character
+ *
+ * Usage:
+ * ```astro
+ * <Steps>
+ *   <li class="step step-primary">Register</li>
+ *   <li class="step step-primary">Choose plan</li>
+ *   <li class="step">Purchase</li>
+ *   <li class="step">Receive product</li>
+ * </Steps>
+ * ```
+ */
+
+interface Props {
+    /** Display steps vertically. */
+    vertical?: boolean;
+    /** Extra classes on the `<ul>` element. */
+    classes?: string;
+}
+
+const { vertical = false, classes } = Astro.props;
+
+const rootClass = twMerge(
+    "steps",
+    vertical && "steps-vertical",
+    classes,
+);
+---
+
+<ul class={rootClass}>
+    <slot />
+</ul>

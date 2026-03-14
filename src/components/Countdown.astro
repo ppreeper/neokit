@@ -1,0 +1,64 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Countdown — DaisyUI `countdown` component.
+ *
+ * Renders a single digit unit with the CSS-based flip animation.
+ * The value is set via the `--value` CSS variable on the inner span.
+ * To animate, update both the `aria-label` and `--value` via JS.
+ *
+ * Basic usage (static):
+ * ```astro
+ * <Countdown value={59} />
+ * ```
+ *
+ * Large clock-style:
+ * ```astro
+ * <span class="font-mono text-2xl flex gap-1 items-baseline">
+ *   <Countdown value={10} />h
+ *   <Countdown value={24} />m
+ *   <Countdown value={59} />s
+ * </span>
+ * ```
+ *
+ * Live JS-driven countdown:
+ * ```astro
+ * <Countdown value={59} id="my-counter" />
+ * <script>
+ *   const el = document.querySelector('#my-counter .countdown > span');
+ *   let n = 59;
+ *   setInterval(() => {
+ *     n = n > 0 ? n - 1 : 59;
+ *     el.style.setProperty('--value', n);
+ *     el.setAttribute('aria-label', n);
+ *   }, 1000);
+ * </script>
+ * ```
+ */
+
+interface Props {
+    /** The numeric value to display (0–999). */
+    value: number;
+    /**
+     * Minimum number of digits to display.
+     * Set to `2` or `3` to zero-pad (e.g. `05` instead of `5`).
+     */
+    digits?: 1 | 2 | 3;
+    /** Extra classes on the root `countdown` span. */
+    classes?: string;
+    /** Id forwarded to the root element (useful for JS targeting). */
+    id?: string;
+}
+
+const { value, digits, classes, id } = Astro.props;
+
+const rootClass = twMerge("countdown", classes);
+const style = digits
+    ? `--value:${value}; --digits:${digits};`
+    : `--value:${value};`;
+---
+
+<span class={rootClass} id={id}>
+    <span style={style} aria-live="polite" aria-label={String(value)}>{value}</span>
+</span>

@@ -1,0 +1,22 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    /** Optional border color — any Tailwind border color or arbitrary value e.g. `border-[#ff8938]` */
+    classes?: string;
+    /** Extra classes on the display div */
+    displayClasses?: string;
+}
+
+const { classes, displayClasses } = Astro.props;
+
+const wrapClass = twMerge("mockup-phone", classes);
+const dispClass = twMerge("mockup-phone-display", displayClasses);
+---
+
+<div class={wrapClass}>
+    <div class="mockup-phone-camera"></div>
+    <div class={dispClass}>
+        <slot />
+    </div>
+</div>

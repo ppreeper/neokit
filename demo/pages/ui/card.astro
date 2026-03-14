@@ -1,0 +1,285 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Card from "neokit/components/Card.astro";
+import Badge from "neokit/components/Badge.astro";
+import Button from "neokit/components/Button.astro";
+---
+
+<AppLayout title="Card">
+    <h1 id="top" class="text-5xl">Card</h1>
+    <p class="mt-2 opacity-70">
+        Flexible content container. Supports images, actions, layouts, and style
+        variants via DaisyUI's <code>card</code> classes.
+    </p>
+
+    <!-- ── Basic card ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic</h2>
+    <p class="mt-1 text-sm opacity-70">Title + body text + actions in the default slot.</p>
+
+    <fieldset>
+        <legend>Default card</legend>
+        <div class="flex flex-wrap gap-4">
+            <Card title="Card Title" classes="w-80 bg-base-100 shadow-sm">
+                <p>If a dog chews shoes, whose shoes does he choose?</p>
+                <div slot="actions" class="card-actions justify-end">
+                    <Button theme="primary" size="small">Buy Now</Button>
+                </div>
+            </Card>
+        </div>
+    </fieldset>
+
+    <!-- ── Style variants ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Style variants</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>default</code> (shadow), <code>bordered</code>, <code>dash</code>, <code>glass</code>.
+    </p>
+
+    <fieldset>
+        <legend>All style variants</legend>
+        <div class="flex flex-wrap gap-4">
+            {(["default", "bordered", "dash", "glass"] as const).map((s) => (
+                <Card title={s} style={s} classes="w-56 bg-base-100">
+                    <p class="text-sm">Style: <code>{s}</code></p>
+                </Card>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Compact size ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Compact</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>size="compact"</code> reduces padding for denser layouts.
+    </p>
+
+    <fieldset>
+        <legend>Normal vs compact</legend>
+        <div class="flex flex-wrap gap-4 items-start">
+            <Card title="Normal padding" classes="w-56 bg-base-100 shadow-sm">
+                <p class="text-sm">Default card-body padding.</p>
+            </Card>
+            <Card title="Compact padding" size="compact" classes="w-56 bg-base-100 shadow-sm">
+                <p class="text-sm">Reduced padding for dense UIs.</p>
+            </Card>
+        </div>
+    </fieldset>
+
+    <!-- ── Card with image (top) ─────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Card with image</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Pass <code>imageSrc</code> to render a <code>&lt;figure&gt;</code> above the body.
+    </p>
+
+    <fieldset>
+        <legend>Image top (default vertical layout)</legend>
+        <div class="flex flex-wrap gap-4">
+            <div class="card w-72 bg-base-100 shadow-sm">
+                <figure class="bg-base-200 h-40 flex items-center justify-center text-base-content/30">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title">Shoes!</h2>
+                    <p>If a dog chews shoes, whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                        <Button theme="primary" size="small">Buy Now</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Side layout ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Side layout</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>layout="side"</code> places the image to the left of the body.
+    </p>
+
+    <fieldset>
+        <legend>card-side</legend>
+        <div class="flex flex-wrap gap-4">
+            <div class="card card-side bg-base-100 shadow-sm w-full max-w-xl">
+                <figure class="bg-base-200 w-40 shrink-0 flex items-center justify-center text-base-content/30">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title">New movie is released!</h2>
+                    <p>Click the button to watch on Jetflix app.</p>
+                    <div class="card-actions justify-end">
+                        <Button theme="primary" size="small">Watch</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Image overlay (image-full) ───────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Image overlay</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>imageOverlay</code> adds <code>image-full</code> — text renders over the image.
+    </p>
+
+    <fieldset>
+        <legend>image-full</legend>
+        <div class="flex flex-wrap gap-4">
+            <div class="card image-full w-72 shadow-sm">
+                <figure class="bg-gradient-to-br from-primary to-secondary h-48">
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title text-white">Mountains!</h2>
+                    <p class="text-white/80">What a beautiful view of the mountains.</p>
+                    <div class="card-actions justify-end">
+                        <Button theme="primary" size="small" ghost>See more</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Colored cards ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colored backgrounds</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use <code>bg</code> and <code>textColor</code> props (or Tailwind classes) to tint cards.
+    </p>
+
+    <fieldset>
+        <legend>Semantic color backgrounds</legend>
+        <div class="flex flex-wrap gap-4">
+            <Card title="Primary" bg="primary" textColor="primary-content" classes="w-48">
+                <p class="text-sm">bg-primary</p>
+            </Card>
+            <Card title="Secondary" bg="secondary" textColor="secondary-content" classes="w-48">
+                <p class="text-sm">bg-secondary</p>
+            </Card>
+            <Card title="Accent" bg="accent" textColor="accent-content" classes="w-48">
+                <p class="text-sm">bg-accent</p>
+            </Card>
+            <Card title="Neutral" bg="neutral" textColor="neutral-content" classes="w-48">
+                <p class="text-sm">bg-neutral</p>
+            </Card>
+            <Card title="Info" bg="info" textColor="info-content" classes="w-48">
+                <p class="text-sm">bg-info</p>
+            </Card>
+            <Card title="Success" bg="success" textColor="success-content" classes="w-48">
+                <p class="text-sm">bg-success</p>
+            </Card>
+            <Card title="Warning" bg="warning" textColor="warning-content" classes="w-48">
+                <p class="text-sm">bg-warning</p>
+            </Card>
+            <Card title="Error" bg="error" textColor="error-content" classes="w-48">
+                <p class="text-sm">bg-error</p>
+            </Card>
+        </div>
+    </fieldset>
+
+    <!-- ── Card with badge in title ──────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Title with badge</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Slot a <code>Badge</code> next to the title using the <code>title</code> prop
+        and a custom heading in the default slot.
+    </p>
+
+    <fieldset>
+        <legend>Title + badge combo</legend>
+        <div class="flex flex-wrap gap-4">
+            <div class="card w-80 bg-base-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        Wireless Headphones
+                        <Badge color="success" size="sm">New</Badge>
+                    </h2>
+                    <p>Premium sound quality with active noise cancellation.</p>
+                    <div class="card-actions justify-between items-center">
+                        <span class="text-xl font-bold">$299</span>
+                        <Button theme="primary" size="small">Add to cart</Button>
+                    </div>
+                </div>
+            </div>
+            <div class="card w-80 bg-base-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        Smart Watch
+                        <Badge color="error" size="sm">Sale</Badge>
+                    </h2>
+                    <p>Track your fitness goals with style.</p>
+                    <div class="card-actions justify-between items-center">
+                        <span class="text-xl font-bold">$199 <span class="text-sm line-through opacity-50">$249</span></span>
+                        <Button theme="primary" size="small">Add to cart</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Card actions alignment ────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Action alignment</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>justify-end</code>, <code>justify-center</code>, <code>justify-between</code>
+        on the <code>card-actions</code> wrapper.
+    </p>
+
+    <fieldset>
+        <legend>Action positions</legend>
+        <div class="flex flex-wrap gap-4">
+            <div class="card w-64 bg-base-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">Left</h2>
+                    <p class="text-sm">Default alignment.</p>
+                    <div class="card-actions justify-start">
+                        <Button theme="primary" size="small">Action</Button>
+                    </div>
+                </div>
+            </div>
+            <div class="card w-64 bg-base-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">Center</h2>
+                    <p class="text-sm">Centered actions.</p>
+                    <div class="card-actions justify-center">
+                        <Button theme="primary" size="small">Action</Button>
+                    </div>
+                </div>
+            </div>
+            <div class="card w-64 bg-base-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">Right</h2>
+                    <p class="text-sm">Right-aligned actions.</p>
+                    <div class="card-actions justify-end">
+                        <Button theme="primary" size="small">Action</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Card grid ─────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Card grid</h2>
+    <p class="mt-1 text-sm opacity-70">Responsive grid of cards — common product / article layout.</p>
+
+    <fieldset>
+        <legend>3-column grid</legend>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+                { title: "Analytics", desc: "Track your key metrics in real time.", color: "primary", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" },
+                { title: "Security", desc: "Keep your account safe with 2FA.", color: "error", icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" },
+                { title: "Integrations", desc: "Connect with your favourite tools.", color: "success", icon: "M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" },
+            ].map(({ title, desc, color, icon }) => (
+                <div class="card bg-base-100 shadow-sm">
+                    <div class="card-body">
+                        <div class={`size-10 rounded-lg bg-${color}/10 flex items-center justify-center mb-2`}>
+                            <svg xmlns="http://www.w3.org/2000/svg" class={`size-5 text-${color}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d={icon} />
+                            </svg>
+                        </div>
+                        <h2 class="card-title text-base">{title}</h2>
+                        <p class="text-sm opacity-70">{desc}</p>
+                        <div class="card-actions justify-end mt-2">
+                            <Button theme="ghost" size="small">Learn more →</Button>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+</AppLayout>

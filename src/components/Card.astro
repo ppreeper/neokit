@@ -1,0 +1,133 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Card component — DaisyUI `card` wrapper.
+ *
+ * Basic usage:
+ * ```astro
+ * <Card title="Hello" actions={[{ label: "Buy", href: "#" }]}>
+ *   Card description here.
+ * </Card>
+ * ```
+ *
+ * With an image:
+ * ```astro
+ * <Card title="Shoes" imageSrc="/shoes.jpg" imageAlt="Shoes">
+ *   A great pair of shoes.
+ * </Card>
+ * ```
+ *
+ * Side layout:
+ * ```astro
+ * <Card title="Side" imageSrc="/img.jpg" layout="side">Content</Card>
+ * ```
+ *
+ * Full-bleed image overlay (image-full):
+ * ```astro
+ * <Card title="Overlay" imageSrc="/bg.jpg" imageOverlay>Content</Card>
+ * ```
+ */
+
+interface Props {
+    /** Card heading — rendered as `<h2 class="card-title">` in the body. */
+    title?: string;
+    /**
+     * Layout variant.
+     * - `"vertical"` — default stacked layout
+     * - `"side"`     — image left, body right (`card-side`)
+     * @default "vertical"
+     */
+    layout?: "vertical" | "side";
+    /**
+     * Visual style modifier.
+     * - `"default"`   — elevated card (default)
+     * - `"bordered"`  — outlined border (`card-border`)
+     * - `"dash"`      — dashed border (`card-dash`)
+     * - `"glass"`     — glassmorphism (`glass`)
+     * @default "default"
+     */
+    style?: "default" | "bordered" | "dash" | "glass";
+    /**
+     * Padding size.
+     * - `"normal"`  — standard padding (default)
+     * - `"compact"` — reduced padding (`card-compact`)
+     * @default "normal"
+     */
+    size?: "normal" | "compact";
+    /**
+     * Image src for the figure element. When provided an `<img>` is rendered
+     * inside a `<figure>`.
+     */
+    imageSrc?: string;
+    /** Alt text for the card image. @default "" */
+    imageAlt?: string;
+    /**
+     * When true, the image sits behind the body text (`image-full` class).
+     * Requires `imageSrc`.
+     * @default false
+     */
+    imageOverlay?: boolean;
+    /**
+     * Background color token for the card.
+     * Maps to `bg-{color}` — e.g. `"base-100"`, `"primary"`, `"neutral"`.
+     */
+    bg?: string;
+    /**
+     * Text color token for card content.
+     * Maps to `text-{color}` — e.g. `"primary-content"`, `"neutral-content"`.
+     */
+    textColor?: string;
+    /** Extra classes on the root card element. */
+    classes?: string;
+}
+
+const {
+    title,
+    layout = "vertical",
+    style = "default",
+    size = "normal",
+    imageSrc,
+    imageAlt = "",
+    imageOverlay = false,
+    bg,
+    textColor,
+    classes,
+} = Astro.props;
+
+const layoutClass = layout === "side" ? "card-side" : "";
+const styleClass = {
+    default: "",
+    bordered: "card-border",
+    dash: "card-dash",
+    glass: "glass",
+}[style];
+const sizeClass = size === "compact" ? "card-compact" : "";
+const overlayClass = imageOverlay ? "image-full" : "";
+const bgClass = bg ? `bg-${bg}` : "";
+const textClass = textColor ? `text-${textColor}` : "";
+
+const rootClass = twMerge(
+    "card",
+    layoutClass,
+    styleClass,
+    sizeClass,
+    overlayClass,
+    bgClass,
+    textClass,
+    classes,
+);
+---
+
+<div class={rootClass}>
+    {imageSrc && (
+        <figure>
+            <img src={imageSrc} alt={imageAlt} />
+        </figure>
+    )}
+    <div class="card-body">
+        {title && <h2 class="card-title">{title}</h2>}
+        <slot />
+        <slot name="actions" />
+    </div>
+</div>

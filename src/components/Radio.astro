@@ -1,0 +1,70 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Radio — DaisyUI `radio` input component.
+ *
+ * Renders a styled `<input type="radio">`. Group multiple radios by
+ * sharing the same `name` prop. Wrap in a `<label>` for accessibility.
+ *
+ * Sizes: `"xs"` | `"sm"` | `"md"` (default) | `"lg"` | `"xl"`
+ * Colors: `"primary"` | `"secondary"` | `"accent"` | `"info"` |
+ *         `"success"` | `"warning"` | `"error"` | `"neutral"`
+ *
+ * ```astro
+ * <label class="flex items-center gap-2">
+ *   <Radio name="size" value="sm" /> Small
+ * </label>
+ * <label class="flex items-center gap-2">
+ *   <Radio name="size" value="lg" checked /> Large
+ * </label>
+ * ```
+ */
+
+interface Props {
+    /** Checked state. */
+    checked?: boolean;
+    /** Disabled state. */
+    disabled?: boolean;
+    /** Size token. Default: `"md"`. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Color token. */
+    color?: "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error" | "neutral";
+    /** name attribute — required to group radio buttons. */
+    name?: string;
+    /** value attribute. */
+    value?: string;
+    /** id attribute. */
+    id?: string;
+    /** Extra classes. */
+    classes?: string;
+}
+
+const {
+    checked,
+    disabled,
+    size = "md",
+    color,
+    name,
+    value,
+    id,
+    classes,
+} = Astro.props;
+
+const rootClass = twMerge(
+    "radio",
+    size !== "md" && `radio-${size}`,
+    color && `radio-${color}`,
+    classes,
+);
+---
+
+<input
+    type="radio"
+    class={rootClass}
+    checked={checked}
+    disabled={disabled}
+    name={name}
+    value={value}
+    id={id}
+/>

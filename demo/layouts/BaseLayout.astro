@@ -1,0 +1,56 @@
+---
+const { title } = Astro.props;
+const { bodyClass } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <title>{title}</title>
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.7/bundles/datastar.js"
+        ></script>
+        <script is:inline>
+            // Define the theme names
+            const lightTheme = "corporate";
+            const darkTheme = "business";
+            // This function runs immediately to prevent flashing
+            const initTheme = () => {
+                const savedTheme = localStorage.getItem("theme");
+
+                if (savedTheme) {
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        savedTheme,
+                    );
+                } else {
+                    // Fallback to system preference
+                    const systemTheme = window.matchMedia(
+                        "(prefers-color-scheme: dark)",
+                    ).matches
+                        ? darkTheme
+                        : lightTheme;
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        systemTheme,
+                    );
+                }
+            };
+
+            initTheme();
+
+            // Re-run on View Transitions (if you use them)
+            document.addEventListener("astro:after-swap", initTheme);
+        </script>
+    </head>
+
+    <body class={bodyClass}>
+        <slot />
+        <slot name="scripts" />
+    </body>
+</html>

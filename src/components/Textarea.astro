@@ -1,0 +1,76 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Textarea — DaisyUI `textarea` multi-line input component.
+ *
+ * Renders a styled `<textarea>` element.
+ *
+ * Sizes: `"xs"` | `"sm"` | `"md"` (default) | `"lg"` | `"xl"`
+ * Colors: `"primary"` | `"secondary"` | `"accent"` | `"info"` |
+ *         `"success"` | `"warning"` | `"error"` | `"neutral"`
+ * Variants: `"bordered"` | `"ghost"`
+ *
+ * ```astro
+ * <Textarea placeholder="Write your message…" />
+ * <Textarea color="primary" size="lg" rows={6} />
+ * ```
+ */
+
+interface Props {
+    /** Placeholder text. */
+    placeholder?: string;
+    /** Current value. */
+    value?: string;
+    /** Number of visible rows. */
+    rows?: number;
+    /** Disabled state. */
+    disabled?: boolean;
+    /** Read-only state. */
+    readonly?: boolean;
+    /** Size token. Default: `"md"`. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Color token. */
+    color?: "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error" | "neutral";
+    /** Visual variant. */
+    variant?: "bordered" | "ghost";
+    /** id attribute. */
+    id?: string;
+    /** name attribute. */
+    name?: string;
+    /** Extra classes. */
+    classes?: string;
+}
+
+const {
+    placeholder,
+    value,
+    rows,
+    disabled,
+    readonly,
+    size = "md",
+    color,
+    variant,
+    id,
+    name,
+    classes,
+} = Astro.props;
+
+const rootClass = twMerge(
+    "textarea",
+    size !== "md" && `textarea-${size}`,
+    color && `textarea-${color}`,
+    variant && `textarea-${variant}`,
+    classes,
+);
+---
+
+<textarea
+    class={rootClass}
+    placeholder={placeholder}
+    rows={rows}
+    disabled={disabled}
+    readonly={readonly}
+    id={id}
+    name={name}
+>{value}</textarea>

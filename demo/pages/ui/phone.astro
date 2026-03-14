@@ -1,0 +1,102 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import MockupPhone from "neokit/components/MockupPhone.astro";
+---
+
+<AppLayout title="Mockup Phone">
+    <h1 id="top" class="text-5xl">Mockup Phone</h1>
+    <p class="mt-2 opacity-70">
+        A smartphone chrome for showcasing mobile UI.
+        Wraps a <code>&lt;div class="mockup-phone"&gt;</code> with a camera notch and display area.
+    </p>
+
+    <!-- ── Default ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Default dark phone chrome with a dark display. Place any content in the default slot.
+    </p>
+
+    <fieldset>
+        <legend>Default phone</legend>
+        <MockupPhone>
+            <div class="flex flex-col items-center justify-center h-full py-12 px-6 bg-base-100 text-base-content text-center">
+                <p class="text-lg font-bold">Hello!</p>
+                <p class="text-sm opacity-60 mt-1">Mobile content here</p>
+            </div>
+        </MockupPhone>
+    </fieldset>
+
+    <!-- ── With app-like content ─────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With app-like content</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Nest a realistic app layout inside the display slot.
+    </p>
+
+    <fieldset>
+        <legend>App inside phone</legend>
+        <MockupPhone>
+            <div class="bg-primary text-primary-content w-full px-4 py-3 text-center font-bold text-sm">
+                My App
+            </div>
+            <div class="flex flex-col gap-2 p-4 bg-base-100">
+                <div class="card card-border bg-base-200 shadow-sm">
+                    <div class="card-body p-3">
+                        <p class="font-semibold text-sm">Notification</p>
+                        <p class="text-xs opacity-60">You have 3 new messages</p>
+                    </div>
+                </div>
+                <div class="card card-border bg-base-200 shadow-sm">
+                    <div class="card-body p-3">
+                        <p class="font-semibold text-sm">Update available</p>
+                        <p class="text-xs opacity-60">Version 2.1.0 is ready</p>
+                    </div>
+                </div>
+                <div class="card card-border bg-base-200 shadow-sm">
+                    <div class="card-body p-3">
+                        <p class="font-semibold text-sm">Reminder</p>
+                        <p class="text-xs opacity-60">Meeting at 3:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </MockupPhone>
+    </fieldset>
+
+    <!-- ── Custom border color ───────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Custom border color</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Pass a border color utility via <code>classes</code> to change the phone frame color.
+    </p>
+
+    <fieldset>
+        <legend>Primary-bordered phone</legend>
+        <MockupPhone classes="border-primary">
+            <div class="flex flex-col items-center justify-center h-full py-12 px-6 bg-base-100 text-base-content text-center">
+                <p class="text-lg font-bold text-primary">Custom frame</p>
+                <p class="text-sm opacity-60 mt-1">border-primary applied</p>
+            </div>
+        </MockupPhone>
+    </fieldset>
+
+    <!-- ── With wallpaper ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With wallpaper / image background</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use an image as the display content to simulate a lock screen or wallpaper.
+    </p>
+
+    <fieldset>
+        <legend>Phone with wallpaper</legend>
+        <MockupPhone>
+            <div class="w-full h-full relative" style="min-height:200px">
+                <img
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    alt="wallpaper"
+                    class="w-full h-full object-cover"
+                />
+                <div class="absolute inset-0 flex flex-col items-center justify-end pb-8 text-white">
+                    <p class="text-2xl font-bold drop-shadow">9:41</p>
+                    <p class="text-sm opacity-80 drop-shadow">Saturday, March 14</p>
+                </div>
+            </div>
+        </MockupPhone>
+    </fieldset>
+</AppLayout>

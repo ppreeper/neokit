@@ -1,0 +1,157 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Toast from "neokit/components/Toast.astro";
+import Alert from "neokit/components/Alert.astro";
+---
+
+<AppLayout title="Toast">
+    <h1 id="top" class="text-5xl">Toast</h1>
+    <p class="mt-2 opacity-70">
+        A fixed-position notification container. Built with DaisyUI's{" "}
+        <code>toast</code> class. Place <code>&lt;Alert&gt;</code> or raw{" "}
+        <code>alert</code> divs inside. Supports nine position combinations
+        (3 horizontal × 3 vertical).
+    </p>
+
+    <!-- ── Default (bottom-end) ────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default position</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Default is <code>horizontal="end"</code> (right) and{" "}
+        <code>vertical="bottom"</code>. Uses <code>classes="absolute"</code>{" "}
+        here so it stays inside the demo container.
+    </p>
+
+    <fieldset>
+        <legend>toast default</legend>
+        <div class="relative h-32 w-full border border-base-300 rounded-box overflow-hidden bg-base-200">
+            <Toast classes="absolute">
+                <Alert color="success">
+                    <span>File saved successfully.</span>
+                </Alert>
+            </Toast>
+        </div>
+    </fieldset>
+
+    <!-- ── Positions grid ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">All positions</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Every combination of <code>horizontal</code> (start / center / end) and{" "}
+        <code>vertical</code> (top / middle / bottom).
+    </p>
+
+    <fieldset>
+        <legend>toast positions</legend>
+        <div class="grid grid-cols-3 gap-4">
+            {(["top", "middle", "bottom"] as const).map((v) =>
+                (["start", "center", "end"] as const).map((h) => (
+                    <div class="relative h-24 border border-base-300 rounded-box overflow-hidden bg-base-200 text-xs">
+                        <Toast horizontal={h} vertical={v} classes="absolute">
+                            <div class="alert alert-info py-1 px-3 text-xs">
+                                <span>{h}-{v}</span>
+                            </div>
+                        </Toast>
+                        <span class="absolute top-1 left-2 opacity-40 text-[10px]">{h}/{v}</span>
+                    </div>
+                ))
+            )}
+        </div>
+    </fieldset>
+
+    <!-- ── Stacked alerts ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Stacked alerts</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Multiple children stack vertically inside the toast container.
+    </p>
+
+    <fieldset>
+        <legend>toast stacked</legend>
+        <div class="relative h-40 w-full border border-base-300 rounded-box overflow-hidden bg-base-200">
+            <Toast classes="absolute">
+                <Alert color="info"><span>Sync started.</span></Alert>
+                <Alert color="success"><span>Upload complete.</span></Alert>
+                <Alert color="warning"><span>Low memory.</span></Alert>
+            </Toast>
+        </div>
+    </fieldset>
+
+    <!-- ── Color variants ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Color variants</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use any <code>Alert</code> color inside a toast.
+    </p>
+
+    <fieldset>
+        <legend>toast colors</legend>
+        <div class="flex flex-wrap gap-4">
+            {(["info", "success", "warning", "error"] as const).map((c) => (
+                <div class="relative h-20 w-56 border border-base-300 rounded-box overflow-hidden bg-base-200">
+                    <Toast classes="absolute">
+                        <Alert color={c}>
+                            <span class="capitalize">{c} toast</span>
+                        </Alert>
+                    </Toast>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Top-start ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Top-start</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>horizontal="start" vertical="top"</code> — common for system
+        notifications in LTR layouts.
+    </p>
+
+    <fieldset>
+        <legend>toast top-start</legend>
+        <div class="relative h-28 w-full border border-base-300 rounded-box overflow-hidden bg-base-200">
+            <Toast horizontal="start" vertical="top" classes="absolute">
+                <Alert color="warning">
+                    <svg xmlns="http://www.w3.org/2000/svg" slot="icon" fill="none" viewBox="0 0 24 24" class="h-5 w-5 shrink-0 stroke-current">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span>Your session expires soon.</span>
+                </Alert>
+            </Toast>
+        </div>
+    </fieldset>
+
+    <!-- ── Center-middle ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Center-middle</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>horizontal="center" vertical="middle"</code> — draws attention to
+        critical messages.
+    </p>
+
+    <fieldset>
+        <legend>toast center-middle</legend>
+        <div class="relative h-28 w-full border border-base-300 rounded-box overflow-hidden bg-base-200">
+            <Toast horizontal="center" vertical="middle" classes="absolute">
+                <Alert color="error">
+                    <span>Connection lost. Retrying…</span>
+                </Alert>
+            </Toast>
+        </div>
+    </fieldset>
+
+    <!-- ── Usage pattern ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Usage pattern</h2>
+    <p class="mt-1 text-sm opacity-70">
+        In production, omit <code>classes="absolute"</code> so the toast is
+        fixed to the viewport. Combine with JS to dynamically add / remove
+        alert children.
+    </p>
+
+    <fieldset>
+        <legend>toast usage code</legend>
+        <div class="mockup-code text-sm">
+            <pre data-prefix=""><code>{"import Toast from 'neokit/components/Toast.astro';"}</code></pre>
+            <pre data-prefix=""><code>{"import Alert from 'neokit/components/Alert.astro';"}</code></pre>
+            <pre data-prefix=""><code>{""}</code></pre>
+            <pre data-prefix=""><code>{"// Fixed to viewport (default, no classes override)"}</code></pre>
+            <pre data-prefix=""><code>{"<Toast horizontal=\"end\" vertical=\"bottom\">"}</code></pre>
+            <pre data-prefix=""><code>{"  <Alert color=\"success\"><span>Saved!</span></Alert>"}</code></pre>
+            <pre data-prefix=""><code>{"</Toast>"}</code></pre>
+        </div>
+    </fieldset>
+</AppLayout>

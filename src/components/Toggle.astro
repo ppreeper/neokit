@@ -1,0 +1,70 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Toggle — DaisyUI `toggle` switch input component.
+ *
+ * Renders a styled `<input type="checkbox">` that looks like a toggle switch.
+ * Wrap in a `<label>` for accessible labelling.
+ *
+ * Sizes: `"xs"` | `"sm"` | `"md"` (default) | `"lg"` | `"xl"`
+ * Colors: `"primary"` | `"secondary"` | `"accent"` | `"info"` |
+ *         `"success"` | `"warning"` | `"error"` | `"neutral"`
+ *
+ * ```astro
+ * <label class="flex items-center gap-2">
+ *   <Toggle checked />
+ *   <span>Dark mode</span>
+ * </label>
+ *
+ * <Toggle color="success" size="lg" />
+ * ```
+ */
+
+interface Props {
+    /** Checked / on state. */
+    checked?: boolean;
+    /** Disabled state. */
+    disabled?: boolean;
+    /** Size token. Default: `"md"`. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Color token. */
+    color?: "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error" | "neutral";
+    /** id attribute. */
+    id?: string;
+    /** name attribute. */
+    name?: string;
+    /** value attribute. */
+    value?: string;
+    /** Extra classes. */
+    classes?: string;
+}
+
+const {
+    checked,
+    disabled,
+    size = "md",
+    color,
+    id,
+    name,
+    value,
+    classes,
+} = Astro.props;
+
+const rootClass = twMerge(
+    "toggle",
+    size !== "md" && `toggle-${size}`,
+    color && `toggle-${color}`,
+    classes,
+);
+---
+
+<input
+    type="checkbox"
+    class={rootClass}
+    checked={checked}
+    disabled={disabled}
+    id={id}
+    name={name}
+    value={value}
+/>

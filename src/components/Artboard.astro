@@ -1,0 +1,26 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    /**
+     * Phone size preset (1–6). Sets the artboard-phone-N modifier.
+     * Omit for a plain artboard div.
+     */
+    phone?: 1 | 2 | 3 | 4 | 5 | 6;
+    /** Flip portrait → landscape orientation */
+    horizontal?: boolean;
+    /** Show a demo/placeholder grid background */
+    demo?: boolean;
+    classes?: string;
+}
+
+const { phone, horizontal = false, demo = false, classes } = Astro.props;
+
+const phoneClass = phone ? `artboard-phone-${phone}` : "";
+const horizontalClass = horizontal ? "artboard-horizontal" : "";
+const demoClass = demo ? "artboard-demo" : "";
+
+const classList = twMerge("artboard", phoneClass, horizontalClass, demoClass, classes);
+---
+
+<div class={classList}><slot /></div>

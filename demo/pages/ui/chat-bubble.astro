@@ -1,0 +1,208 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import ChatBubble from "neokit/components/ChatBubble.astro";
+---
+
+<AppLayout title="Chat Bubble">
+    <h1 id="top" class="text-5xl">Chat Bubble</h1>
+    <p class="mt-2 opacity-70">
+        Compose chat conversations with optional avatars, headers, timestamps, and
+        per-bubble colour tokens. Each <code>ChatBubble</code> renders a single message
+        row — stack them to build a thread.
+    </p>
+
+    <!-- ── Basic start / end ────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>side="start"</code> aligns left (incoming); <code>side="end"</code> aligns right (outgoing).
+    </p>
+
+    <fieldset>
+        <legend>start + end</legend>
+        <div class="flex flex-col gap-1">
+            <ChatBubble side="start">It's over Anakin, I have the high ground.</ChatBubble>
+            <ChatBubble side="end">You underestimate my power!</ChatBubble>
+        </div>
+    </fieldset>
+
+    <!-- ── With avatar ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With avatar</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Supply <code>avatarSrc</code> to render a <code>chat-image</code> section beside
+        the bubble.
+    </p>
+
+    <fieldset>
+        <legend>avatar on start + end</legend>
+        <div class="flex flex-col gap-1">
+            <ChatBubble
+                side="start"
+                avatarSrc="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
+                avatarAlt="Obi-Wan Kenobi"
+            >
+                You were the Chosen One!
+            </ChatBubble>
+            <ChatBubble
+                side="end"
+                avatarSrc="https://img.daisyui.com/images/profile/demo/anakeen@192.webp"
+                avatarAlt="Anakin Skywalker"
+            >
+                I hate you!
+            </ChatBubble>
+        </div>
+    </fieldset>
+
+    <!-- ── Header + footer + avatar ─────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Header, footer &amp; avatar</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add <code>header</code>, <code>time</code>, and <code>footer</code> for a rich
+        message card — name, timestamp, and delivery status.
+    </p>
+
+    <fieldset>
+        <legend>full metadata</legend>
+        <div class="flex flex-col gap-1">
+            <ChatBubble
+                side="start"
+                avatarSrc="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
+                avatarAlt="Obi-Wan Kenobi"
+                header="Obi-Wan Kenobi"
+                time="12:45"
+                footer="Delivered"
+            >
+                It's over Anakin, I have the high ground.
+            </ChatBubble>
+            <ChatBubble
+                side="end"
+                avatarSrc="https://img.daisyui.com/images/profile/demo/anakeen@192.webp"
+                avatarAlt="Anakin Skywalker"
+                header="Anakin Skywalker"
+                time="12:46"
+                footer="Seen at 12:46"
+            >
+                You underestimate my power!
+            </ChatBubble>
+        </div>
+    </fieldset>
+
+    <!-- ── Header + footer without avatar ──────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Header &amp; footer without avatar</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>avatarSrc</code> is optional — header and footer work independently.
+    </p>
+
+    <fieldset>
+        <legend>no avatar</legend>
+        <div class="flex flex-col gap-1">
+            <ChatBubble
+                side="start"
+                header="Obi-Wan Kenobi"
+                time="12:45"
+                footer="Delivered"
+            >
+                It's over Anakin, I have the high ground.
+            </ChatBubble>
+            <ChatBubble
+                side="end"
+                header="Anakin Skywalker"
+                time="12:46"
+                footer="Seen at 12:46"
+            >
+                You underestimate my power!
+            </ChatBubble>
+        </div>
+    </fieldset>
+
+    <!-- ── Bubble colors ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Bubble colors</h2>
+    <p class="mt-1 text-sm opacity-70">
+        The <code>color</code> prop maps to <code>chat-bubble-{"{color}"}</code>.
+        All 8 DaisyUI color tokens are supported.
+    </p>
+
+    <fieldset>
+        <legend>start — all colors</legend>
+        <div class="flex flex-col gap-1">
+            {(["neutral", "primary", "secondary", "accent", "info", "success", "warning", "error"] as const).map((color) => (
+                <ChatBubble side="start" color={color}>
+                    {color.charAt(0).toUpperCase() + color.slice(1)} bubble
+                </ChatBubble>
+            ))}
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>end — all colors</legend>
+        <div class="flex flex-col gap-1">
+            {(["neutral", "primary", "secondary", "accent", "info", "success", "warning", "error"] as const).map((color) => (
+                <ChatBubble side="end" color={color}>
+                    {color.charAt(0).toUpperCase() + color.slice(1)} bubble
+                </ChatBubble>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Realistic conversation ────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Full conversation</h2>
+    <p class="mt-1 text-sm opacity-70">
+        A realistic thread combining avatars, headers, timestamps, footers, and colors.
+    </p>
+
+    <fieldset>
+        <legend>conversation thread</legend>
+        <div class="flex flex-col gap-1 max-w-lg">
+            <ChatBubble
+                side="start"
+                avatarSrc="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
+                avatarAlt="Obi-Wan"
+                header="Obi-Wan Kenobi"
+                time="12:30"
+                color="primary"
+            >
+                Hello there!
+            </ChatBubble>
+            <ChatBubble
+                side="end"
+                avatarSrc="https://img.daisyui.com/images/profile/demo/anakeen@192.webp"
+                avatarAlt="Anakin"
+                header="Anakin Skywalker"
+                time="12:31"
+                color="secondary"
+            >
+                General Kenobi.
+            </ChatBubble>
+            <ChatBubble
+                side="start"
+                avatarSrc="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
+                avatarAlt="Obi-Wan"
+                header="Obi-Wan Kenobi"
+                time="12:44"
+                color="primary"
+            >
+                It's over Anakin, I have the high ground.
+            </ChatBubble>
+            <ChatBubble
+                side="end"
+                avatarSrc="https://img.daisyui.com/images/profile/demo/anakeen@192.webp"
+                avatarAlt="Anakin"
+                header="Anakin Skywalker"
+                time="12:45"
+                color="error"
+                footer="Seen at 12:45"
+            >
+                You underestimate my power!
+            </ChatBubble>
+            <ChatBubble
+                side="start"
+                avatarSrc="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
+                avatarAlt="Obi-Wan"
+                header="Obi-Wan Kenobi"
+                time="12:46"
+                color="primary"
+                footer="Delivered"
+            >
+                Don't try it.
+            </ChatBubble>
+        </div>
+    </fieldset>
+</AppLayout>

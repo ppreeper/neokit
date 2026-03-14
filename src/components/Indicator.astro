@@ -1,0 +1,36 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    /**
+     * Position of the indicator badge relative to the wrapped content.
+     * Defaults to `top-end` (top-right).
+     */
+    position?:
+        | "top-start"
+        | "top-center"
+        | "top-end"
+        | "middle-start"
+        | "middle-center"
+        | "middle-end"
+        | "bottom-start"
+        | "bottom-center"
+        | "bottom-end";
+    classes?: string;
+    /** Extra classes for the indicator-item span */
+    itemClasses?: string;
+}
+
+const { position, classes, itemClasses } = Astro.props;
+
+const posClass = position ? `indicator-${position}` : "";
+const itemClass = twMerge("indicator-item", posClass, itemClasses);
+const wrapClass = twMerge("indicator", classes);
+---
+
+<div class={wrapClass}>
+    <!-- Badge/label goes here -->
+    <span class={itemClass}><slot name="indicator" /></span>
+    <!-- Main content goes here -->
+    <slot />
+</div>

@@ -1,0 +1,55 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Navbar — DaisyUI `navbar` component.
+ *
+ * Renders a `<div class="navbar">` with three named slots:
+ * - `start`  → left section  (`navbar-start`)
+ * - `center` → center section (`navbar-center`)
+ * - `end`    → right section  (`navbar-end`)
+ *
+ * Any slot can be omitted. The default (unnamed) slot is ignored —
+ * use the named slots for structured layouts.
+ *
+ * ```astro
+ * <Navbar classes="bg-base-100 shadow">
+ *   <span slot="start" class="btn btn-ghost text-xl">Brand</span>
+ *   <Fragment slot="center">
+ *     <a class="btn btn-ghost">Home</a>
+ *     <a class="btn btn-ghost">About</a>
+ *   </Fragment>
+ *   <Fragment slot="end">
+ *     <button class="btn btn-primary btn-sm">Sign in</button>
+ *   </Fragment>
+ * </Navbar>
+ * ```
+ */
+
+interface Props {
+    /** Extra classes on the root `<div class="navbar">`. */
+    classes?: string;
+}
+
+const { classes } = Astro.props;
+
+const rootClass = twMerge("navbar", classes);
+---
+
+<div class={rootClass}>
+    {Astro.slots.has("start") && (
+        <div class="navbar-start">
+            <slot name="start" />
+        </div>
+    )}
+    {Astro.slots.has("center") && (
+        <div class="navbar-center">
+            <slot name="center" />
+        </div>
+    )}
+    {Astro.slots.has("end") && (
+        <div class="navbar-end">
+            <slot name="end" />
+        </div>
+    )}
+</div>

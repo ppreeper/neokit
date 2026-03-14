@@ -1,0 +1,255 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import List from "neokit/components/List.astro";
+---
+
+<AppLayout title="List">
+    <h1 id="top" class="text-5xl">List</h1>
+    <p class="mt-2 opacity-70">
+        A vertical flex layout for structured rows. Use <code>list-row</code> on
+        each <code>&lt;li&gt;</code>; the 2nd child fills remaining space by
+        default. Override with <code>list-col-grow</code> or push a child to its
+        own row with <code>list-col-wrap</code>.
+    </p>
+
+    <!-- ── Basic playlist ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic list</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Music playlist. The 2nd child (title/artist column) fills remaining
+        space by default — no extra classes needed.
+    </p>
+
+    <fieldset>
+        <legend>list — playlist</legend>
+        <List classes="max-w-md">
+            <li class="p-4 pb-2 text-xs opacity-60 tracking-widest uppercase">
+                Your mix — 4 tracks
+            </li>
+            {[
+                {
+                    n: 1,
+                    img: "https://img.daisyui.com/images/profile/demo/1@94.webp",
+                    title: "Sonder",
+                    artist: "Novo Amor",
+                    duration: "3:14",
+                },
+                {
+                    n: 2,
+                    img: "https://img.daisyui.com/images/profile/demo/2@94.webp",
+                    title: "Holocene",
+                    artist: "Bon Iver",
+                    duration: "5:37",
+                },
+                {
+                    n: 3,
+                    img: "https://img.daisyui.com/images/profile/demo/3@94.webp",
+                    title: "Bloom",
+                    artist: "The Paper Kites",
+                    duration: "4:03",
+                },
+                {
+                    n: 4,
+                    img: "https://img.daisyui.com/images/profile/demo/4@94.webp",
+                    title: "Skinny Love",
+                    artist: "Bon Iver",
+                    duration: "3:58",
+                },
+            ].map((track) => (
+                <li class="list-row items-center">
+                    <div>
+                        <img
+                            class="size-10 rounded-box"
+                            src={track.img}
+                            alt={track.artist}
+                        />
+                    </div>
+                    <div>
+                        <div class="font-medium">{track.title}</div>
+                        <div class="text-xs opacity-60">{track.artist}</div>
+                    </div>
+                    <div class="text-xs opacity-50 tabular-nums">
+                        {track.duration}
+                    </div>
+                    <div class="flex gap-1">
+                        <button class="btn btn-square btn-ghost btn-xs" aria-label="play">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-square btn-ghost btn-xs" aria-label="like">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </li>
+            ))}
+        </List>
+    </fieldset>
+
+    <!-- ── list-col-grow ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">list-col-grow</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Override which column fills remaining space with{" "}
+        <code>list-col-grow</code>. Here the rank number is first, but the 3rd
+        child (title) is the one that should grow.
+    </p>
+
+    <fieldset>
+        <legend>list-col-grow</legend>
+        <List classes="max-w-sm">
+            <li class="p-4 pb-2 text-xs opacity-60 tracking-widest uppercase">
+                Leaderboard
+            </li>
+            {[
+                { rank: 1, img: "https://img.daisyui.com/images/profile/demo/1@94.webp", name: "Alice Chen", score: 9820 },
+                { rank: 2, img: "https://img.daisyui.com/images/profile/demo/2@94.webp", name: "Bob Russo", score: 8440 },
+                { rank: 3, img: "https://img.daisyui.com/images/profile/demo/3@94.webp", name: "Carol Kim", score: 7760 },
+            ].map(({ rank, img, name, score }) => (
+                <li class="list-row items-center">
+                    <div class="text-2xl font-bold tabular-nums opacity-30 w-6 text-right">
+                        {rank}
+                    </div>
+                    <div>
+                        <img class="size-8 rounded-full" src={img} alt={name} />
+                    </div>
+                    <div class="list-col-grow font-medium">{name}</div>
+                    <div class="text-sm font-mono opacity-60">{score.toLocaleString()}</div>
+                </li>
+            ))}
+        </List>
+    </fieldset>
+
+    <!-- ── list-col-wrap ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">list-col-wrap</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>list-col-wrap</code> pushes a child to its own full-width row
+        below the other children. Good for descriptions or secondary content.
+    </p>
+
+    <fieldset>
+        <legend>list-col-wrap</legend>
+        <List classes="max-w-lg">
+            <li class="p-4 pb-2 text-xs opacity-60 tracking-widest uppercase">
+                Articles
+            </li>
+            {[
+                {
+                    img: "https://img.daisyui.com/images/profile/demo/1@94.webp",
+                    title: "The future of component libraries",
+                    author: "Alice Chen",
+                    desc: "How modern design systems are evolving beyond simple UI kits into full-stack developer tools.",
+                },
+                {
+                    img: "https://img.daisyui.com/images/profile/demo/2@94.webp",
+                    title: "Building with Tailwind v4",
+                    author: "Bob Russo",
+                    desc: "A hands-on guide to the new CSS-first configuration and what it means for your workflow.",
+                },
+            ].map(({ img, title, author, desc }) => (
+                <li class="list-row">
+                    <div>
+                        <img class="size-10 rounded-box" src={img} alt={author} />
+                    </div>
+                    <div>
+                        <div class="font-medium">{title}</div>
+                        <div class="text-xs opacity-60">{author}</div>
+                    </div>
+                    <button class="btn btn-ghost btn-xs self-center">Read</button>
+                    <p class="list-col-wrap text-sm opacity-60 mt-1">{desc}</p>
+                </li>
+            ))}
+        </List>
+    </fieldset>
+
+    <!-- ── Text-only list ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Text-only list</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Simple text rows with no media — useful for menus, tables of contents,
+        or category lists.
+    </p>
+
+    <fieldset>
+        <legend>text-only list</legend>
+        <List classes="max-w-xs">
+            <li class="p-4 pb-2 text-xs opacity-60 tracking-widest uppercase">
+                Categories
+            </li>
+            {[
+                "Actions",
+                "Data Display",
+                "Navigation",
+                "Feedback",
+                "Data Input",
+                "Layout",
+                "Mockup",
+            ].map((cat) => (
+                <li class="list-row">
+                    <div class="list-col-grow py-1">{cat}</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4 opacity-40 self-center" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </li>
+            ))}
+        </List>
+    </fieldset>
+
+    <!-- ── Settings / menu panel ─────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Settings panel</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Icon + label + action element — a common pattern for settings menus.
+    </p>
+
+    <fieldset>
+        <legend>settings panel</legend>
+        <List classes="max-w-sm">
+            <li class="p-4 pb-2 text-xs opacity-60 tracking-widest uppercase">
+                Preferences
+            </li>
+
+            <!-- Toggle row -->
+            <li class="list-row items-center">
+                <div class="text-xl">🔔</div>
+                <div class="list-col-grow">
+                    <div class="font-medium">Notifications</div>
+                    <div class="text-xs opacity-60">Push and email alerts</div>
+                </div>
+                <input type="checkbox" class="toggle toggle-primary" checked />
+            </li>
+
+            <!-- Badge row -->
+            <li class="list-row items-center">
+                <div class="text-xl">🌙</div>
+                <div class="list-col-grow">
+                    <div class="font-medium">Dark mode</div>
+                    <div class="text-xs opacity-60">System default</div>
+                </div>
+                <span class="badge badge-ghost badge-sm">Auto</span>
+            </li>
+
+            <!-- Button row -->
+            <li class="list-row items-center">
+                <div class="text-xl">🔒</div>
+                <div class="list-col-grow">
+                    <div class="font-medium">Two-factor auth</div>
+                    <div class="text-xs opacity-60">Add an extra layer of security</div>
+                </div>
+                <button class="btn btn-sm btn-outline btn-error">Disable</button>
+            </li>
+
+            <!-- Select row -->
+            <li class="list-row items-center">
+                <div class="text-xl">🌐</div>
+                <div class="list-col-grow">
+                    <div class="font-medium">Language</div>
+                    <div class="text-xs opacity-60">Display language</div>
+                </div>
+                <select class="select select-sm select-bordered w-28">
+                    <option>English</option>
+                    <option>French</option>
+                    <option>Spanish</option>
+                </select>
+            </li>
+        </List>
+    </fieldset>
+</AppLayout>

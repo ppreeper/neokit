@@ -1,0 +1,99 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import MockupCode from "neokit/components/MockupCode.astro";
+---
+
+<AppLayout title="Mockup Code">
+    <h1 id="top" class="text-5xl">Mockup Code</h1>
+    <p class="mt-2 opacity-70">
+        A terminal / code block mockup with gutter prefix labels.
+        Wraps a <code>&lt;div class="mockup-code"&gt;</code>. Each line is a
+        <code>&lt;pre data-prefix="..."&gt;&lt;code&gt;</code> element.
+    </p>
+
+    <!-- ── Single command ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Single command</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use <code>data-prefix="$"</code> on a <code>&lt;pre&gt;</code> to show a shell prompt.
+    </p>
+
+    <fieldset>
+        <legend>Shell command</legend>
+        <MockupCode>
+            <pre data-prefix="$"><code>npm install daisyui</code></pre>
+        </MockupCode>
+    </fieldset>
+
+    <!-- ── Multi-line with output ────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Multi-line with output</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Mix prompt lines and numbered output lines. Use any string as <code>data-prefix</code>.
+    </p>
+
+    <fieldset>
+        <legend>Command with output</legend>
+        <MockupCode>
+            <pre data-prefix="$"><code>git status</code></pre>
+            <pre data-prefix=" "><code>On branch main</code></pre>
+            <pre data-prefix=" "><code>nothing to commit, working tree clean</code></pre>
+        </MockupCode>
+    </fieldset>
+
+    <!-- ── Highlighted line ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Highlighted line</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add <code>class="bg-warning text-warning-content"</code> (or any bg/text pair) to a
+        <code>&lt;pre&gt;</code> to highlight that line.
+    </p>
+
+    <fieldset>
+        <legend>Warning line highlighted</legend>
+        <MockupCode>
+            <pre data-prefix="1"><code>import &#123;neokit&#125; from 'neokit'</code></pre>
+            <pre data-prefix="2" class="bg-warning text-warning-content"><code>// deprecated API call below</code></pre>
+            <pre data-prefix="3"><code>neokit.oldMethod()</code></pre>
+        </MockupCode>
+    </fieldset>
+
+    <!-- ── Error line ─────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Error line</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use <code>class="bg-error text-error-content"</code> for error output.
+    </p>
+
+    <fieldset>
+        <legend>Error output</legend>
+        <MockupCode>
+            <pre data-prefix="$"><code>npm run build</code></pre>
+            <pre data-prefix=" " class="bg-error text-error-content"><code>Error: Cannot find module './missing'</code></pre>
+        </MockupCode>
+    </fieldset>
+
+    <!-- ── Without prefix ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Without prefix</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Omit <code>data-prefix</code> to show no gutter label on that line.
+    </p>
+
+    <fieldset>
+        <legend>No prefix</legend>
+        <MockupCode>
+            <pre><code>const greeting = "Hello, world!"</code></pre>
+            <pre><code>console.log(greeting)</code></pre>
+        </MockupCode>
+    </fieldset>
+
+    <!-- ── Custom background color ───────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Custom background</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Pass a bg utility via <code>classes</code> to change the terminal color scheme.
+    </p>
+
+    <fieldset>
+        <legend>Primary-colored terminal</legend>
+        <MockupCode classes="bg-primary text-primary-content">
+            <pre data-prefix="$"><code>echo "styled terminal"</code></pre>
+            <pre data-prefix=">" class="text-primary-content/70"><code>styled terminal</code></pre>
+        </MockupCode>
+    </fieldset>
+</AppLayout>

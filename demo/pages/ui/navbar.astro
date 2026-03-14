@@ -1,0 +1,179 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import NavbarComponent from "neokit/components/Navbar.astro";
+import Menu from "neokit/components/Menu.astro";
+---
+
+<AppLayout title="Navbar">
+    <h1 id="top" class="text-5xl">Navbar</h1>
+    <p class="mt-2 opacity-70">
+        A horizontal app bar built with DaisyUI's <code>navbar</code> class.
+        Three named slots — <code>start</code>, <code>center</code>,{" "}
+        <code>end</code> — map to <code>navbar-start</code>,{" "}
+        <code>navbar-center</code>, and <code>navbar-end</code>. Any slot can
+        be omitted.
+    </p>
+
+    <!-- ── Brand only ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Brand only</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Minimal navbar — just a brand name in the start slot.
+    </p>
+
+    <fieldset>
+        <legend>navbar brand</legend>
+        <div class="not-prose rounded-box overflow-hidden border border-base-300">
+            <NavbarComponent classes="bg-base-100">
+                <span slot="start" class="btn btn-ghost text-xl">Brand</span>
+            </NavbarComponent>
+        </div>
+    </fieldset>
+
+    <!-- ── Brand + links ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Brand + links</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Brand on the left, navigation links on the right.
+    </p>
+
+    <fieldset>
+        <legend>navbar brand links</legend>
+        <div class="not-prose rounded-box overflow-hidden border border-base-300">
+            <NavbarComponent classes="bg-base-100">
+                <span slot="start" class="btn btn-ghost text-xl">Acme</span>
+                <Fragment slot="end">
+                    <a class="btn btn-ghost btn-sm">Home</a>
+                    <a class="btn btn-ghost btn-sm">About</a>
+                    <a class="btn btn-ghost btn-sm">Blog</a>
+                    <button class="btn btn-primary btn-sm">Sign in</button>
+                </Fragment>
+            </NavbarComponent>
+        </div>
+    </fieldset>
+
+    <!-- ── With center title ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Center title</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Brand centered, utility buttons on each end.
+    </p>
+
+    <fieldset>
+        <legend>navbar center</legend>
+        <div class="not-prose rounded-box overflow-hidden border border-base-300">
+            <NavbarComponent classes="bg-base-100">
+                <button slot="start" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+                </button>
+                <span slot="center" class="btn btn-ghost text-xl">daisyUI</span>
+                <Fragment slot="end">
+                    <button class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    </button>
+                    <button class="btn btn-ghost btn-circle">
+                        <div class="indicator">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                            <span class="badge badge-xs badge-primary indicator-item"></span>
+                        </div>
+                    </button>
+                </Fragment>
+            </NavbarComponent>
+        </div>
+    </fieldset>
+
+    <!-- ── With dropdown menu ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With dropdown menu</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Hamburger icon on mobile opening a DaisyUI dropdown with a{" "}
+        <code>Menu</code> inside.
+    </p>
+
+    <fieldset>
+        <legend>navbar dropdown</legend>
+        <div class="not-prose rounded-box overflow-hidden border border-base-300">
+            <NavbarComponent classes="bg-base-100">
+                <Fragment slot="start">
+                    <div class="dropdown">
+                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                        </div>
+                        <Menu tabindex="0" classes="menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            <li><a>Homepage</a></li>
+                            <li><a>Portfolio</a></li>
+                            <li><a>About</a></li>
+                        </Menu>
+                    </div>
+                </Fragment>
+                <span slot="center" class="btn btn-ghost text-xl">daisyUI</span>
+                <Fragment slot="end">
+                    <button class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    </button>
+                    <div class="dropdown dropdown-end">
+                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                            <div class="w-10 rounded-full bg-base-300 flex items-center justify-center text-sm font-bold">AK</div>
+                        </div>
+                        <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            <li><a>Profile</a></li>
+                            <li><a>Settings</a></li>
+                            <li><a>Logout</a></li>
+                        </ul>
+                    </div>
+                </Fragment>
+            </NavbarComponent>
+        </div>
+    </fieldset>
+
+    <!-- ── Colored ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colored</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Apply semantic background colors via the <code>classes</code> prop.
+    </p>
+
+    <fieldset>
+        <legend>navbar colors</legend>
+        <div class="flex flex-col gap-2">
+            {([
+                { bg: "bg-neutral text-neutral-content",     label: "neutral"   },
+                { bg: "bg-primary text-primary-content",     label: "primary"   },
+                { bg: "bg-secondary text-secondary-content", label: "secondary" },
+                { bg: "bg-accent text-accent-content",       label: "accent"    },
+            ] as const).map(({ bg, label }) => (
+                <div class="not-prose rounded-box overflow-hidden">
+                    <NavbarComponent classes={bg}>
+                        <span slot="start" class="btn btn-ghost text-xl">{label}</span>
+                        <Fragment slot="end">
+                            <a class="btn btn-ghost btn-sm">Home</a>
+                            <a class="btn btn-ghost btn-sm">About</a>
+                        </Fragment>
+                    </NavbarComponent>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Sticky (concept) ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sticky</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Wrap in a container with <code>sticky top-0 z-50</code> to pin the
+        navbar to the viewport top while scrolling.
+    </p>
+
+    <fieldset>
+        <legend>navbar sticky</legend>
+        <div class="not-prose relative h-40 overflow-y-auto rounded-box border border-base-300">
+            <div class="sticky top-0 z-10">
+                <NavbarComponent classes="bg-base-100 shadow-sm">
+                    <span slot="start" class="btn btn-ghost text-xl">Sticky</span>
+                    <Fragment slot="end">
+                        <button class="btn btn-ghost btn-sm">Home</button>
+                        <button class="btn btn-primary btn-sm">Sign in</button>
+                    </Fragment>
+                </NavbarComponent>
+            </div>
+            <div class="p-4 space-y-2">
+                {Array.from({ length: 8 }, (_, i) => (
+                    <p class="text-sm opacity-60">Scroll content line {i + 1} — the navbar above stays fixed.</p>
+                ))}
+            </div>
+        </div>
+    </fieldset>
+</AppLayout>

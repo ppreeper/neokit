@@ -1,0 +1,71 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * FileInput — DaisyUI `file-input` file picker component.
+ *
+ * Renders a styled `<input type="file">`.
+ *
+ * Sizes: `"xs"` | `"sm"` | `"md"` (default) | `"lg"` | `"xl"`
+ * Colors: `"primary"` | `"secondary"` | `"accent"` | `"info"` |
+ *         `"success"` | `"warning"` | `"error"` | `"neutral"`
+ * Variants: `"bordered"` | `"ghost"`
+ *
+ * ```astro
+ * <FileInput />
+ * <FileInput accept="image/*" color="primary" size="sm" />
+ * <FileInput multiple />
+ * ```
+ */
+
+interface Props {
+    /** Accepted file types (MIME types or extensions). */
+    accept?: string;
+    /** Allow selecting multiple files. */
+    multiple?: boolean;
+    /** Disabled state. */
+    disabled?: boolean;
+    /** Size token. Default: `"md"`. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Color token. */
+    color?: "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error" | "neutral";
+    /** Visual variant. */
+    variant?: "bordered" | "ghost";
+    /** id attribute. */
+    id?: string;
+    /** name attribute. */
+    name?: string;
+    /** Extra classes. */
+    classes?: string;
+}
+
+const {
+    accept,
+    multiple,
+    disabled,
+    size = "md",
+    color,
+    variant,
+    id,
+    name,
+    classes,
+} = Astro.props;
+
+const rootClass = twMerge(
+    "file-input",
+    size !== "md" && `file-input-${size}`,
+    color && `file-input-${color}`,
+    variant && `file-input-${variant}`,
+    classes,
+);
+---
+
+<input
+    type="file"
+    class={rootClass}
+    accept={accept}
+    multiple={multiple}
+    disabled={disabled}
+    id={id}
+    name={name}
+/>

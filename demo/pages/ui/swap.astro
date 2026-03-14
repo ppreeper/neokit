@@ -1,0 +1,144 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Swap from "neokit/components/Swap.astro";
+---
+
+<AppLayout title="Swap">
+    <h1 id="top" class="text-5xl">Swap</h1>
+
+    <!-- ── Text swap (no effect) ────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Text swap</h2>
+
+    <fieldset>
+        <legend>Toggle between two words</legend>
+        <Swap>
+            <span slot="on">ON</span>
+            <span slot="off">OFF</span>
+        </Swap>
+    </fieldset>
+
+    <!-- ── Icon swap ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Icon swap</h2>
+
+    <fieldset>
+        <legend>Volume icons (no effect)</legend>
+        <Swap classes="text-4xl">
+            <!-- volume on -->
+            <svg slot="on" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
+            </svg>
+            <!-- volume off -->
+            <svg slot="off" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
+            </svg>
+        </Swap>
+    </fieldset>
+
+    <!-- ── Rotate effect ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Rotate effect</h2>
+
+    <fieldset>
+        <legend>Sun / moon theme toggle</legend>
+        <Swap effect="rotate" classes="text-4xl">
+            <!-- sun (light mode) -->
+            <svg slot="on" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+            </svg>
+            <!-- moon (dark mode) -->
+            <svg slot="off" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+            </svg>
+        </Swap>
+    </fieldset>
+
+    <fieldset>
+        <legend>Hamburger / close icon</legend>
+        <Swap effect="rotate" classes="text-4xl">
+            <!-- hamburger open -->
+            <svg slot="off" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <!-- close X -->
+            <svg slot="on" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </Swap>
+    </fieldset>
+
+    <!-- ── Flip effect ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Flip effect</h2>
+
+    <fieldset>
+        <legend>Emoji flip</legend>
+        <Swap effect="flip" classes="text-5xl">
+            <span slot="on">😈</span>
+            <span slot="off">😇</span>
+        </Swap>
+    </fieldset>
+
+    <fieldset>
+        <legend>Heart favourite</legend>
+        <Swap effect="flip" classes="text-4xl">
+            <svg slot="on" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8 text-error">
+                <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+            </svg>
+            <svg slot="off" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+            </svg>
+        </Swap>
+    </fieldset>
+
+    <!-- ── Pre-checked ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Pre-checked state</h2>
+
+    <fieldset>
+        <legend>Starts in the "on" state (checked=true)</legend>
+        <Swap effect="rotate" checked classes="text-4xl">
+            <svg slot="on" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+            </svg>
+            <svg slot="off" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+            </svg>
+        </Swap>
+    </fieldset>
+
+    <!-- ── Class-based active mode ──────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Class-based active (no checkbox)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use <code>active</code> to control state purely via a server-side boolean or client-side class toggling.
+        No hidden checkbox is rendered — clicking the label does nothing by default.
+    </p>
+
+    <fieldset>
+        <legend>active=false</legend>
+        <Swap active={false} classes="text-4xl">
+            <span slot="on">ON</span>
+            <span slot="off">OFF</span>
+        </Swap>
+    </fieldset>
+
+    <fieldset>
+        <legend>active=true</legend>
+        <Swap active={true} classes="text-4xl">
+            <span slot="on">ON</span>
+            <span slot="off">OFF</span>
+        </Swap>
+    </fieldset>
+
+    <fieldset>
+        <legend>JS-toggled — click to flip swap-active class</legend>
+        <Swap id="js-swap" active={false} effect="rotate" classes="text-4xl cursor-pointer">
+            <svg slot="on" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+            </svg>
+            <svg slot="off" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+            </svg>
+        </Swap>
+        <script>
+            const el = document.getElementById("js-swap");
+            el?.addEventListener("click", () => el.classList.toggle("swap-active"));
+        </script>
+    </fieldset>
+</AppLayout>

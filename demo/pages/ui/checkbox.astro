@@ -1,0 +1,146 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Checkbox from "neokit/components/Checkbox.astro";
+---
+
+<AppLayout title="Checkbox">
+    <h1 id="top" class="text-5xl">Checkbox</h1>
+    <p class="mt-2 opacity-70">
+        A styled checkbox input. Built on <code>&lt;input type="checkbox"&gt;</code>{" "}
+        with DaisyUI's <code>checkbox</code> class. Wrap in a{" "}
+        <code>&lt;label&gt;</code> for accessible labelling. Supports sizes,
+        colors, checked, and indeterminate states.
+    </p>
+
+    <!-- ── Default ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">Unchecked and checked states.</p>
+
+    <fieldset>
+        <legend>checkbox default</legend>
+        <div class="flex items-center gap-6">
+            <label class="flex items-center gap-2 cursor-pointer">
+                <Checkbox />
+                <span>Unchecked</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+                <Checkbox checked />
+                <span>Checked</span>
+            </label>
+        </div>
+    </fieldset>
+
+    <!-- ── Colors ──────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">All eight DaisyUI color tokens.</p>
+
+    <fieldset>
+        <legend>checkbox colors</legend>
+        <div class="flex flex-wrap gap-4">
+            {(["primary","secondary","accent","info","success","warning","error","neutral"] as const).map((c) => (
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <Checkbox color={c} checked />
+                    <span class="text-sm capitalize">{c}</span>
+                </label>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Sizes ───────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes: <code>xs</code> → <code>xl</code>.
+    </p>
+
+    <fieldset>
+        <legend>checkbox sizes</legend>
+        <div class="flex items-end gap-6">
+            {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
+                <label class="flex flex-col items-center gap-1 cursor-pointer">
+                    <Checkbox size={s} checked color="primary" />
+                    <span class="text-xs opacity-60">{s}</span>
+                </label>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Indeterminate ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Indeterminate</h2>
+    <p class="mt-1 text-sm opacity-70">
+        The <code>indeterminate</code> prop sets the mixed-state dash via JS.
+        Useful for "select all" patterns.
+    </p>
+
+    <fieldset>
+        <legend>checkbox indeterminate</legend>
+        <label class="flex items-center gap-2 cursor-pointer">
+            <Checkbox indeterminate color="primary" />
+            <span>Some items selected</span>
+        </label>
+    </fieldset>
+
+    <!-- ── Disabled ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Disabled</h2>
+    <p class="mt-1 text-sm opacity-70">Both unchecked and checked disabled states.</p>
+
+    <fieldset>
+        <legend>checkbox disabled</legend>
+        <div class="flex items-center gap-6">
+            <label class="flex items-center gap-2 cursor-not-allowed">
+                <Checkbox disabled />
+                <span class="opacity-50">Disabled</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-not-allowed">
+                <Checkbox disabled checked />
+                <span class="opacity-50">Disabled checked</span>
+            </label>
+        </div>
+    </fieldset>
+
+    <!-- ── Checklist ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Checklist</h2>
+    <p class="mt-1 text-sm opacity-70">Real-world task list pattern.</p>
+
+    <fieldset>
+        <legend>checkbox checklist</legend>
+        <div class="card bg-base-100 shadow max-w-sm">
+            <div class="card-body gap-3">
+                <h3 class="font-bold">Sprint tasks</h3>
+                {[
+                    { label: "Design system audit", done: true },
+                    { label: "Implement Input component", done: true },
+                    { label: "Write Checkbox demo", done: false },
+                    { label: "Add unit tests", done: false },
+                    { label: "Deploy to staging", done: false },
+                ].map(({ label, done }) => (
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <Checkbox color="success" checked={done} />
+                        <span class={done ? "line-through opacity-50" : ""}>{label}</span>
+                    </label>
+                ))}
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Select-all pattern ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Select all pattern</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Parent uses <code>indeterminate</code> when only some children are checked.
+    </p>
+
+    <fieldset>
+        <legend>checkbox select all</legend>
+        <div class="flex flex-col gap-2 max-w-xs">
+            <label class="flex items-center gap-2 cursor-pointer font-semibold border-b border-base-300 pb-2">
+                <Checkbox indeterminate color="primary" />
+                <span>Select all (2 / 4)</span>
+            </label>
+            {["Document A", "Document B", "Document C", "Document D"].map((doc, i) => (
+                <label class="flex items-center gap-2 cursor-pointer pl-4">
+                    <Checkbox color="primary" checked={i < 2} />
+                    <span>{doc}</span>
+                </label>
+            ))}
+        </div>
+    </fieldset>
+</AppLayout>

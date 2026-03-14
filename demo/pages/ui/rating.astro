@@ -1,0 +1,167 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Rating from "neokit/components/Rating.astro";
+---
+
+<AppLayout title="Rating">
+    <h1 id="top" class="text-5xl">Rating</h1>
+    <p class="mt-2 opacity-70">
+        A star-rating input built with DaisyUI's <code>rating</code> class.
+        Uses hidden radio inputs styled as masked star icons. Supports
+        full stars, half stars, sizes, color tokens, and pre-selected values.
+    </p>
+
+    <!-- ── Default ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">Five stars, none selected.</p>
+
+    <fieldset>
+        <legend>rating default</legend>
+        <Rating name="r-default" />
+    </fieldset>
+
+    <!-- ── Pre-selected ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Pre-selected value</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Set <code>value</code> to highlight stars 1–max.
+    </p>
+
+    <fieldset>
+        <legend>rating pre-selected</legend>
+        <div class="flex flex-col gap-2">
+            {[1, 2, 3, 4, 5].map((v) => (
+                <div class="flex items-center gap-3">
+                    <span class="w-4 text-sm opacity-60">{v}</span>
+                    <Rating name={`r-pre-${v}`} value={v} />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Colors ──────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">Color tokens change the star fill color.</p>
+
+    <fieldset>
+        <legend>rating colors</legend>
+        <div class="flex flex-col gap-2">
+            {(["primary","secondary","accent","info","success","warning","error","neutral"] as const).map((c) => (
+                <div class="flex items-center gap-3">
+                    <span class="w-20 text-xs capitalize opacity-60 shrink-0">{c}</span>
+                    <Rating name={`r-color-${c}`} value={3} color={c} />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Sizes ───────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes: <code>xs</code> → <code>xl</code>.
+    </p>
+
+    <fieldset>
+        <legend>rating sizes</legend>
+        <div class="flex flex-col gap-3">
+            {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
+                <div class="flex items-center gap-3">
+                    <span class="w-6 text-xs opacity-60 shrink-0">{s}</span>
+                    <Rating name={`r-size-${s}`} value={3} size={s} color="warning" />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Half stars ─────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Half stars</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>half</code> prop doubles the inputs using half-mask shapes.
+    </p>
+
+    <fieldset>
+        <legend>rating half</legend>
+        <div class="flex flex-col gap-3">
+            <Rating name="r-half-1" half color="warning" />
+            <Rating name="r-half-2" half value={2.5} color="warning" />
+            <Rating name="r-half-3" half value={4} color="warning" />
+        </div>
+    </fieldset>
+
+    <!-- ── Different max ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Custom max</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use <code>max</code> to show 3 or 10 stars instead of the default 5.
+    </p>
+
+    <fieldset>
+        <legend>rating custom max</legend>
+        <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-3">
+                <span class="text-xs opacity-60 w-12 shrink-0">3 stars</span>
+                <Rating name="r-max3" max={3} value={2} color="primary" />
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-xs opacity-60 w-12 shrink-0">10 stars</span>
+                <Rating name="r-max10" max={10} value={7} color="success" size="sm" />
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Product review card ────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Product review</h2>
+    <p class="mt-1 text-sm opacity-70">Real-world rating inside a review card.</p>
+
+    <fieldset>
+        <legend>rating product review</legend>
+        <div class="card bg-base-100 shadow max-w-sm">
+            <div class="card-body gap-3">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h3 class="font-bold">Mechanical Keyboard Pro</h3>
+                        <p class="text-xs opacity-60">Verified purchase · March 2026</p>
+                    </div>
+                    <Rating name="r-review" value={4} size="sm" color="warning" />
+                </div>
+                <p class="text-sm opacity-80">
+                    Excellent build quality and the tactile feedback is satisfying.
+                    Shipping was fast. Would recommend to any developer.
+                </p>
+                <div class="flex items-center gap-2 text-xs opacity-50">
+                    <span>Was this helpful?</span>
+                    <button class="btn btn-xs btn-ghost">Yes (12)</button>
+                    <button class="btn btn-xs btn-ghost">No (2)</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Summary bar chart ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Rating summary</h2>
+    <p class="mt-1 text-sm opacity-70">Display aggregate rating distribution.</p>
+
+    <fieldset>
+        <legend>rating summary</legend>
+        <div class="flex gap-6 items-center max-w-sm">
+            <div class="text-center shrink-0">
+                <div class="text-5xl font-bold">4.3</div>
+                <Rating name="r-avg" value={4} size="xs" color="warning" classes="mt-1" />
+                <div class="text-xs opacity-50 mt-1">128 reviews</div>
+            </div>
+            <div class="flex-1 flex flex-col gap-1">
+                {[
+                    { stars: 5, pct: 62 },
+                    { stars: 4, pct: 22 },
+                    { stars: 3, pct: 10 },
+                    { stars: 2, pct: 4 },
+                    { stars: 1, pct: 2 },
+                ].map(({ stars, pct }) => (
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="w-3 shrink-0">{stars}</span>
+                        <progress class="progress progress-warning flex-1 h-2" value={pct} max={100}></progress>
+                        <span class="w-7 text-right opacity-60">{pct}%</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </fieldset>
+</AppLayout>

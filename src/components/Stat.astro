@@ -1,0 +1,57 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Stat — DaisyUI `stat` item component.
+ *
+ * A single stat cell. Wrap multiple `<Stat>` items in a `<Stats>` container.
+ *
+ * Slots:
+ * - `figure`   — icon or avatar displayed beside the stat
+ * - `actions`  — buttons rendered below the description
+ * - (default)  — additional content inside the stat body
+ *
+ * Usage:
+ * ```astro
+ * <Stats>
+ *   <Stat title="Downloads" value="31K" desc="Jan 1st - Feb 1st">
+ *     <svg slot="figure" .../>
+ *   </Stat>
+ * </Stats>
+ * ```
+ */
+
+interface Props {
+    /** Small label above the value. */
+    title?: string;
+    /** The primary large number or text. */
+    value?: string;
+    /** Additional description below the value. */
+    desc?: string;
+    /** Center-align all content inside the stat. */
+    centered?: boolean;
+    /** Extra classes on the `<div class="stat">` element. */
+    classes?: string;
+}
+
+const { title, value, desc, centered = false, classes } = Astro.props;
+
+const rootClass = twMerge(
+    "stat",
+    centered && "place-items-center",
+    classes,
+);
+---
+
+<div class={rootClass}>
+    <div class="stat-figure text-primary">
+        <slot name="figure" />
+    </div>
+    {title && <div class="stat-title">{title}</div>}
+    {value && <div class="stat-value">{value}</div>}
+    {desc && <div class="stat-desc">{desc}</div>}
+    <div class="stat-actions">
+        <slot name="actions" />
+    </div>
+    <slot />
+</div>

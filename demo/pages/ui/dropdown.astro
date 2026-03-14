@@ -1,0 +1,277 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Dropdown from "neokit/components/Dropdown.astro";
+---
+
+<AppLayout title="Dropdown">
+    <h1 id="top" class="text-5xl">Dropdown</h1>
+
+    <!-- ── Method: focus (default) ──────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Method: focus (default)</h2>
+
+    <fieldset>
+        <legend>Basic</legend>
+        <Dropdown>
+            Click to open
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Open on hover</legend>
+        <Dropdown hover>
+            Hover
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <!-- ── Positions ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Positions</h2>
+
+    <fieldset>
+        <legend>Bottom start (default)</legend>
+        <Dropdown direction="bottom" align="start">
+            Click ⬇️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Bottom center</legend>
+        <Dropdown direction="bottom" align="center">
+            Click ⬇️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Bottom end</legend>
+        <Dropdown direction="bottom" align="end">
+            Click ⬇️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Top start</legend>
+        <Dropdown direction="top" align="start">
+            Click ⬆️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Top center</legend>
+        <Dropdown direction="top" align="center">
+            Click ⬆️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Top end</legend>
+        <Dropdown direction="top" align="end">
+            Click ⬆️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Left</legend>
+        <Dropdown direction="left">
+            Click ⬅️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Left center</legend>
+        <Dropdown direction="left" align="center">
+            Click ⬅️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Left end</legend>
+        <Dropdown direction="left" align="end">
+            Click ⬅️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Right</legend>
+        <Dropdown direction="right">
+            Click ➡️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Right center</legend>
+        <Dropdown direction="right" align="center">
+            Click ➡️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Right end</legend>
+        <Dropdown direction="right" align="end">
+            Click ➡️
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <!-- ── Method: details ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Method: details / summary</h2>
+
+    <fieldset>
+        <legend>Basic</legend>
+        <Dropdown method="details">
+            Open or close
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Top end</legend>
+        <Dropdown method="details" direction="top" align="end">
+            Open ⬆️ end
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <!-- ── Method: popover ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Method: popover API</h2>
+    <p class="text-sm opacity-60 mb-4">Opens on a top layer — no z-index issues, no overflow clipping.</p>
+
+    <fieldset>
+        <legend>Basic popover</legend>
+        <Dropdown method="popover" id="dd-popover-1">
+            Button
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <!-- ── More examples ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">More examples</h2>
+
+    <fieldset>
+        <legend>Card as dropdown content</legend>
+        <Dropdown contentClass="card card-sm bg-base-100 w-64 shadow-md">
+            Click
+            <div slot="content" class="card-body">
+                <p>This is a card. You can use any element as a dropdown.</p>
+            </div>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Helper / info tooltip</legend>
+        <span>A normal text and a helper dropdown</span>
+        <Dropdown align="end" contentClass="card card-sm bg-base-100 w-64 shadow-sm">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                class="btn btn-circle btn-ghost btn-xs text-info h-4 w-4 stroke-current"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+            </svg>
+            <div slot="content" class="card-body">
+                <h2 class="card-title">You needed more info?</h2>
+                <p>Here is a description!</p>
+            </div>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>Force open</legend>
+        <Dropdown open>
+            Button (forced open)
+            <ul slot="content" class="menu bg-base-100 rounded-box w-52 p-2 shadow-sm">
+                <li><a>Item 1</a></li>
+                <li><a>Item 2</a></li>
+            </ul>
+        </Dropdown>
+    </fieldset>
+
+    <fieldset>
+        <legend>In a navbar</legend>
+        <div class="navbar bg-base-200 rounded-box">
+            <div class="ps-4">
+                <a class="text-lg font-bold">neokit</a>
+            </div>
+            <div class="flex grow justify-end px-2">
+                <div class="flex items-stretch gap-1">
+                    <a class="btn btn-ghost rounded-field">Link</a>
+                    <Dropdown align="end" classes="items-stretch">
+                        Menu
+                        <ul slot="content" class="menu bg-base-200 rounded-box w-52 mt-4 p-2 shadow-sm">
+                            <li><a>Item 1</a></li>
+                            <li><a>Item 2</a></li>
+                        </ul>
+                    </Dropdown>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</AppLayout>

@@ -1,0 +1,68 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Status — DaisyUI `status` dot indicator component.
+ *
+ * A small colored dot used to show presence, state, or notification status.
+ *
+ * Ping animation uses the stacked-grid trick:
+ * `inline-grid *:[grid-area:1/1]` with two overlapping status divs —
+ * the outer one animates with `animate-ping`.
+ *
+ * Usage:
+ * ```astro
+ * <Status color="success" />
+ * <Status color="error" animate="ping" />
+ * <Status color="warning" size="lg" label="Warning" />
+ * ```
+ */
+
+interface Props {
+    /** Semantic color token. */
+    color?: "neutral" | "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error";
+    /** Size of the dot. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Animation type. "ping" uses a pulsing radiate effect. */
+    animate?: "none" | "ping" | "bounce";
+    /** Accessible label (sets aria-label). */
+    label?: string;
+    /** Extra classes on the root element. */
+    classes?: string;
+}
+
+const {
+    color,
+    size,
+    animate = "none",
+    label,
+    classes,
+} = Astro.props;
+
+const dotClass = twMerge(
+    "status",
+    color && `status-${color}`,
+    size && `status-${size}`,
+    animate === "bounce" && "animate-bounce",
+    classes,
+);
+---
+
+{animate === "ping" ? (
+    <span
+        class={twMerge("inline-grid *:[grid-area:1/1]", classes)}
+        aria-label={label}
+        role={label ? "status" : undefined}
+    >
+        {/* outer ping layer */}
+        <span class={twMerge("status", color && `status-${color}`, size && `status-${size}`, "animate-ping opacity-75")} />
+        {/* solid inner dot */}
+        <span class={twMerge("status", color && `status-${color}`, size && `status-${size}`)} />
+    </span>
+) : (
+    <span
+        class={dotClass}
+        aria-label={label}
+        role={label ? "status" : undefined}
+    />
+)}

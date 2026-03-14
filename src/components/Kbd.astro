@@ -1,0 +1,44 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Kbd — DaisyUI keyboard key display component.
+ *
+ * Renders a single key in a keyboard-style badge. Compose multiple
+ * `<Kbd>` elements with `+` separators for shortcuts.
+ *
+ * Basic usage:
+ * ```astro
+ * <Kbd>K</Kbd>
+ * ```
+ *
+ * Keyboard shortcut:
+ * ```astro
+ * <Kbd>ctrl</Kbd> + <Kbd>shift</Kbd> + <Kbd>K</Kbd>
+ * ```
+ *
+ * Size variants:
+ * ```astro
+ * <Kbd size="xs">xs</Kbd>
+ * <Kbd size="sm">sm</Kbd>
+ * <Kbd size="lg">lg</Kbd>
+ * ```
+ */
+
+interface Props {
+    /**
+     * Size of the key badge.
+     * @default "md"
+     */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Extra classes on the `<kbd>` element. */
+    classes?: string;
+}
+
+const { size = "md", classes } = Astro.props;
+
+const sizeClass = size !== "md" ? `kbd-${size}` : "";
+const rootClass = twMerge("kbd", sizeClass, classes);
+---
+
+<kbd class={rootClass}><slot /></kbd>

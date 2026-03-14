@@ -1,0 +1,39 @@
+---
+import { twMerge } from "tailwind-merge";
+
+type MaskShape =
+    | "squircle"
+    | "heart"
+    | "hexagon"
+    | "hexagon-2"
+    | "decagon"
+    | "pentagon"
+    | "diamond"
+    | "square"
+    | "circle"
+    | "parallelogram"
+    | "parallelogram-2"
+    | "parallelogram-3"
+    | "parallelogram-4"
+    | "star"
+    | "star-2"
+    | "triangle"
+    | "triangle-2"
+    | "triangle-3"
+    | "triangle-4"
+    | "half-1"
+    | "half-2";
+
+interface Props {
+    /** The shape to clip the element to. Defaults to `squircle`. */
+    shape?: MaskShape;
+    classes?: string;
+}
+
+const { shape: maskShape = "squircle", classes } = Astro.props;
+
+const shapeClass = `mask-${maskShape}`;
+const classList = twMerge("mask", shapeClass, classes);
+---
+
+<div class={classList}><slot /></div>

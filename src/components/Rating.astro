@@ -1,0 +1,104 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Rating — DaisyUI `rating` star-input component.
+ *
+ * Renders a group of hidden radio inputs styled as star icons.
+ * The `max` prop controls the number of stars (default 5).
+ * Set `value` to pre-select a star (1-indexed, 0 = none).
+ *
+ * Sizes: `"xs"` | `"sm"` | `"md"` (default) | `"lg"` | `"xl"`
+ * Colors: `"primary"` | `"secondary"` | `"accent"` | `"info"` |
+ *         `"success"` | `"warning"` | `"error"` | `"neutral"`
+ *
+ * ```astro
+ * <!-- 5-star, none selected -->
+ * <Rating name="product-rating" />
+ *
+ * <!-- pre-selected at 3 -->
+ * <Rating name="review" value={3} color="warning" />
+ *
+ * <!-- half stars -->
+ * <Rating name="score" half />
+ * ```
+ */
+
+interface Props {
+    /** name attribute shared by all radio inputs. Required for grouping. */
+    name: string;
+    /** Pre-selected star (1-indexed). 0 = none. */
+    value?: number;
+    /** Total number of stars. Default: 5. */
+    max?: number;
+    /** Enable half-star mode (doubles inputs, uses mask-half-1/2). */
+    half?: boolean;
+    /** Size token. Default: `"md"`. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Color token. */
+    color?: "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error" | "neutral";
+    /** Extra classes on the wrapper div. */
+    classes?: string;
+}
+
+const {
+    name,
+    value = 0,
+    max = 5,
+    half = false,
+    size = "md",
+    color,
+    classes,
+} = Astro.props;
+
+const wrapperClass = twMerge("rating", half && "rating-half", classes);
+
+const maskBase = twMerge(
+    "mask mask-star-2",
+    size !== "md" && `rating-${size}`,
+    color && `bg-${color}`,
+);
+
+// Build the star inputs array
+// In half mode each visual star = 2 inputs (mask-half-1, mask-half-2)
+const stars: { inputValue: number; maskClass: string; checked: boolean }[] = [];
+
+if (half) {
+    for (let s = 1; s <= max; s++) {
+        const left = (s - 1) * 2 + 1;
+        const right = left + 1;
+        stars.push({
+            inputValue: left,
+            maskClass: twMerge(maskBase, "mask-half-1"),
+            checked: value * 2 - 1 === left,
+        });
+        stars.push({
+            inputValue: right,
+            maskClass: twMerge(maskBase, "mask-half-2"),
+            checked: value * 2 === right,
+        });
+    }
+} else {
+    for (let s = 1; s <= max; s++) {
+        stars.push({
+            inputValue: s,
+            maskClass: maskBase,
+            checked: value === s,
+        });
+    }
+}
+---
+
+<div class={wrapperClass}>
+    {/* Hidden zero-value radio to allow deselection */}
+    <input type="radio" name={name} class="rating-hidden" value="0" checked={value === 0} />
+    {stars.map(({ inputValue, maskClass, checked }) => (
+        <input
+            type="radio"
+            name={name}
+            value={String(inputValue)}
+            class={maskClass}
+            checked={checked}
+        />
+    ))}
+</div>

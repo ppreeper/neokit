@@ -1,0 +1,249 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Tabs from "neokit/components/Tabs.astro";
+---
+
+<AppLayout title="Tabs">
+    <h1 id="top" class="text-5xl">Tabs</h1>
+    <p class="mt-2 opacity-70">
+        Switch between views without a page load. DaisyUI offers three visual
+        variants — plain, bordered, lifted, and box — all purely CSS-driven.
+        Use the radio-input method for built-in panel switching with no
+        JavaScript.
+    </p>
+
+    <!-- ── Plain (underline) ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Plain (default)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        No variant — renders a simple underline-style tab bar.
+    </p>
+
+    <fieldset>
+        <legend>tabs</legend>
+        <Tabs>
+            <a role="tab" class="tab">Tab 1</a>
+            <a role="tab" class="tab tab-active">Tab 2</a>
+            <a role="tab" class="tab">Tab 3</a>
+        </Tabs>
+    </fieldset>
+
+    <!-- ── Bordered ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Bordered</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>variant="bordered"</code> — adds a bottom border to the active
+        tab and an underline across the tab bar.
+    </p>
+
+    <fieldset>
+        <legend>tabs bordered</legend>
+        <Tabs variant="bordered">
+            <a role="tab" class="tab">Tab 1</a>
+            <a role="tab" class="tab tab-active">Tab 2</a>
+            <a role="tab" class="tab">Tab 3</a>
+        </Tabs>
+    </fieldset>
+
+    <!-- ── Lifted ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Lifted</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>variant="lifted"</code> — the active tab is raised, connecting
+        to the content panel below it.
+    </p>
+
+    <fieldset>
+        <legend>tabs lifted</legend>
+        <Tabs variant="lifted">
+            <a role="tab" class="tab">Tab 1</a>
+            <a role="tab" class="tab tab-active">Tab 2</a>
+            <a role="tab" class="tab">Tab 3</a>
+        </Tabs>
+    </fieldset>
+
+    <!-- ── Box ───────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Box</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>variant="box"</code> — pill/box style with the active tab filled
+        as a solid background.
+    </p>
+
+    <fieldset>
+        <legend>tabs box</legend>
+        <Tabs variant="box">
+            <a role="tab" class="tab">Tab 1</a>
+            <a role="tab" class="tab tab-active">Tab 2</a>
+            <a role="tab" class="tab">Tab 3</a>
+        </Tabs>
+    </fieldset>
+
+    <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes: <code>xs</code>, <code>sm</code>, <code>md</code>,
+        <code>lg</code>, <code>xl</code>.
+    </p>
+
+    <fieldset>
+        <legend>tabs sizes</legend>
+        <div class="flex flex-col gap-4">
+            {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+                <div>
+                    <p class="text-xs opacity-50 mb-1">size="{size}"</p>
+                    <Tabs variant="box" size={size}>
+                        <a role="tab" class="tab tab-active">Active</a>
+                        <a role="tab" class="tab">Tab 2</a>
+                        <a role="tab" class="tab">Tab 3</a>
+                    </Tabs>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Radio tabs with panels (bordered) ─────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With content panels — bordered</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Radio inputs power built-in panel switching with zero JavaScript.
+        Each <code>&lt;input type="radio" class="tab"&gt;</code> is paired with
+        a <code>&lt;div class="tab-content"&gt;</code>.
+    </p>
+
+    <fieldset>
+        <legend>tabs with panels (bordered)</legend>
+        <Tabs variant="bordered">
+            <input type="radio" name="tabs-bordered" class="tab" aria-label="Tab 1" checked />
+            <div class="tab-content border-base-300 bg-base-100 p-6">
+                <h3 class="font-bold mb-2">Tab 1 content</h3>
+                <p class="opacity-70 text-sm">
+                    This panel is shown when Tab 1 is selected. It can contain
+                    any HTML — forms, tables, lists, images, etc.
+                </p>
+            </div>
+
+            <input type="radio" name="tabs-bordered" class="tab" aria-label="Tab 2" />
+            <div class="tab-content border-base-300 bg-base-100 p-6">
+                <h3 class="font-bold mb-2">Tab 2 content</h3>
+                <p class="opacity-70 text-sm">
+                    Selecting this tab hides Tab 1 and Tab 3's panels entirely —
+                    no JavaScript needed.
+                </p>
+            </div>
+
+            <input type="radio" name="tabs-bordered" class="tab" aria-label="Tab 3" />
+            <div class="tab-content border-base-300 bg-base-100 p-6">
+                <h3 class="font-bold mb-2">Tab 3 content</h3>
+                <p class="opacity-70 text-sm">
+                    The radio input approach keeps everything in CSS and HTML,
+                    with no event listeners required.
+                </p>
+            </div>
+        </Tabs>
+    </fieldset>
+
+    <!-- ── Radio tabs with panels (lifted) ───────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With content panels — lifted</h2>
+    <p class="mt-1 text-sm opacity-70">
+        The lifted variant visually connects the active tab to its panel.
+    </p>
+
+    <fieldset>
+        <legend>tabs with panels (lifted)</legend>
+        <Tabs variant="lifted">
+            <input type="radio" name="tabs-lifted" class="tab" aria-label="Overview" checked />
+            <div class="tab-content border-base-300 rounded-box rounded-tl-none bg-base-100 p-6">
+                <h3 class="font-bold mb-2">Overview</h3>
+                <p class="text-sm opacity-70">
+                    High-level summary of the project. Status: on track.
+                    Completion: 68%.
+                </p>
+                <div class="mt-3 w-full bg-base-300 rounded-full h-2">
+                    <div class="bg-primary h-2 rounded-full" style="width:68%"></div>
+                </div>
+            </div>
+
+            <input type="radio" name="tabs-lifted" class="tab" aria-label="Files" />
+            <div class="tab-content border-base-300 rounded-box rounded-tl-none bg-base-100 p-6">
+                <h3 class="font-bold mb-2">Files</h3>
+                <ul class="text-sm opacity-70 space-y-1 list-disc list-inside">
+                    <li>README.md</li>
+                    <li>package.json</li>
+                    <li>src/index.ts</li>
+                    <li>src/components/</li>
+                </ul>
+            </div>
+
+            <input type="radio" name="tabs-lifted" class="tab" aria-label="Settings" />
+            <div class="tab-content border-base-300 rounded-box rounded-tl-none bg-base-100 p-6">
+                <h3 class="font-bold mb-2">Settings</h3>
+                <div class="flex flex-col gap-3 text-sm">
+                    <label class="flex items-center gap-3">
+                        <input type="checkbox" class="toggle toggle-sm toggle-primary" checked />
+                        Enable notifications
+                    </label>
+                    <label class="flex items-center gap-3">
+                        <input type="checkbox" class="toggle toggle-sm toggle-primary" />
+                        Auto-deploy on merge
+                    </label>
+                </div>
+            </div>
+        </Tabs>
+    </fieldset>
+
+    <!-- ── Radio tabs with panels (box) ──────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With content panels — box</h2>
+
+    <fieldset>
+        <legend>tabs with panels (box)</legend>
+        <Tabs variant="box">
+            <input type="radio" name="tabs-box" class="tab" aria-label="Daily" checked />
+            <div class="tab-content bg-base-100 border-base-300 p-4">
+                <p class="text-sm opacity-70">Showing daily stats for today.</p>
+                <div class="stats mt-3 shadow">
+                    <div class="stat">
+                        <div class="stat-title">Visitors</div>
+                        <div class="stat-value text-primary">1,240</div>
+                        <div class="stat-desc">↗︎ 12% vs yesterday</div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="radio" name="tabs-box" class="tab" aria-label="Weekly" />
+            <div class="tab-content bg-base-100 border-base-300 p-4">
+                <p class="text-sm opacity-70">Showing weekly stats for this week.</p>
+                <div class="stats mt-3 shadow">
+                    <div class="stat">
+                        <div class="stat-title">Visitors</div>
+                        <div class="stat-value text-secondary">8,670</div>
+                        <div class="stat-desc">↘︎ 3% vs last week</div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="radio" name="tabs-box" class="tab" aria-label="Monthly" />
+            <div class="tab-content bg-base-100 border-base-300 p-4">
+                <p class="text-sm opacity-70">Showing monthly stats for this month.</p>
+                <div class="stats mt-3 shadow">
+                    <div class="stat">
+                        <div class="stat-title">Visitors</div>
+                        <div class="stat-value text-accent">34,200</div>
+                        <div class="stat-desc">↗︎ 8% vs last month</div>
+                    </div>
+                </div>
+            </div>
+        </Tabs>
+    </fieldset>
+
+    <!-- ── Disabled tab ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Disabled tab</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add <code>tab-disabled</code> to make a tab non-interactive.
+    </p>
+
+    <fieldset>
+        <legend>tabs disabled</legend>
+        <Tabs variant="bordered">
+            <a role="tab" class="tab tab-active">Active</a>
+            <a role="tab" class="tab">Tab 2</a>
+            <a role="tab" class="tab tab-disabled">Disabled</a>
+            <a role="tab" class="tab">Tab 4</a>
+        </Tabs>
+    </fieldset>
+</AppLayout>

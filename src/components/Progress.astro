@@ -1,0 +1,46 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Progress — DaisyUI `progress` bar component.
+ *
+ * Renders a `<progress>` element. Set `value` and `max` for a
+ * determinate bar, or omit `value` for an indeterminate animation.
+ *
+ * Colors: `"primary"` | `"secondary"` | `"accent"` | `"info"` |
+ *         `"success"` | `"warning"` | `"error"` | `"neutral"`
+ *
+ * ```astro
+ * <!-- Determinate -->
+ * <Progress value={70} max={100} color="primary" />
+ *
+ * <!-- Indeterminate (animated) -->
+ * <Progress color="accent" />
+ * ```
+ */
+
+interface Props {
+    /** Current value. Omit for indeterminate. */
+    value?: number;
+    /** Maximum value. Default: 100. */
+    max?: number;
+    /** Color token. */
+    color?: "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error" | "neutral";
+    /** Extra classes on the `<progress>` element. */
+    classes?: string;
+}
+
+const { value, max = 100, color, classes } = Astro.props;
+
+const rootClass = twMerge(
+    "progress",
+    color && `progress-${color}`,
+    classes,
+);
+---
+
+<progress
+    class={rootClass}
+    value={value}
+    max={max}
+></progress>

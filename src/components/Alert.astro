@@ -1,0 +1,54 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Alert — DaisyUI `alert` component.
+ *
+ * Renders a `<div role="alert" class="alert">` with an optional icon slot
+ * and a default slot for the message content.
+ *
+ * Colors: `"info"` | `"success"` | `"warning"` | `"error"`
+ * Direction: `"vertical"` → `alert-vertical` (stacks icon above text)
+ * Soft variant: `soft` → `alert-soft` (muted background tint)
+ * Outline variant: `outline` → `alert-outline`
+ * Dash variant: `dash` → `alert-dash`
+ *
+ * ```astro
+ * <Alert color="success">
+ *   <svg slot="icon" .../>
+ *   <span>Your changes have been saved.</span>
+ * </Alert>
+ * ```
+ *
+ * Without an icon:
+ * ```astro
+ * <Alert color="error">Payment failed. Please try again.</Alert>
+ * ```
+ */
+
+interface Props {
+    /** Semantic color. Default: neutral. */
+    color?: "info" | "success" | "warning" | "error";
+    /** Visual variant. */
+    variant?: "soft" | "outline" | "dash";
+    /** Stack icon above content. */
+    vertical?: boolean;
+    /** Extra classes on the root element. */
+    classes?: string;
+}
+
+const { color, variant, vertical, classes } = Astro.props;
+
+const rootClass = twMerge(
+    "alert",
+    color && `alert-${color}`,
+    variant && `alert-${variant}`,
+    vertical && "alert-vertical",
+    classes,
+);
+---
+
+<div role="alert" class={rootClass}>
+    {Astro.slots.has("icon") && <slot name="icon" />}
+    <slot />
+</div>

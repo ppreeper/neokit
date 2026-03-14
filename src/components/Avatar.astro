@@ -1,0 +1,62 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { twMerge } from "tailwind-merge";
+
+interface Props extends HTMLAttributes<"div"> {
+    size?: "xsmall" | "small" | "medium" | "large" | "xlarge";
+    mask?: "none" | "squircle" | "heart" | "hexagon";
+    ring?: boolean;
+    round?: boolean;
+    /**
+     * Extra classes applied to the outer `avatar` wrapper div.
+     * Use this for DaisyUI modifier classes like `avatar-online`, `avatar-offline`,
+     * `avatar-placeholder`, etc.
+     */
+    classes?: string;
+    /**
+     * Extra classes applied to the inner sizing div.
+     */
+    innerClass?: string;
+}
+
+const {
+    size = "medium",
+    mask = "none",
+    ring = false,
+    round = false,
+    classes,
+    innerClass,
+    ...rest
+} = Astro.props;
+
+const outerClass = twMerge("avatar", classes);
+
+const sizeClass = {
+    xsmall: "w-12 rounded",
+    small: "w-16 rounded-sm",
+    medium: "w-20 rounded-md",
+    large: "w-24 rounded-lg",
+    xlarge: "w-32 rounded-xl",
+}[size];
+
+const maskClass = {
+    none: "",
+    squircle: "mask mask-squircle",
+    heart: "mask mask-heart",
+    hexagon: "mask mask-hexagon-2",
+}[mask];
+
+// round overrides the size's default border-radius
+const roundClass = round ? "rounded-full" : "";
+
+// ring only adds the ring utility classes; rounding is handled by round/size
+const ringClass = ring ? "ring-2 ring-primary ring-offset-2 ring-offset-base-100" : "";
+
+const innerClasses = twMerge(sizeClass, roundClass, maskClass, ringClass, innerClass);
+---
+
+<div class={outerClass}>
+    <div class={innerClasses} {...rest}>
+        <slot />
+    </div>
+</div>

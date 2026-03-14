@@ -1,0 +1,231 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Carousel from "neokit/components/Carousel.astro";
+
+const stockImages = [
+    { src: "https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp", alt: "Burger" },
+    { src: "https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp", alt: "Fruit" },
+    { src: "https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp", alt: "Sunflower" },
+    { src: "https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.webp", alt: "Coffee" },
+    { src: "https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.webp", alt: "Cherries" },
+    { src: "https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.webp", alt: "Strawberry" },
+    { src: "https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.webp", alt: "Pineapple" },
+];
+
+const slideImages = [
+    { id: "slide-a-1", src: "https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp", alt: "Mountains" },
+    { id: "slide-a-2", src: "https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp", alt: "River" },
+    { id: "slide-a-3", src: "https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp", alt: "Forest" },
+    { id: "slide-a-4", src: "https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp", alt: "Waterfall" },
+];
+
+const prevNextImages = [
+    { id: "slide-b-1", prev: "slide-b-4", next: "slide-b-2", src: "https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp", alt: "Mountains" },
+    { id: "slide-b-2", prev: "slide-b-1", next: "slide-b-3", src: "https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp", alt: "River" },
+    { id: "slide-b-3", prev: "slide-b-2", next: "slide-b-4", src: "https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp", alt: "Forest" },
+    { id: "slide-b-4", prev: "slide-b-3", next: "slide-b-1", src: "https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp", alt: "Waterfall" },
+];
+---
+
+<AppLayout title="Carousel">
+    <h1 id="top" class="text-5xl">Carousel</h1>
+    <p class="mt-2 opacity-70">
+        CSS scroll-snap carousel — no JavaScript required. Supports horizontal/vertical
+        direction, snap alignment, full-width slides, indicator buttons, and prev/next controls.
+    </p>
+
+    <!-- ── Snap to start (default) ──────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Snap to start (default)</h2>
+    <p class="mt-1 text-sm opacity-70">Items snap to the left edge on scroll. Default behaviour.</p>
+
+    <fieldset>
+        <legend>carousel (snap start)</legend>
+        <Carousel classes="rounded-box">
+            {stockImages.map(({ src, alt }) => (
+                <div class="carousel-item">
+                    <img src={src} alt={alt} />
+                </div>
+            ))}
+        </Carousel>
+    </fieldset>
+
+    <!-- ── Snap to center ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Snap to center</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>snap="center"</code> — items snap to the centre of the viewport.
+    </p>
+
+    <fieldset>
+        <legend>carousel-center</legend>
+        <Carousel snap="center" classes="rounded-box">
+            {stockImages.map(({ src, alt }) => (
+                <div class="carousel-item">
+                    <img src={src} alt={alt} />
+                </div>
+            ))}
+        </Carousel>
+    </fieldset>
+
+    <!-- ── Snap to end ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Snap to end</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>snap="end"</code> — items snap to the right edge.
+    </p>
+
+    <fieldset>
+        <legend>carousel-end</legend>
+        <Carousel snap="end" classes="rounded-box">
+            {stockImages.map(({ src, alt }) => (
+                <div class="carousel-item">
+                    <img src={src} alt={alt} />
+                </div>
+            ))}
+        </Carousel>
+    </fieldset>
+
+    <!-- ── Full-width items ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Full-width items</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add <code>w-full</code> to each <code>carousel-item</code> and its
+        <code>img</code> — one slide fills the entire container width.
+    </p>
+
+    <fieldset>
+        <legend>Full-width carousel</legend>
+        <Carousel classes="rounded-box w-full max-w-xl">
+            {stockImages.slice(0, 4).map(({ src, alt }) => (
+                <div class="carousel-item w-full">
+                    <img src={src} class="w-full" alt={alt} />
+                </div>
+            ))}
+        </Carousel>
+    </fieldset>
+
+    <!-- ── Half-width items ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Half-width items</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>w-1/2</code> on each item — two slides visible at a time.
+    </p>
+
+    <fieldset>
+        <legend>Half-width carousel</legend>
+        <Carousel snap="center" classes="rounded-box w-full max-w-xl">
+            {stockImages.map(({ src, alt }) => (
+                <div class="carousel-item w-1/2">
+                    <img src={src} class="w-full" alt={alt} />
+                </div>
+            ))}
+        </Carousel>
+    </fieldset>
+
+    <!-- ── Vertical carousel ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Vertical</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>direction="vertical"</code> — scroll up/down instead of left/right.
+    </p>
+
+    <fieldset>
+        <legend>carousel-vertical</legend>
+        <Carousel direction="vertical" classes="rounded-box h-80 w-64">
+            {stockImages.map(({ src, alt }) => (
+                <div class="carousel-item h-full">
+                    <img src={src} alt={alt} />
+                </div>
+            ))}
+        </Carousel>
+    </fieldset>
+
+    <!-- ── Full-bleed with padding ───────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Full-bleed with padding</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Wrap in a coloured container with padding — each item gets its own
+        <code>rounded-box</code>.
+    </p>
+
+    <fieldset>
+        <legend>carousel-center + bg + padding</legend>
+        <Carousel snap="center" classes="bg-neutral rounded-box max-w-lg space-x-4 p-4">
+            {stockImages.map(({ src, alt }) => (
+                <div class="carousel-item">
+                    <img src={src} class="rounded-box" alt={alt} />
+                </div>
+            ))}
+        </Carousel>
+    </fieldset>
+
+    <!-- ── Indicator buttons ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Indicator buttons</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Give each item an <code>id</code>, then link anchor buttons below the carousel.
+        The browser snaps to the target item on click — no JS needed.
+    </p>
+
+    <fieldset>
+        <legend>Full-width + indicator dots</legend>
+        <div class="w-full max-w-xl">
+            <Carousel classes="w-full">
+                {slideImages.map(({ id, src, alt }) => (
+                    <div id={id} class="carousel-item w-full">
+                        <img src={src} class="w-full" alt={alt} />
+                    </div>
+                ))}
+            </Carousel>
+            <div class="flex w-full justify-center gap-2 py-2">
+                {slideImages.map(({ id }, i) => (
+                    <a href={`#${id}`} class="btn btn-xs">{i + 1}</a>
+                ))}
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Prev / next buttons ───────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Prev / next buttons</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Absolute-positioned anchor buttons inside each item link to the previous
+        and next slide by <code>id</code>. Wraps around (last ← first).
+    </p>
+
+    <fieldset>
+        <legend>Full-width + in-slide controls</legend>
+        <Carousel classes="w-full max-w-xl">
+            {prevNextImages.map(({ id, prev, next, src, alt }) => (
+                <div id={id} class="carousel-item relative w-full">
+                    <img src={src} class="w-full" alt={alt} />
+                    <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 justify-between">
+                        <a href={`#${prev}`} class="btn btn-circle btn-sm opacity-80">&#10094;</a>
+                        <a href={`#${next}`} class="btn btn-circle btn-sm opacity-80">&#10095;</a>
+                    </div>
+                </div>
+            ))}
+        </Carousel>
+    </fieldset>
+
+    <!-- ── Card carousel ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Card carousel</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Carousel items don't have to be images — any content works.
+    </p>
+
+    <fieldset>
+        <legend>Cards in a horizontal carousel</legend>
+        <Carousel snap="center" classes="rounded-box space-x-4 py-2">
+            {[
+                { title: "Tailwind CSS", desc: "A utility-first CSS framework for rapid UI development.", color: "primary" },
+                { title: "DaisyUI", desc: "The most popular component library for Tailwind CSS.", color: "secondary" },
+                { title: "Astro", desc: "The web framework for content-driven websites.", color: "accent" },
+                { title: "Vite", desc: "Next generation frontend tooling for blazing fast dev.", color: "info" },
+                { title: "TypeScript", desc: "Typed JavaScript at any scale.", color: "success" },
+            ].map(({ title, desc, color }) => (
+                <div class="carousel-item">
+                    <div class={`card w-56 bg-base-100 shadow-sm border border-base-300`}>
+                        <div class="card-body p-4">
+                            <div class={`badge badge-${color} badge-soft mb-1`}>{color}</div>
+                            <h3 class="font-semibold text-sm">{title}</h3>
+                            <p class="text-xs opacity-70">{desc}</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </Carousel>
+    </fieldset>
+</AppLayout>

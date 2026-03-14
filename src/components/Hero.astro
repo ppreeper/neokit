@@ -1,0 +1,26 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    classes?: string;
+    /** Extra classes on the hero-content inner div */
+    contentClasses?: string;
+    /** Optional background image URL — adds inline style */
+    bgImage?: string;
+    /** When true, adds a dark overlay over the background image */
+    overlay?: boolean;
+}
+
+const { classes, contentClasses, bgImage, overlay = false } = Astro.props;
+
+const classList = twMerge("hero", classes);
+const contentClass = twMerge("hero-content", contentClasses);
+const style = bgImage ? `background-image: url('${bgImage}');` : undefined;
+---
+
+<div class={classList} style={style}>
+    {overlay && <div class="hero-overlay"></div>}
+    <div class={contentClass}>
+        <slot />
+    </div>
+</div>

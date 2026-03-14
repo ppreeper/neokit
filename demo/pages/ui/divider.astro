@@ -1,0 +1,92 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Divider from "neokit/components/Divider.astro";
+
+const colors = ["neutral", "primary", "secondary", "accent", "info", "success", "warning", "error"] as const;
+---
+
+<AppLayout title="Divider">
+    <h1 id="top" class="text-5xl">Divider</h1>
+    <p class="mt-2 opacity-70">
+        Horizontal or vertical divider line with optional label text.
+        Wraps a <code>&lt;div class="divider"&gt;</code>.
+    </p>
+
+    <!-- ── Default horizontal ───────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">No props — a plain horizontal divider line, no text.</p>
+
+    <fieldset>
+        <legend>Plain divider</legend>
+        <div class="flex flex-col">
+            <p>Content above</p>
+            <Divider />
+            <p>Content below</p>
+        </div>
+    </fieldset>
+
+    <!-- ── With text ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With text</h2>
+    <p class="mt-1 text-sm opacity-70">Place text in the default slot to label the divider.</p>
+
+    <fieldset>
+        <legend>Divider with label text</legend>
+        <div class="flex flex-col">
+            <p>Section one</p>
+            <Divider>OR</Divider>
+            <p>Section two</p>
+        </div>
+    </fieldset>
+
+    <!-- ── Colors ───────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">All eight semantic color tokens.</p>
+
+    <fieldset>
+        <legend>All color tokens</legend>
+        <div class="flex flex-col gap-1">
+            {colors.map((c) => (
+                <Divider color={c}>{c}</Divider>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Label position ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Label position</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>start</code> pins the label to the left, <code>end</code> pins it to the right.
+    </p>
+
+    <fieldset>
+        <legend>Start / center / end</legend>
+        <div class="flex flex-col gap-1">
+            <Divider start>Start</Divider>
+            <Divider>Center (default)</Divider>
+            <Divider end>End</Divider>
+        </div>
+    </fieldset>
+
+    <!-- ── Vertical divider ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Vertical</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add <code>vertical</code> prop for a column-direction divider. Useful inside flex rows.
+    </p>
+
+    <fieldset>
+        <legend>Vertical divider in a flex row</legend>
+        <div class="flex h-20 items-center">
+            <span>Left</span>
+            <Divider vertical />
+            <span>Right</span>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Vertical with label</legend>
+        <div class="flex h-20 items-center">
+            <span>Before</span>
+            <Divider vertical>|</Divider>
+            <span>After</span>
+        </div>
+    </fieldset>
+</AppLayout>

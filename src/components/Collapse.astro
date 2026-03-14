@@ -1,0 +1,110 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Collapse — DaisyUI single collapsible panel.
+ *
+ * Unlike Accordion (which uses a radio group), Collapse is a standalone
+ * toggle. Three mechanisms are supported:
+ *
+ * - `"checkbox"` (default) — hidden checkbox; click to open/close
+ * - `"focus"`    — opens on focus, closes when focus leaves
+ * - `"details"`  — native `<details>/<summary>`; browser-searchable
+ *
+ * Basic usage:
+ * ```astro
+ * <Collapse title="Click me">Hidden content here.</Collapse>
+ * ```
+ *
+ * Start open:
+ * ```astro
+ * <Collapse title="Open by default" open>Content visible on load.</Collapse>
+ * ```
+ *
+ * With arrow icon:
+ * ```astro
+ * <Collapse title="FAQ item" icon="arrow">Answer text.</Collapse>
+ * ```
+ *
+ * Focus method:
+ * ```astro
+ * <Collapse method="focus" title="Hover/focus me" tabindex="0">
+ *   Closes when you click elsewhere.
+ * </Collapse>
+ * ```
+ */
+
+interface Props extends HTMLAttributes<"div"> {
+    /** Title text shown in the collapse header. */
+    title: string;
+    /**
+     * Mechanism used to open/close the panel.
+     * - `"checkbox"` — hidden checkbox toggle (default)
+     * - `"focus"`    — opens while the root element is focused
+     * - `"details"`  — native `<details>/<summary>`; browser-searchable
+     * @default "checkbox"
+     */
+    method?: "checkbox" | "focus" | "details";
+    /**
+     * Icon shown at the right edge of the title bar.
+     * - `"none"`  — no icon (default)
+     * - `"arrow"` — animated chevron
+     * - `"plus"`  — plus/minus toggle
+     * @default "none"
+     */
+    icon?: "none" | "arrow" | "plus";
+    /** Start in the open/expanded state. @default false */
+    open?: boolean;
+    /** Extra classes on the root element. */
+    classes?: string;
+}
+
+const {
+    title,
+    method = "checkbox",
+    icon = "none",
+    open = false,
+    classes,
+    ...rest
+} = Astro.props;
+
+const iconClass = {
+    none: "",
+    arrow: "collapse-arrow",
+    plus: "collapse-plus",
+}[icon];
+
+const rootClass = twMerge(
+    "collapse",
+    "bg-base-100",
+    "border",
+    "border-base-300",
+    iconClass,
+    classes,
+);
+---
+
+{method === "details" ? (
+    <details class={rootClass} open={open || undefined} {...rest}>
+        <summary class="collapse-title font-semibold">{title}</summary>
+        <div class="collapse-content text-sm">
+            <slot />
+        </div>
+    </details>
+) : method === "focus" ? (
+    <div class={rootClass} tabindex="0" {...rest}>
+        <div class="collapse-title font-semibold">{title}</div>
+        <div class="collapse-content text-sm">
+            <slot />
+        </div>
+    </div>
+) : (
+    <div class={rootClass} {...rest}>
+        <input type="checkbox" checked={open || undefined} />
+        <div class="collapse-title font-semibold">{title}</div>
+        <div class="collapse-content text-sm">
+            <slot />
+        </div>
+    </div>
+)}

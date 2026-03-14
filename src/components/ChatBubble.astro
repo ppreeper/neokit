@@ -1,0 +1,101 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * ChatBubble — DaisyUI `chat` component.
+ *
+ * Renders a single chat message row with optional avatar, header,
+ * footer, and a coloured bubble. Compose multiple ChatBubbles to
+ * build a conversation thread.
+ *
+ * Basic usage:
+ * ```astro
+ * <ChatBubble side="start">It's over Anakin.</ChatBubble>
+ * <ChatBubble side="end">You underestimate my power!</ChatBubble>
+ * ```
+ *
+ * With avatar, header and footer:
+ * ```astro
+ * <ChatBubble
+ *   side="start"
+ *   avatarSrc="/obi.webp"
+ *   avatarAlt="Obi-Wan"
+ *   header="Obi-Wan Kenobi"
+ *   time="12:45"
+ *   footer="Delivered"
+ *   color="primary"
+ * >
+ *   You were the Chosen One!
+ * </ChatBubble>
+ * ```
+ */
+
+interface Props {
+    /**
+     * Horizontal alignment of the bubble.
+     * - `"start"` — left side (incoming messages)
+     * - `"end"`   — right side (outgoing messages)
+     * @default "start"
+     */
+    side?: "start" | "end";
+    /**
+     * Bubble color token.
+     * Maps to `chat-bubble-{color}`.
+     */
+    color?:
+        | "neutral"
+        | "primary"
+        | "secondary"
+        | "accent"
+        | "info"
+        | "success"
+        | "warning"
+        | "error";
+    /** URL for the avatar image. When provided renders a `chat-image` section. */
+    avatarSrc?: string;
+    /** Alt text for the avatar image. @default "" */
+    avatarAlt?: string;
+    /** Name / label shown in the `chat-header`. */
+    header?: string;
+    /** Timestamp shown next to the header. */
+    time?: string;
+    /** Status text shown in the `chat-footer`. */
+    footer?: string;
+    /** Extra classes on the root `chat` element. */
+    classes?: string;
+}
+
+const {
+    side = "start",
+    color,
+    avatarSrc,
+    avatarAlt = "",
+    header,
+    time,
+    footer,
+    classes,
+} = Astro.props;
+
+const sideClass = side === "end" ? "chat-end" : "chat-start";
+const colorClass = color ? `chat-bubble-${color}` : "";
+const rootClass = twMerge("chat", sideClass, classes);
+const bubbleClass = twMerge("chat-bubble", colorClass);
+---
+
+<div class={rootClass}>
+    {avatarSrc && (
+        <div class="chat-image avatar">
+            <div class="w-10 rounded-full">
+                <img src={avatarSrc} alt={avatarAlt} />
+            </div>
+        </div>
+    )}
+    {(header || time) && (
+        <div class="chat-header">
+            {header && <span>{header}</span>}
+            {time && <time class="text-xs opacity-50">{time}</time>}
+        </div>
+    )}
+    <div class={bubbleClass}><slot /></div>
+    {footer && <div class="chat-footer opacity-50">{footer}</div>}
+</div>

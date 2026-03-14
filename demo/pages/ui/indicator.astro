@@ -1,0 +1,108 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Indicator from "neokit/components/Indicator.astro";
+import Badge from "neokit/components/Badge.astro";
+import Button from "neokit/components/Button.astro";
+
+const positions = [
+    "top-start", "top-center", "top-end",
+    "middle-start", "middle-center", "middle-end",
+    "bottom-start", "bottom-center", "bottom-end",
+] as const;
+---
+
+<AppLayout title="Indicator">
+    <h1 id="top" class="text-5xl">Indicator</h1>
+    <p class="mt-2 opacity-70">
+        Overlay badge / dot / counter on top of any element.
+        Uses named slot <code>indicator</code> for the badge and the default slot for the main content.
+    </p>
+
+    <!-- ── Default ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">No position prop — defaults to top-end (top-right).</p>
+
+    <fieldset>
+        <legend>Badge on a button</legend>
+        <div class="flex gap-8 flex-wrap">
+            <Indicator>
+                <Badge slot="indicator" color="primary">99+</Badge>
+                <Button>Inbox</Button>
+            </Indicator>
+            <Indicator>
+                <span slot="indicator" class="badge badge-error badge-xs"></span>
+                <Button theme="ghost">Notifications</Button>
+            </Indicator>
+        </div>
+    </fieldset>
+
+    <!-- ── Positions ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Positions</h2>
+    <p class="mt-1 text-sm opacity-70">
+        9 positions: <code>top</code> / <code>middle</code> / <code>bottom</code> ×
+        <code>start</code> / <code>center</code> / <code>end</code>.
+    </p>
+
+    <fieldset>
+        <legend>All 9 positions</legend>
+        <div class="grid grid-cols-3 gap-8">
+            {positions.map((pos) => (
+                <div class="flex flex-col items-center gap-1">
+                    <Indicator position={pos}>
+                        <Badge slot="indicator" color="primary" size="xs" />
+                        <div class="bg-base-200 w-20 h-12 rounded flex items-center justify-center text-xs opacity-60">
+                            content
+                        </div>
+                    </Indicator>
+                    <span class="text-xs opacity-50 text-center">{pos}</span>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── On images ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">On an image</h2>
+    <p class="mt-1 text-sm opacity-70">Works on any child element, including images.</p>
+
+    <fieldset>
+        <legend>Avatar with online dot</legend>
+        <div class="flex gap-6 items-center flex-wrap">
+            <Indicator>
+                <span slot="indicator" class="badge badge-xs badge-success"></span>
+                <div class="avatar">
+                    <div class="w-12 rounded-full">
+                        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="avatar" />
+                    </div>
+                </div>
+            </Indicator>
+            <Indicator>
+                <Badge slot="indicator" color="error" size="xs">!</Badge>
+                <div class="avatar">
+                    <div class="w-12 rounded-full">
+                        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="avatar" />
+                    </div>
+                </div>
+            </Indicator>
+        </div>
+    </fieldset>
+
+    <!-- ── On a card ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">On a card</h2>
+    <p class="mt-1 text-sm opacity-70">Common use case: "new" badge on a product card.</p>
+
+    <fieldset>
+        <legend>Card with badge indicator</legend>
+        <Indicator>
+            <Badge slot="indicator" color="secondary">New</Badge>
+            <div class="card card-border w-64">
+                <div class="card-body">
+                    <h2 class="card-title">Product name</h2>
+                    <p class="text-sm opacity-70">Description of the product goes here.</p>
+                    <div class="card-actions justify-end">
+                        <Button theme="primary" size="sm">Buy now</Button>
+                    </div>
+                </div>
+            </div>
+        </Indicator>
+    </fieldset>
+</AppLayout>

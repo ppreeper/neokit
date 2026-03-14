@@ -1,0 +1,35 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Skeleton — DaisyUI `skeleton` placeholder component.
+ *
+ * Renders a `<div class="skeleton">` placeholder block. Size and shape
+ * are controlled entirely via `classes` / Tailwind utilities.
+ *
+ * Use `rounded-full` for circular avatars, `rounded-none` for
+ * sharp-cornered blocks, etc.
+ *
+ * ```astro
+ * <!-- Line of text -->
+ * <Skeleton classes="h-4 w-full" />
+ *
+ * <!-- Avatar circle -->
+ * <Skeleton classes="h-12 w-12 rounded-full" />
+ *
+ * <!-- Card image placeholder -->
+ * <Skeleton classes="h-48 w-full rounded-xl" />
+ * ```
+ */
+
+interface Props {
+    /** Extra classes controlling size, shape, etc. */
+    classes?: string;
+}
+
+const { classes } = Astro.props;
+
+const rootClass = twMerge("skeleton", classes);
+---
+
+<div class={rootClass}></div>

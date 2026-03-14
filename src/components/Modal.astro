@@ -1,0 +1,105 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Modal component — wraps DaisyUI's `modal` pattern using the native
+ * `<dialog>` element (recommended method).
+ *
+ * Usage:
+ * ```astro
+ * <!-- Trigger (outside the component) -->
+ * <button onclick="my_modal.showModal()" class="btn">Open</button>
+ *
+ * <!-- Modal -->
+ * <Modal id="my_modal" title="Hello!">
+ *   <p>Modal body content.</p>
+ *   <div slot="actions">
+ *     <form method="dialog"><button class="btn">Close</button></form>
+ *   </div>
+ * </Modal>
+ * ```
+ *
+ * Alternatively use the `trigger` slot to co-locate the trigger button:
+ * ```astro
+ * <Modal id="my_modal" title="Hello!">
+ *   <span slot="trigger">Open modal</span>
+ *   <p>Modal body content.</p>
+ * </Modal>
+ * ```
+ *
+ * Slots:
+ * - default     — body content inside modal-box
+ * - `trigger`   — optional label for the trigger button rendered before the dialog
+ * - `actions`   — content of the modal-action bar (buttons, forms, etc.)
+ */
+
+interface Props extends HTMLAttributes<"dialog"> {
+    /** Unique id — required. Used for showModal() / close() targeting. */
+    id: string;
+    /** Optional title rendered as an <h3> inside the modal-box. */
+    title?: string;
+    /** Placement of the modal on screen. @default "middle" */
+    placement?: "top" | "middle" | "bottom" | "start" | "end";
+    /** Render a backdrop that closes the modal when clicked. @default false */
+    closeOnBackdrop?: boolean;
+    /** Render a ✕ close button in the top-right corner. @default false */
+    showCloseButton?: boolean;
+    /** Extra classes on the modal-box (inner content box). Use for custom widths. */
+    boxClass?: string;
+    /** Extra classes on the outer modal dialog element. */
+    classes?: string;
+}
+
+const {
+    id,
+    title,
+    placement = "middle",
+    closeOnBackdrop = false,
+    showCloseButton = false,
+    boxClass,
+    classes,
+    ...rest
+} = Astro.props;
+
+const hasTriggerSlot = Astro.slots.has("trigger");
+
+const placementClass = {
+    top: "modal-top",
+    middle: "modal-middle",
+    bottom: "modal-bottom",
+    start: "modal-start",
+    end: "modal-end",
+}[placement];
+
+const dialogClass = twMerge("modal", placementClass, classes);
+const innerBoxClass = twMerge("modal-box", boxClass);
+---
+
+{hasTriggerSlot && (
+    <button class="btn" onclick={`document.getElementById('${id}').showModal()`}>
+        <slot name="trigger" />
+    </button>
+)}
+
+<dialog {id} class={dialogClass} {...rest}>
+    <div class={innerBoxClass}>
+        {showCloseButton && (
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+        )}
+        {title && <h3 class="text-lg font-bold">{title}</h3>}
+        <slot />
+        {Astro.slots.has("actions") && (
+            <div class="modal-action">
+                <slot name="actions" />
+            </div>
+        )}
+    </div>
+    {closeOnBackdrop && (
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    )}
+</dialog>

@@ -1,0 +1,108 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Diff from "neokit/components/Diff.astro";
+---
+
+<AppLayout title="Diff">
+    <h1 id="top" class="text-5xl">Diff</h1>
+    <p class="mt-2 opacity-70">
+        A draggable slider that reveals two panes side-by-side. Drag the handle to
+        compare before/after content — images, text, or any HTML.
+    </p>
+
+    <!-- ── Image diff ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Image comparison</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Drag the handle left and right to reveal the sharp vs blurred version.
+    </p>
+
+    <fieldset>
+        <legend>diff (images)</legend>
+        <Diff classes="w-full max-w-2xl rounded-box">
+            <img
+                slot="item1"
+                alt="Sharp photo"
+                src="https://img.daisyui.com/images/stock/photo-1560717789-0ac7c58ac90a.webp"
+            />
+            <img
+                slot="item2"
+                alt="Blurred photo"
+                src="https://img.daisyui.com/images/stock/photo-1560717789-0ac7c58ac90a-blur.webp"
+            />
+        </Diff>
+    </fieldset>
+
+    <!-- ── Text diff ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Text comparison</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Any content can go inside the slots — here two styled text blocks show a
+        theme color contrast.
+    </p>
+
+    <fieldset>
+        <legend>diff (text)</legend>
+        <Diff classes="w-full max-w-2xl rounded-box">
+            <div
+                slot="item1"
+                class="bg-primary text-primary-content grid place-content-center text-9xl font-black h-full"
+            >
+                NEOKIT
+            </div>
+            <div
+                slot="item2"
+                class="bg-base-200 grid place-content-center text-9xl font-black h-full"
+            >
+                NEOKIT
+            </div>
+        </Diff>
+    </fieldset>
+
+    <!-- ── Custom aspect ratio ──────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Custom aspect ratio</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use the <code>aspect</code> prop to set any Tailwind aspect ratio.
+        Default is <code>aspect-16/9</code>.
+    </p>
+
+    <fieldset>
+        <legend>diff aspect-square</legend>
+        <Diff aspect="aspect-square" classes="w-64 rounded-box">
+            <div
+                slot="item1"
+                class="bg-secondary text-secondary-content grid place-content-center text-5xl font-black h-full"
+            >
+                AFTER
+            </div>
+            <div
+                slot="item2"
+                class="bg-base-300 grid place-content-center text-5xl font-black h-full"
+            >
+                BEFORE
+            </div>
+        </Diff>
+    </fieldset>
+
+    <!-- ── Color theme diff ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Theme color comparison</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Compare two UI states — useful for design system documentation.
+    </p>
+
+    <fieldset>
+        <legend>diff (theme colors)</legend>
+        <Diff classes="w-full max-w-2xl rounded-box">
+            <div slot="item1" class="bg-accent text-accent-content grid place-content-center h-full">
+                <div class="text-center p-8">
+                    <div class="text-4xl font-bold mb-2">Dark Mode</div>
+                    <p class="opacity-80">Accent colour on dark background</p>
+                </div>
+            </div>
+            <div slot="item2" class="bg-base-100 text-base-content grid place-content-center h-full">
+                <div class="text-center p-8">
+                    <div class="text-4xl font-bold mb-2">Light Mode</div>
+                    <p class="opacity-60">Same content on light background</p>
+                </div>
+            </div>
+        </Diff>
+    </fieldset>
+</AppLayout>

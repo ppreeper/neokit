@@ -1,0 +1,44 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Breadcrumbs — DaisyUI `breadcrumbs` navigation component.
+ *
+ * Renders a `<nav aria-label="breadcrumb">` wrapper containing DaisyUI's
+ * `breadcrumbs` div. Place `<li>` items inside — each `<li>` typically
+ * contains an `<a>` for linked crumbs or plain text for the current page.
+ *
+ * DaisyUI adds a separator (›) between items automatically via CSS.
+ * To add an icon inside a crumb, put it before the link text inside `<li>`.
+ *
+ * Size via `classes`: `text-xs`, `text-sm`, `text-lg` etc.
+ *
+ * Usage:
+ * ```astro
+ * <Breadcrumbs>
+ *   <li><a href="/">Home</a></li>
+ *   <li><a href="/docs">Docs</a></li>
+ *   <li>Components</li>
+ * </Breadcrumbs>
+ * ```
+ */
+
+interface Props {
+    /** Accessible label for the nav landmark. */
+    ariaLabel?: string;
+    /** Extra classes on the inner `breadcrumbs` div. */
+    classes?: string;
+}
+
+const { ariaLabel = "breadcrumb", classes } = Astro.props;
+
+const innerClass = twMerge("breadcrumbs", classes);
+---
+
+<nav aria-label={ariaLabel}>
+    <div class={innerClass}>
+        <ul>
+            <slot />
+        </ul>
+    </div>
+</nav>

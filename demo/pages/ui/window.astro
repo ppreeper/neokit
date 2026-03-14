@@ -1,0 +1,82 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import MockupWindow from "neokit/components/MockupWindow.astro";
+import Card from "neokit/components/Card.astro";
+---
+
+<AppLayout title="Mockup Window">
+    <h1 id="top" class="text-5xl">Mockup Window</h1>
+    <p class="mt-2 opacity-70">
+        A desktop application window chrome — three traffic-light buttons rendered via CSS.
+        Wraps a <code>&lt;div class="mockup-window"&gt;</code>.
+    </p>
+
+    <!-- ── With border ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With border</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add a <code>border</code> class via <code>classes</code> for a visible window outline.
+    </p>
+
+    <fieldset>
+        <legend>Window with border</legend>
+        <MockupWindow classes="border border-base-300">
+            <div class="flex justify-center items-center h-36 bg-base-200">
+                Hello world!
+            </div>
+        </MockupWindow>
+    </fieldset>
+
+    <!-- ── With background color ────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With background color</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use any Tailwind bg utility on the wrapper to style the window titlebar chrome.
+    </p>
+
+    <fieldset>
+        <legend>Window with bg-base-300 chrome</legend>
+        <MockupWindow classes="bg-base-300">
+            <div class="flex justify-center items-center h-36 bg-base-200">
+                Hello world!
+            </div>
+        </MockupWindow>
+    </fieldset>
+
+    <!-- ── With real content ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With real content</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Place any component inside the default slot — great for desktop app mockups.
+    </p>
+
+    <fieldset>
+        <legend>Window showing a card</legend>
+        <MockupWindow classes="border border-base-300">
+            <div class="flex justify-center items-center py-8 bg-base-100">
+                <Card classes="w-72 card-border shadow">
+                    <div class="card-body">
+                        <h2 class="card-title">App Window</h2>
+                        <p class="opacity-70">This content lives inside a desktop window mockup.</p>
+                        <div class="card-actions justify-end mt-2">
+                            <button class="btn btn-sm">Cancel</button>
+                            <button class="btn btn-sm btn-primary">OK</button>
+                        </div>
+                    </div>
+                </Card>
+            </div>
+        </MockupWindow>
+    </fieldset>
+
+    <!-- ── Colored window ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colored window</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Semantic color utilities give the window a themed titlebar.
+    </p>
+
+    <fieldset>
+        <legend>Primary titlebar</legend>
+        <MockupWindow classes="bg-primary text-primary-content">
+            <div class="flex justify-center items-center h-28 bg-base-100 text-base-content">
+                Content area
+            </div>
+        </MockupWindow>
+    </fieldset>
+</AppLayout>

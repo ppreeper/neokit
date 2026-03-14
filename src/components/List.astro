@@ -1,0 +1,49 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * List — DaisyUI `list` container component.
+ *
+ * A vertical flex layout for displaying rows of structured data.
+ * Wrap `<li class="list-row">` items inside for consistent row layout.
+ *
+ * Key layout classes for `list-row` children:
+ * - Default: the **2nd child** fills remaining space
+ * - `list-col-grow` — override which child fills remaining space
+ * - `list-col-wrap` — push a child to its own row (full-width below siblings)
+ *
+ * Basic usage:
+ * ```astro
+ * <List>
+ *   <li class="p-4 pb-2 text-xs opacity-60">Section header</li>
+ *   <li class="list-row">
+ *     <div><img class="size-10 rounded-box" src="..." /></div>
+ *     <div>
+ *       <div>Title</div>
+ *       <div class="text-xs opacity-60">Subtitle</div>
+ *     </div>
+ *     <button class="btn btn-square btn-ghost">...</button>
+ *   </li>
+ * </List>
+ * ```
+ */
+
+interface Props {
+    /** Extra classes on the root `<ul>` element. */
+    classes?: string;
+}
+
+const { classes } = Astro.props;
+
+const rootClass = twMerge(
+    "list",
+    "bg-base-100",
+    "rounded-box",
+    "shadow-md",
+    classes,
+);
+---
+
+<ul class={rootClass}>
+    <slot />
+</ul>

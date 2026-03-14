@@ -1,0 +1,39 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    color?:
+        | "neutral"
+        | "primary"
+        | "secondary"
+        | "accent"
+        | "info"
+        | "success"
+        | "warning"
+        | "error";
+    variant?: "solid" | "outline" | "soft" | "dash" | "ghost";
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    classes?: string;
+}
+
+const {
+    color,
+    variant = "solid",
+    size = "md",
+    classes,
+} = Astro.props;
+
+const colorClass = color ? `badge-${color}` : "";
+const variantClass = {
+    solid: "",
+    outline: "badge-outline",
+    soft: "badge-soft",
+    dash: "badge-dash",
+    ghost: "badge-ghost",
+}[variant];
+const sizeClass = size === "md" ? "" : `badge-${size}`;
+
+const classList = twMerge("badge", colorClass, variantClass, sizeClass, classes);
+---
+
+<span class={classList}><slot /></span>

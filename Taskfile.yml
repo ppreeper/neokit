@@ -1,0 +1,13 @@
+version: "3"
+
+tasks:
+  # Development Tools
+  astro-dev:
+    desc: Start Astro development server
+    cmds:
+      - "bun run dev"
+
+  dev:
+    desc: Start development server with hot reload
+    cmds:
+      - "bun run dev"

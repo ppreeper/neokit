@@ -1,0 +1,178 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Pagination from "neokit/components/Pagination.astro";
+import Table from "neokit/components/Table.astro";
+---
+
+<AppLayout title="Pagination">
+    <h1 id="top" class="text-5xl">Pagination</h1>
+    <p class="mt-2 opacity-70">
+        A row of page buttons built with DaisyUI's <code>join</code> +{" "}
+        <code>btn</code> pattern. Supports prev/next controls, sizes, outline
+        variant, smart ellipsis windowing, and link-based rendering.
+    </p>
+
+    <!-- ── Basic ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Ten pages, page 4 active. Prev/next arrows shown by default.
+    </p>
+
+    <fieldset>
+        <legend>pagination basic</legend>
+        <Pagination total={10} current={4} />
+    </fieldset>
+
+    <!-- ── Without prev/next ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Without prev / next</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Set <code>showPrevNext={false}</code> to hide the « / » controls.
+    </p>
+
+    <fieldset>
+        <legend>pagination no prev/next</legend>
+        <Pagination total={8} current={3} showPrevNext={false} />
+    </fieldset>
+
+    <!-- ── Disabled prev (first page) ───────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">First page (prev disabled)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        When <code>current={1}</code> the « button is automatically disabled.
+    </p>
+
+    <fieldset>
+        <legend>pagination first page</legend>
+        <Pagination total={8} current={1} />
+    </fieldset>
+
+    <!-- ── Disabled next (last page) ────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Last page (next disabled)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        When <code>current</code> equals <code>total</code> the » button is
+        automatically disabled.
+    </p>
+
+    <fieldset>
+        <legend>pagination last page</legend>
+        <Pagination total={8} current={8} />
+    </fieldset>
+
+    <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes — xs through xl.
+    </p>
+
+    <fieldset>
+        <legend>pagination sizes</legend>
+        <div class="flex flex-col gap-4">
+            {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
+                <div class="flex items-center gap-4">
+                    <span class="text-xs opacity-50 w-6">{s}</span>
+                    <Pagination total={5} current={3} size={s} />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Outline variant ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Outline variant</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Pass <code>variant="outline"</code> to use outlined buttons for
+        inactive pages.
+    </p>
+
+    <fieldset>
+        <legend>pagination outline</legend>
+        <Pagination total={10} current={5} variant="outline" />
+    </fieldset>
+
+    <!-- ── As links ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">As links</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Pass an <code>href</code> function to render <code>&lt;a&gt;</code>{" "}
+        tags — useful for server-side pagination with URL query params.
+    </p>
+
+    <fieldset>
+        <legend>pagination as links</legend>
+        <Pagination
+            total={10}
+            current={4}
+            href={(p) => `/posts?page=${p}`}
+        />
+    </fieldset>
+
+    <!-- ── Smart ellipsis window ─────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Smart ellipsis</h2>
+    <p class="mt-1 text-sm opacity-70">
+        For large page counts the component always shows first, last, and ±2
+        around the current page, collapsing the rest into <code>…</code>{" "}
+        gaps.
+    </p>
+
+    <fieldset>
+        <legend>pagination ellipsis</legend>
+        <div class="flex flex-col gap-4">
+            {([1, 5, 10, 15, 20] as const).map((cur) => (
+                <div class="flex items-center gap-4">
+                    <span class="text-xs opacity-50 w-16">page {cur}</span>
+                    <Pagination total={20} current={cur} />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Few pages (no ellipsis) ───────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Few pages (no ellipsis)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        When <code>total ≤ 7</code> all pages are shown — no gaps needed.
+    </p>
+
+    <fieldset>
+        <legend>pagination few pages</legend>
+        <Pagination total={5} current={3} />
+    </fieldset>
+
+    <!-- ── In a table footer ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">In a table footer</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Common real-world pattern: pagination below a data table.
+    </p>
+
+    <fieldset>
+        <legend>pagination table footer</legend>
+        <div class="flex flex-col gap-2">
+            <Table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {[
+                        { id: 1, name: "Alice Chen",    role: "Engineer",  status: "Active"   },
+                        { id: 2, name: "Bob Torres",    role: "Designer",  status: "Active"   },
+                        { id: 3, name: "Carol White",   role: "Manager",   status: "On leave" },
+                        { id: 4, name: "David Kim",     role: "Engineer",  status: "Active"   },
+                        { id: 5, name: "Eva Müller",    role: "Marketing", status: "Inactive" },
+                    ].map(({ id, name, role, status }) => (
+                        <tr>
+                            <th>{id}</th>
+                            <td>{name}</td>
+                            <td>{role}</td>
+                            <td>{status}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+            <div class="flex items-center justify-between px-1">
+                <span class="text-sm opacity-60">Showing 1–5 of 38 results</span>
+                <Pagination total={8} current={1} size="sm" />
+            </div>
+        </div>
+    </fieldset>
+</AppLayout>

@@ -1,0 +1,19 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    /** Render the join container vertically */
+    vertical?: boolean;
+    /** Responsive: stack vertically on mobile, horizontal on medium+ */
+    responsive?: boolean;
+    classes?: string;
+}
+
+const { vertical = false, responsive = false, classes } = Astro.props;
+
+const verticalClass = vertical ? "join-vertical" : responsive ? "join-vertical lg:join-horizontal" : "";
+
+const classList = twMerge("join", verticalClass, classes);
+---
+
+<div class={classList}><slot /></div>

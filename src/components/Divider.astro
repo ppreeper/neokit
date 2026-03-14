@@ -1,0 +1,36 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    /** Place the divider vertically (turns it into a column divider) */
+    vertical?: boolean;
+    /**
+     * Color token for the divider line.
+     * Maps to `divider-{color}`.
+     */
+    color?:
+        | "neutral"
+        | "primary"
+        | "secondary"
+        | "accent"
+        | "info"
+        | "success"
+        | "warning"
+        | "error";
+    /** Move label to the start of the line */
+    start?: boolean;
+    /** Move label to the end of the line */
+    end?: boolean;
+    classes?: string;
+}
+
+const { vertical = false, color, start = false, end = false, classes } = Astro.props;
+
+const verticalClass = vertical ? "divider-vertical" : "";
+const colorClass = color ? `divider-${color}` : "";
+const positionClass = start ? "divider-start" : end ? "divider-end" : "";
+
+const classList = twMerge("divider", verticalClass, colorClass, positionClass, classes);
+---
+
+<div class={classList}><slot /></div>

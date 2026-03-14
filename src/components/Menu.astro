@@ -1,0 +1,52 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Menu — DaisyUI `menu` component.
+ *
+ * Renders a `<ul class="menu">` wrapper. Place `<li>` children inside:
+ * - Plain link item:   `<li><a>Label</a></li>`
+ * - Active item:       `<li><a class="active">Label</a></li>`
+ * - Disabled item:     `<li><a class="disabled">Label</a></li>`
+ * - Section title:     `<li class="menu-title">Title</li>`
+ * - Submenu:           `<li><a>Parent</a><ul><li><a>Child</a></li></ul></li>`
+ * - Collapsible sub:   `<li><details><summary>Parent</summary><ul>...</ul></details></li>`
+ *
+ * Sizes: `"xs"` | `"sm"` | `"md"` | `"lg"` | `"xl"`
+ * Direction: `"horizontal"` → `menu-horizontal`
+ * Variants:
+ * - default — vertical list
+ * - `"compact"` → no extra padding between items (deprecated in v5, kept for compat)
+ *
+ * ```astro
+ * <Menu size="sm" classes="bg-base-200 rounded-box w-56">
+ *   <li class="menu-title">Category</li>
+ *   <li><a>Item one</a></li>
+ *   <li><a class="active">Item two</a></li>
+ *   <li><a class="disabled">Item three</a></li>
+ * </Menu>
+ * ```
+ */
+
+interface Props {
+    /** Button size. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Lay items out horizontally. */
+    horizontal?: boolean;
+    /** Extra classes on the root `<ul>`. */
+    classes?: string;
+}
+
+const { size, horizontal, classes } = Astro.props;
+
+const rootClass = twMerge(
+    "menu",
+    size && `menu-${size}`,
+    horizontal && "menu-horizontal",
+    classes,
+);
+---
+
+<ul class={rootClass}>
+    <slot />
+</ul>

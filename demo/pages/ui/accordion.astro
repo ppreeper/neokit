@@ -1,0 +1,198 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Accordion from "neokit/components/Accordion.astro";
+
+const faqItems = [
+    {
+        title: "How do I create an account?",
+        content: 'Click the "Sign Up" button in the top right corner and follow the registration process.',
+    },
+    {
+        title: "I forgot my password. What should I do?",
+        content: 'Click on "Forgot Password" on the login page and follow the instructions sent to your email.',
+    },
+    {
+        title: "How do I update my profile information?",
+        content: 'Go to "My Account" settings and select "Edit Profile" to make changes.',
+    },
+];
+---
+
+<AppLayout title="Accordion">
+    <h1 id="top" class="text-5xl">Accordion</h1>
+    <p class="mt-2 opacity-70">
+        Accordion items use DaisyUI's <code>collapse</code> component. Group multiple items by sharing
+        the same <code>name</code> — only one can be open at a time.
+    </p>
+
+    <!-- ── Radio method (default) ───────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Radio inputs (default)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Each item wraps a hidden radio input. Checking one unchecks the others automatically.
+    </p>
+
+    <fieldset>
+        <legend>No icon</legend>
+        <div class="space-y-0">
+            {faqItems.map((item, i) => (
+                <Accordion name="acc-basic" title={item.title} open={i === 0}>
+                    {item.content}
+                </Accordion>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Arrow icon ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Arrow icon</h2>
+
+    <fieldset>
+        <legend>collapse-arrow</legend>
+        <div class="space-y-0">
+            {faqItems.map((item, i) => (
+                <Accordion name="acc-arrow" title={item.title} icon="arrow" open={i === 0}>
+                    {item.content}
+                </Accordion>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Plus/minus icon ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Plus / minus icon</h2>
+
+    <fieldset>
+        <legend>collapse-plus</legend>
+        <div class="space-y-0">
+            {faqItems.map((item, i) => (
+                <Accordion name="acc-plus" title={item.title} icon="plus" open={i === 0}>
+                    {item.content}
+                </Accordion>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Details method ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Details method</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Uses native <code>&lt;details&gt;/&lt;summary&gt;</code> — content is browser-searchable
+        (Ctrl+F / Cmd+F finds text inside collapsed items).
+    </p>
+
+    <fieldset>
+        <legend>details + arrow icon</legend>
+        <div class="space-y-0">
+            {faqItems.map((item, i) => (
+                <Accordion
+                    method="details"
+                    name="acc-details"
+                    title={item.title}
+                    icon="arrow"
+                    open={i === 0}
+                >
+                    {item.content}
+                </Accordion>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Join (seamless) ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Join (seamless border radius)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Wrap items in <code>join join-vertical</code> and add <code>classes="join-item"</code>
+        to each item. The join handles border-radius automatically.
+    </p>
+
+    <fieldset>
+        <legend>Joined accordion with arrow icon</legend>
+        <div class="join join-vertical w-full bg-base-100">
+            {faqItems.map((item, i) => (
+                <Accordion
+                    name="acc-join"
+                    title={item.title}
+                    icon="arrow"
+                    classes="join-item"
+                    open={i === 0}
+                >
+                    {item.content}
+                </Accordion>
+            ))}
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Joined accordion with plus icon</legend>
+        <div class="join join-vertical w-full bg-base-100">
+            {faqItems.map((item, i) => (
+                <Accordion
+                    name="acc-join-plus"
+                    title={item.title}
+                    icon="plus"
+                    classes="join-item"
+                    open={i === 0}
+                >
+                    {item.content}
+                </Accordion>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Rich content inside items ────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Rich content</h2>
+    <p class="mt-1 text-sm opacity-70">Slot content can be any HTML — lists, code, images, etc.</p>
+
+    <fieldset>
+        <legend>Items with rich content</legend>
+        <div class="join join-vertical w-full bg-base-100">
+            <Accordion name="acc-rich" title="What technologies does neokit use?" icon="arrow" classes="join-item" open>
+                <ul class="list-disc pl-4 space-y-1 mt-2">
+                    <li>Astro — component framework</li>
+                    <li>Tailwind CSS v4 — utility-first styling</li>
+                    <li>DaisyUI — component library on top of Tailwind</li>
+                    <li>tailwind-merge — class conflict resolution</li>
+                </ul>
+            </Accordion>
+            <Accordion name="acc-rich" title="How do I install it?" icon="arrow" classes="join-item">
+                <div class="mt-2 space-y-2">
+                    <p>Install with your preferred package manager:</p>
+                    <pre class="bg-base-200 rounded p-2 text-xs overflow-x-auto"><code>bun add neokit
+# or
+npm install neokit</code></pre>
+                    <p>Then add the integration to <code>astro.config.mjs</code>.</p>
+                </div>
+            </Accordion>
+            <Accordion name="acc-rich" title="Is it open source?" icon="arrow" classes="join-item">
+                <p class="mt-2">
+                    Yes — neokit is fully open source and MIT licensed.
+                    Contributions, issues, and PRs are welcome.
+                </p>
+            </Accordion>
+        </div>
+    </fieldset>
+
+    <!-- ── Two independent groups ───────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Multiple independent groups</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use different <code>name</code> values for each group — they operate independently.
+    </p>
+
+    <fieldset>
+        <legend>Two groups side by side</legend>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-wide opacity-50 mb-1">Group A</p>
+                <div class="join join-vertical w-full bg-base-100">
+                    <Accordion name="group-a" title="Item A-1" icon="arrow" classes="join-item" open>Content for A-1.</Accordion>
+                    <Accordion name="group-a" title="Item A-2" icon="arrow" classes="join-item">Content for A-2.</Accordion>
+                    <Accordion name="group-a" title="Item A-3" icon="arrow" classes="join-item">Content for A-3.</Accordion>
+                </div>
+            </div>
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-wide opacity-50 mb-1">Group B</p>
+                <div class="join join-vertical w-full bg-base-100">
+                    <Accordion name="group-b" title="Item B-1" icon="plus" classes="join-item" open>Content for B-1.</Accordion>
+                    <Accordion name="group-b" title="Item B-2" icon="plus" classes="join-item">Content for B-2.</Accordion>
+                    <Accordion name="group-b" title="Item B-3" icon="plus" classes="join-item">Content for B-3.</Accordion>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</AppLayout>

@@ -1,0 +1,77 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Swap component — wraps DaisyUI's `swap` pattern.
+ *
+ * Two named slots define the two states:
+ * - `on`  — content shown when active/checked
+ * - `off` — content shown when inactive/unchecked
+ * - `indeterminate` — (optional) content shown when checkbox is indeterminate
+ *
+ * Usage (checkbox-controlled):
+ * ```astro
+ * <Swap effect="rotate">
+ *   <span slot="on">🌞</span>
+ *   <span slot="off">🌚</span>
+ * </Swap>
+ * ```
+ *
+ * Usage (class-controlled, no checkbox):
+ * ```astro
+ * <Swap active={isOpen}>
+ *   <span slot="on">Close</span>
+ *   <span slot="off">Open</span>
+ * </Swap>
+ * ```
+ */
+
+interface Props extends Omit<HTMLAttributes<"label">, "class"> {
+    /** Animation effect. @default "none" */
+    effect?: "none" | "rotate" | "flip";
+    /**
+     * Class-based active state — when true, adds `swap-active` to the label
+     * and omits the hidden checkbox entirely (no user interaction).
+     * Combine with server-side logic or client JS that toggles the class.
+     * @default false
+     */
+    active?: boolean;
+    /** Initial checked state of the underlying checkbox. @default false */
+    checked?: boolean;
+    /** Extra classes forwarded to the root <label>. */
+    classes?: string;
+}
+
+const {
+    effect = "none",
+    active = false,
+    checked = false,
+    classes,
+    ...rest
+} = Astro.props;
+
+const effectClass = {
+    none: "",
+    rotate: "swap-rotate",
+    flip: "swap-flip",
+}[effect];
+
+const rootClass = twMerge(
+    "swap",
+    effectClass,
+    active && "swap-active",
+    classes
+);
+
+const hasIndeterminate = Astro.slots.has("indeterminate");
+---
+
+<label class={rootClass} {...rest}>
+    {!active && <input type="checkbox" checked={checked || undefined} />}
+    <div class="swap-on"><slot name="on" /></div>
+    <div class="swap-off"><slot name="off" /></div>
+    {hasIndeterminate && (
+        <div class="swap-indeterminate"><slot name="indeterminate" /></div>
+    )}
+</label>

@@ -1,0 +1,84 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { twMerge } from "tailwind-merge";
+
+/**
+ * ThemeController component — wraps DaisyUI's `theme-controller` pattern.
+ *
+ * Renders a single `<input>` (checkbox or radio) that switches the page theme
+ * via CSS when checked. The `theme-controller` class is always applied.
+ *
+ * Usage — toggle (checkbox):
+ * ```astro
+ * <ThemeController theme="synthwave" variant="toggle" />
+ * ```
+ *
+ * Usage — radio group:
+ * ```astro
+ * <ThemeController type="radio" name="theme" theme="retro" variant="radio" />
+ * <ThemeController type="radio" name="theme" theme="cyberpunk" variant="radio" checked />
+ * ```
+ *
+ * Usage — radio button (styled as btn, place inside a join):
+ * ```astro
+ * <div class="join join-vertical">
+ *   <ThemeController type="radio" name="theme-btn" theme="retro" variant="btn" aria-label="Retro" />
+ *   <ThemeController type="radio" name="theme-btn" theme="cyberpunk" variant="btn" aria-label="Cyberpunk" />
+ * </div>
+ * ```
+ *
+ * For the swap+rotate pattern, use the Swap component directly with a
+ * `theme-controller` checkbox inside (see demo page).
+ */
+
+interface Props extends Omit<HTMLAttributes<"input">, "type" | "class"> {
+    /** The DaisyUI theme name this input activates when checked. */
+    theme: string;
+    /**
+     * Input type.
+     * - `"checkbox"` — toggles between default theme and `theme` value
+     * - `"radio"`    — one of many theme options (requires a shared `name`)
+     * @default "checkbox"
+     */
+    type?: "checkbox" | "radio";
+    /**
+     * Visual style of the input.
+     * - `"toggle"`   — styled as a toggle switch (default)
+     * - `"checkbox"` — styled as a checkbox
+     * - `"radio"`    — styled as a radio button
+     * - `"btn"`      — styled as a button (use inside a `join`)
+     * @default "toggle"
+     */
+    variant?: "toggle" | "checkbox" | "radio" | "btn";
+    /** Whether the input starts checked. @default false */
+    checked?: boolean;
+    /** Extra classes forwarded to the input. */
+    classes?: string;
+}
+
+const {
+    theme,
+    type = "checkbox",
+    variant = "toggle",
+    checked = false,
+    classes,
+    ...rest
+} = Astro.props;
+
+const variantClass = {
+    toggle: "toggle",
+    checkbox: "checkbox",
+    radio: "radio",
+    btn: "btn",
+}[variant];
+
+const inputClass = twMerge("theme-controller", variantClass, classes);
+---
+
+<input
+    type={type}
+    value={theme}
+    class={inputClass}
+    checked={checked || undefined}
+    {...rest}
+/>

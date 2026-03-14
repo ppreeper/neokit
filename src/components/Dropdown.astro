@@ -1,0 +1,130 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Dropdown component — wraps DaisyUI's `dropdown` pattern.
+ *
+ * Three open/close methods are supported via the `method` prop:
+ *
+ * - `"focus"` (default) — CSS focus trick; content closes when focus is lost.
+ *   The trigger renders as `<div tabindex="0" role="button">`.
+ * - `"details"` — uses native `<details>`/`<summary>`; JS-free toggle.
+ * - `"popover"` — uses the Popover API + CSS anchor positioning; opens on a
+ *   top layer so no z-index management needed. Requires a unique `id` prop.
+ *
+ * The default slot is the trigger label/content.
+ * The `content` slot is the dropdown panel body (menu items, card, etc.).
+ */
+
+interface Props extends HTMLAttributes<"div"> {
+    /** Open/close mechanism. @default "focus" */
+    method?: "focus" | "details" | "popover";
+    /** Vertical opening direction. @default "bottom" */
+    direction?: "top" | "bottom" | "left" | "right";
+    /** Horizontal (or vertical for left/right) alignment. @default "start" */
+    align?: "start" | "center" | "end";
+    /** Also opens on hover. Only applies to method="focus". */
+    hover?: boolean;
+    /** Force the dropdown open (for debugging / controlled state). */
+    open?: boolean;
+    /**
+     * Required when method="popover". Must be unique on the page.
+     * Used as the popover id and the CSS anchor name.
+     */
+    id?: string;
+    /** Extra classes on the dropdown wrapper. */
+    classes?: string;
+    /** Extra classes on the dropdown-content panel. */
+    contentClass?: string;
+}
+
+const {
+    method = "focus",
+    direction = "bottom",
+    align = "start",
+    hover = false,
+    open = false,
+    id,
+    classes,
+    contentClass,
+    ...rest
+} = Astro.props;
+
+// --- wrapper classes ---
+const directionClass = {
+    top: "dropdown-top",
+    bottom: "dropdown-bottom",
+    left: "dropdown-left",
+    right: "dropdown-right",
+}[direction];
+
+const alignClass = {
+    start: "dropdown-start",
+    center: "dropdown-center",
+    end: "dropdown-end",
+}[align];
+
+const hoverClass = hover ? "dropdown-hover" : "";
+const openClass = open ? "dropdown-open" : "";
+
+// For method=details the outer element is <details> not <div>, so we skip the
+// dropdown class there (details itself gets the class).
+const wrapperClass = twMerge(
+    "dropdown",
+    directionClass,
+    alignClass,
+    hoverClass,
+    openClass,
+    classes,
+);
+
+// --- content panel classes ---
+const panelBase = "dropdown-content z-1";
+const panelClass = twMerge(panelBase, contentClass);
+
+// --- popover unique anchor name ---
+const anchorName = id ? `--anchor-${id}` : undefined;
+---
+
+{method === "details" && (
+    <details class={wrapperClass} {...rest}>
+        <summary class="btn m-1 cursor-pointer list-none">
+            <slot />
+        </summary>
+        <div class={panelClass}>
+            <slot name="content" />
+        </div>
+    </details>
+)}
+
+{method === "popover" && (
+    <>
+        <button
+            class="btn"
+            popovertarget={id}
+            style={anchorName ? `anchor-name:${anchorName}` : undefined}
+        >
+            <slot />
+        </button>
+        <div
+            popover="auto"
+            id={id}
+            class={twMerge("dropdown", directionClass, alignClass, panelClass)}
+            style={anchorName ? `position-anchor:${anchorName}` : undefined}
+        >
+            <slot name="content" />
+        </div>
+    </>
+)}
+
+{method === "focus" && (
+    <div class={wrapperClass} {...rest}>
+        <div tabindex="0" role="button" class="btn m-1">
+            <slot />
+        </div>
+        <div tabindex="-1" class={panelClass}>
+            <slot name="content" />
+        </div>
+    </div>
+)}

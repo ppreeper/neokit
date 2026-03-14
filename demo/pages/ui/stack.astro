@@ -1,0 +1,102 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Stack from "neokit/components/Stack.astro";
+import Card from "neokit/components/Card.astro";
+---
+
+<AppLayout title="Stack">
+    <h1 id="top" class="text-5xl">Stack</h1>
+    <p class="mt-2 opacity-70">
+        Overlaps child elements on top of each other like a physical stack of cards.
+        Wraps a <code>&lt;div class="stack"&gt;</code>.
+    </p>
+
+    <!-- ── Default ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Each child is layered on top of the previous. The first child appears at the top.
+    </p>
+
+    <fieldset>
+        <legend>Stack of colored boxes</legend>
+        <Stack>
+            <div class="w-32 h-20 rounded bg-primary text-primary-content flex items-center justify-center font-bold">1</div>
+            <div class="w-32 h-20 rounded bg-secondary text-secondary-content flex items-center justify-center font-bold">2</div>
+            <div class="w-32 h-20 rounded bg-accent text-accent-content flex items-center justify-center font-bold">3</div>
+        </Stack>
+    </fieldset>
+
+    <!-- ── Stack of cards ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Stack of cards</h2>
+    <p class="mt-1 text-sm opacity-70">Classic "deck of cards" visual — often used in product mockups.</p>
+
+    <fieldset>
+        <legend>Card stack</legend>
+        <Stack>
+            <div class="card card-border w-64 bg-base-100 shadow">
+                <div class="card-body">
+                    <h2 class="card-title">Card 1</h2>
+                    <p class="text-sm opacity-70">The top card in the stack.</p>
+                </div>
+            </div>
+            <div class="card card-border w-64 bg-base-100 shadow">
+                <div class="card-body">
+                    <h2 class="card-title">Card 2</h2>
+                    <p class="text-sm opacity-70">Hidden behind card 1.</p>
+                </div>
+            </div>
+            <div class="card card-border w-64 bg-base-100 shadow">
+                <div class="card-body">
+                    <h2 class="card-title">Card 3</h2>
+                    <p class="text-sm opacity-70">The bottom of the stack.</p>
+                </div>
+            </div>
+        </Stack>
+    </fieldset>
+
+    <!-- ── Stack of images ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Stack of images</h2>
+    <p class="mt-1 text-sm opacity-70">Works well with rounded images of the same size.</p>
+
+    <fieldset>
+        <legend>Photo stack</legend>
+        <Stack classes="w-32">
+            <img
+                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                class="w-32 h-32 object-cover rounded-xl shadow border-2 border-base-100"
+                alt="photo 1"
+            />
+            <img
+                src="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
+                class="w-32 h-32 object-cover rounded-xl shadow border-2 border-base-100"
+                alt="photo 2"
+            />
+            <img
+                src="https://img.daisyui.com/images/stock/photo-1471560090527-d1af5e4e6eb6.webp"
+                class="w-32 h-32 object-cover rounded-xl shadow border-2 border-base-100"
+                alt="photo 3"
+            />
+        </Stack>
+    </fieldset>
+
+    <!-- ── Mixed sizes ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Mixed sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Items don't need to be the same size — the stack container grows to the largest child.
+    </p>
+
+    <fieldset>
+        <legend>Progressively larger cards</legend>
+        <Stack>
+            <div class="card bg-primary text-primary-content w-56 h-28 shadow">
+                <div class="card-body p-4"><p class="font-bold">Top card</p></div>
+            </div>
+            <div class="card bg-secondary text-secondary-content w-60 h-28 shadow">
+                <div class="card-body p-4"><p>Middle</p></div>
+            </div>
+            <div class="card bg-accent text-accent-content w-64 h-28 shadow">
+                <div class="card-body p-4"><p>Bottom card</p></div>
+            </div>
+        </Stack>
+    </fieldset>
+</AppLayout>

@@ -1,0 +1,94 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Drawer from "neokit/components/Drawer.astro";
+import Button from "neokit/components/Button.astro";
+import Menu from "neokit/components/Menu.astro";
+---
+
+<AppLayout title="Drawer">
+    <h1 id="top" class="text-5xl">Drawer</h1>
+    <p class="mt-2 opacity-70">
+        CSS-only sidebar drawer. A hidden checkbox drives open/close state —
+        no JavaScript required. Uses named slots: <code>content</code> for the main area,
+        <code>side</code> for the sidebar.
+    </p>
+
+    <!-- ── Default (left) ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Left drawer</h2>
+    <p class="mt-1 text-sm opacity-70">Default position — sidebar slides in from the left.</p>
+
+    <fieldset>
+        <legend>Left drawer demo</legend>
+        <Drawer id="demo-drawer-left" classes="h-64 rounded-lg overflow-hidden border border-base-300">
+            <Fragment slot="content">
+                <div class="p-4 flex flex-col gap-2 h-full bg-base-100">
+                    <p class="text-sm opacity-70">Main page content lives here.</p>
+                    <label for="demo-drawer-left" class="btn btn-primary w-fit">Open drawer</label>
+                </div>
+            </Fragment>
+            <Fragment slot="side">
+                <ul class="menu bg-base-200 min-h-full w-56 p-4 gap-1">
+                    <li class="menu-title">Navigation</li>
+                    <li><a>Home</a></li>
+                    <li><a>About</a></li>
+                    <li><a>Portfolio</a></li>
+                    <li><a>Contact</a></li>
+                </ul>
+            </Fragment>
+        </Drawer>
+    </fieldset>
+
+    <!-- ── Right drawer ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Right drawer</h2>
+    <p class="mt-1 text-sm opacity-70">Add <code>end</code> prop to place the sidebar on the right.</p>
+
+    <fieldset>
+        <legend>Right drawer demo</legend>
+        <Drawer id="demo-drawer-right" end classes="h-64 rounded-lg overflow-hidden border border-base-300">
+            <Fragment slot="content">
+                <div class="p-4 flex flex-col gap-2 h-full bg-base-100">
+                    <p class="text-sm opacity-70">Click the button to open the right drawer.</p>
+                    <label for="demo-drawer-right" class="btn btn-secondary w-fit">Open right drawer</label>
+                </div>
+            </Fragment>
+            <Fragment slot="side">
+                <ul class="menu bg-base-200 min-h-full w-56 p-4 gap-1">
+                    <li class="menu-title">Settings</li>
+                    <li><a>Profile</a></li>
+                    <li><a>Preferences</a></li>
+                    <li><a>Billing</a></li>
+                    <li><a>Sign out</a></li>
+                </ul>
+            </Fragment>
+        </Drawer>
+    </fieldset>
+
+    <!-- ── Persistent (open by default) ────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Persistent sidebar</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add <code>checked</code> to the underlying checkbox via a custom layout — or use
+        <code>lg:drawer-open</code> in <code>classes</code> to keep the sidebar always-visible at large breakpoints.
+    </p>
+
+    <fieldset>
+        <legend>drawer-open (always open on lg+)</legend>
+        <Drawer id="demo-drawer-open" classes="h-64 rounded-lg overflow-hidden border border-base-300 lg:drawer-open">
+            <Fragment slot="content">
+                <div class="p-4 bg-base-100 h-full">
+                    <p class="text-sm opacity-70">
+                        On large screens the sidebar is always visible.
+                        On small screens it collapses behind the hamburger.
+                    </p>
+                    <label for="demo-drawer-open" class="btn btn-ghost btn-sm mt-2 lg:hidden">Toggle</label>
+                </div>
+            </Fragment>
+            <Fragment slot="side">
+                <ul class="menu bg-base-200 min-h-full w-48 p-4 gap-1">
+                    <li><a>Dashboard</a></li>
+                    <li><a>Reports</a></li>
+                    <li><a>Users</a></li>
+                </ul>
+            </Fragment>
+        </Drawer>
+    </fieldset>
+</AppLayout>

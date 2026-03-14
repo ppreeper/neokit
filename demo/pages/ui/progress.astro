@@ -1,0 +1,172 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Progress from "neokit/components/Progress.astro";
+---
+
+<AppLayout title="Progress">
+    <h1 id="top" class="text-5xl">Progress</h1>
+    <p class="mt-2 opacity-70">
+        A horizontal progress bar. Built on the native{" "}
+        <code>&lt;progress&gt;</code> element with DaisyUI's{" "}
+        <code>progress</code> class. Supports determinate values, indeterminate
+        animation, all DaisyUI color tokens, and custom <code>max</code>.
+    </p>
+
+    <!-- ── Basic ───────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Determinate bar at 70%. Default <code>max</code> is 100.
+    </p>
+
+    <fieldset>
+        <legend>progress basic</legend>
+        <Progress value={70} />
+    </fieldset>
+
+    <!-- ── Indeterminate ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Indeterminate</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Omit <code>value</code> for a looping animation — useful while waiting
+        for an operation to complete.
+    </p>
+
+    <fieldset>
+        <legend>progress indeterminate</legend>
+        <Progress color="primary" />
+    </fieldset>
+
+    <!-- ── Colors ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">
+        All eight DaisyUI color tokens.
+    </p>
+
+    <fieldset>
+        <legend>progress colors</legend>
+        <div class="flex flex-col gap-3">
+            {(["primary", "secondary", "accent", "info", "success", "warning", "error", "neutral"] as const).map((c) => (
+                <div class="flex items-center gap-3">
+                    <span class="w-24 text-sm capitalize shrink-0">{c}</span>
+                    <Progress value={60} color={c} classes="flex-1" />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Values 0–100 ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Values</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Common percentage milestones.
+    </p>
+
+    <fieldset>
+        <legend>progress values</legend>
+        <div class="flex flex-col gap-3">
+            {([0, 25, 50, 75, 100] as const).map((v) => (
+                <div class="flex items-center gap-3">
+                    <span class="w-10 text-sm text-right shrink-0">{v}%</span>
+                    <Progress value={v} color="primary" classes="flex-1" />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Custom max ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Custom max</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>max</code> defaults to 100 but can be any number —
+        useful for task counts or byte totals.
+    </p>
+
+    <fieldset>
+        <legend>progress custom max</legend>
+        <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-3">
+                <span class="w-28 text-sm shrink-0">3 of 10 tasks</span>
+                <Progress value={3} max={10} color="accent" classes="flex-1" />
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="w-28 text-sm shrink-0">512 of 2048 MB</span>
+                <Progress value={512} max={2048} color="info" classes="flex-1" />
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── With labels ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With labels</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Wrap the component with a label above and a value below.
+    </p>
+
+    <fieldset>
+        <legend>progress labeled</legend>
+        <div class="flex flex-col gap-6 max-w-sm">
+            <div>
+                <div class="flex justify-between text-sm mb-1">
+                    <span>Upload progress</span>
+                    <span>45%</span>
+                </div>
+                <Progress value={45} color="primary" />
+            </div>
+            <div>
+                <div class="flex justify-between text-sm mb-1">
+                    <span>Storage used</span>
+                    <span>8.2 / 10 GB</span>
+                </div>
+                <Progress value={82} color="warning" />
+            </div>
+            <div>
+                <div class="flex justify-between text-sm mb-1">
+                    <span>Security score</span>
+                    <span>94%</span>
+                </div>
+                <Progress value={94} color="success" />
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Project roadmap card ───────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Project roadmap</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Real-world example: feature completion tracker inside a card.
+    </p>
+
+    <fieldset>
+        <legend>progress roadmap</legend>
+        <div class="card bg-base-100 shadow max-w-sm">
+            <div class="card-body gap-4">
+                <h2 class="card-title">v2.0 Roadmap</h2>
+                {[
+                    { label: "Authentication", value: 100, color: "success" },
+                    { label: "Dashboard", value: 80, color: "primary" },
+                    { label: "API integration", value: 55, color: "info" },
+                    { label: "Mobile app", value: 30, color: "warning" },
+                    { label: "Analytics", value: 10, color: "error" },
+                ].map(({ label, value, color }) => (
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>{label}</span>
+                            <span>{value}%</span>
+                        </div>
+                        <Progress value={value} color={color as any} />
+                    </div>
+                ))}
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Indeterminate colors ───────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Indeterminate colors</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Indeterminate animation works with all color tokens too.
+    </p>
+
+    <fieldset>
+        <legend>progress indeterminate colors</legend>
+        <div class="flex flex-col gap-3">
+            {(["primary", "secondary", "accent", "info", "success", "warning", "error"] as const).map((c) => (
+                <Progress color={c} />
+            ))}
+        </div>
+    </fieldset>
+</AppLayout>

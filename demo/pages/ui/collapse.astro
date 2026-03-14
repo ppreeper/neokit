@@ -1,0 +1,204 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Collapse from "neokit/components/Collapse.astro";
+---
+
+<AppLayout title="Collapse">
+    <h1 id="top" class="text-5xl">Collapse</h1>
+    <p class="mt-2 opacity-70">
+        A standalone collapsible panel — click to reveal hidden content. Three
+        mechanisms are available: checkbox toggle, focus-to-open, and native
+        <code>&lt;details&gt;</code>. Unlike Accordion, each Collapse is independent.
+    </p>
+
+    <!-- ── Basic checkbox ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic (checkbox)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Default <code>method="checkbox"</code> — click the title bar to toggle.
+    </p>
+
+    <fieldset>
+        <legend>collapse checkbox</legend>
+        <Collapse title="Click me to open">
+            Hidden content revealed on click. Click again to close.
+        </Collapse>
+    </fieldset>
+
+    <!-- ── Open by default ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Open by default</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Pass <code>open</code> to start the panel in the expanded state.
+    </p>
+
+    <fieldset>
+        <legend>collapse open</legend>
+        <Collapse title="I start open" open>
+            This content is visible on page load. Click the title to close.
+        </Collapse>
+    </fieldset>
+
+    <!-- ── Arrow icon ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Arrow icon</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>icon="arrow"</code> adds an animated chevron on the right side.
+    </p>
+
+    <fieldset>
+        <legend>collapse-arrow</legend>
+        <div class="flex flex-col gap-2 max-w-lg">
+            <Collapse title="What is DaisyUI?" icon="arrow">
+                DaisyUI is the most popular component library for Tailwind CSS. It adds
+                component class names to Tailwind CSS so you can make beautiful websites faster.
+            </Collapse>
+            <Collapse title="What is Tailwind CSS?" icon="arrow">
+                Tailwind CSS is a utility-first CSS framework that provides low-level utility
+                classes to build designs directly in your markup.
+            </Collapse>
+            <Collapse title="What is Astro?" icon="arrow">
+                Astro is a web framework for content-driven websites. It ships zero JavaScript
+                by default and supports any UI framework.
+            </Collapse>
+        </div>
+    </fieldset>
+
+    <!-- ── Plus icon ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Plus icon</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>icon="plus"</code> toggles between + and − symbols.
+    </p>
+
+    <fieldset>
+        <legend>collapse-plus</legend>
+        <div class="flex flex-col gap-2 max-w-lg">
+            <Collapse title="How do I install neokit?" icon="plus">
+                Run <code>bun add neokit</code> then add <code>neokit()</code> to your
+                <code>astro.config.mjs</code> integrations array.
+            </Collapse>
+            <Collapse title="Does neokit require Tailwind?" icon="plus">
+                No — the Astro integration automatically injects Tailwind CSS v4 and DaisyUI
+                into your project. No manual setup needed.
+            </Collapse>
+            <Collapse title="Can I override component styles?" icon="plus">
+                Yes — all components accept a <code>classes</code> prop that merges extra
+                Tailwind classes via <code>tailwind-merge</code>.
+            </Collapse>
+        </div>
+    </fieldset>
+
+    <!-- ── Focus method ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Focus method</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>method="focus"</code> — the panel opens while the element has focus and
+        closes when focus leaves. Useful for tooltip-style patterns.
+    </p>
+
+    <fieldset>
+        <legend>collapse focus</legend>
+        <Collapse method="focus" title="Click me, then click outside to close" icon="arrow">
+            This panel stays open while focused. Click anywhere outside to close it.
+        </Collapse>
+    </fieldset>
+
+    <!-- ── Details method ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Details method</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>method="details"</code> uses native <code>&lt;details&gt;/&lt;summary&gt;</code>
+        — content is browser-searchable with Ctrl+F.
+    </p>
+
+    <fieldset>
+        <legend>collapse details</legend>
+        <div class="flex flex-col gap-2 max-w-lg">
+            <Collapse method="details" title="Native details (closed by default)" icon="arrow">
+                This uses a native <code>&lt;details&gt;</code> element. The content is
+                discoverable by browser search even when closed.
+            </Collapse>
+            <Collapse method="details" title="Native details (open by default)" icon="arrow" open>
+                Pass <code>open</code> to expand on page load. The browser manages the
+                open/close state natively.
+            </Collapse>
+        </div>
+    </fieldset>
+
+    <!-- ── Inside a join ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Inside a join</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add <code>classes="join-item"</code> and wrap in <code>&lt;div class="join join-vertical"&gt;</code>
+        for a seamless connected group.
+    </p>
+
+    <fieldset>
+        <legend>join-vertical collapse</legend>
+        <div class="join join-vertical w-full max-w-lg">
+            <Collapse
+                title="First item"
+                icon="arrow"
+                classes="join-item"
+                open
+            >
+                Content for the first panel. The borders between items merge seamlessly.
+            </Collapse>
+            <Collapse
+                title="Second item"
+                icon="arrow"
+                classes="join-item"
+            >
+                Content for the second panel.
+            </Collapse>
+            <Collapse
+                title="Third item"
+                icon="arrow"
+                classes="join-item"
+            >
+                Content for the third panel.
+            </Collapse>
+        </div>
+    </fieldset>
+
+    <!-- ── Custom content ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Rich content</h2>
+    <p class="mt-1 text-sm opacity-70">
+        The default slot accepts any content — lists, images, code blocks, etc.
+    </p>
+
+    <fieldset>
+        <legend>collapse with rich content</legend>
+        <Collapse title="Neokit component list" icon="plus" classes="max-w-lg">
+            <ul class="list-disc pl-5 space-y-1 mt-2">
+                <li>Accordion</li>
+                <li>Avatar</li>
+                <li>Badge</li>
+                <li>Button</li>
+                <li>Card</li>
+                <li>Carousel</li>
+                <li>ChatBubble</li>
+                <li>Collapse</li>
+                <li>Dropdown</li>
+                <li>Modal</li>
+                <li>Swap</li>
+                <li>ThemeController</li>
+            </ul>
+        </Collapse>
+    </fieldset>
+
+    <!-- ── Colored backgrounds ──────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colored backgrounds</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Override the background via <code>classes</code> to use any DaisyUI color token.
+    </p>
+
+    <fieldset>
+        <legend>collapse with bg colors</legend>
+        <div class="flex flex-col gap-2 max-w-lg">
+            <Collapse title="bg-primary" icon="arrow" classes="bg-primary text-primary-content border-primary">
+                Primary colored collapse panel.
+            </Collapse>
+            <Collapse title="bg-secondary" icon="arrow" classes="bg-secondary text-secondary-content border-secondary">
+                Secondary colored collapse panel.
+            </Collapse>
+            <Collapse title="bg-accent" icon="arrow" classes="bg-accent text-accent-content border-accent">
+                Accent colored collapse panel.
+            </Collapse>
+        </div>
+    </fieldset>
+</AppLayout>

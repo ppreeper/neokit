@@ -1,0 +1,38 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Stats — DaisyUI `stats` container component.
+ *
+ * Wraps one or more `<Stat>` items. Renders as a `<div class="stats">`.
+ *
+ * Usage:
+ * ```astro
+ * <Stats>
+ *   <Stat title="Downloads" value="31K" desc="Jan 1st - Feb 1st" />
+ *   <Stat title="Revenue" value="$4,200" desc="↗︎ 22% more than last month" />
+ * </Stats>
+ * ```
+ */
+
+interface Props {
+    /** Layout direction. Defaults to horizontal on md+ screens. */
+    direction?: "horizontal" | "vertical";
+    /** Extra classes on the root element. */
+    classes?: string;
+}
+
+const { direction, classes } = Astro.props;
+
+const rootClass = twMerge(
+    "stats",
+    "shadow",
+    direction === "vertical" && "stats-vertical",
+    direction === "horizontal" && "stats-horizontal",
+    classes,
+);
+---
+
+<div class={rootClass}>
+    <slot />
+</div>

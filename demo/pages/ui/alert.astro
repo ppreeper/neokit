@@ -1,0 +1,191 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Alert from "neokit/components/Alert.astro";
+---
+
+<AppLayout title="Alert">
+    <h1 id="top" class="text-5xl">Alert</h1>
+    <p class="mt-2 opacity-70">
+        A contextual feedback message. Built with DaisyUI's{" "}
+        <code>alert</code> class on a <code>&lt;div role="alert"&gt;</code>.
+        Supports four semantic colors, three visual variants, an optional SVG
+        icon slot, and vertical stacking.
+    </p>
+
+    <!-- ── Default (no color) ────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">No color prop — neutral base style.</p>
+
+    <fieldset>
+        <legend>alert default</legend>
+        <Alert>
+            <span>This is a default alert with no color specified.</span>
+        </Alert>
+    </fieldset>
+
+    <!-- ── Colors ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Four semantic color tokens: <code>info</code>, <code>success</code>,{" "}
+        <code>warning</code>, <code>error</code>.
+    </p>
+
+    <fieldset>
+        <legend>alert colors</legend>
+        <div class="flex flex-col gap-3">
+            <Alert color="info">
+                <svg xmlns="http://www.w3.org/2000/svg" slot="icon" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Your session will expire in 10 minutes.</span>
+            </Alert>
+            <Alert color="success">
+                <svg xmlns="http://www.w3.org/2000/svg" slot="icon" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Your changes have been saved successfully.</span>
+            </Alert>
+            <Alert color="warning">
+                <svg xmlns="http://www.w3.org/2000/svg" slot="icon" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                <span>Low disk space — only 2 GB remaining.</span>
+            </Alert>
+            <Alert color="error">
+                <svg xmlns="http://www.w3.org/2000/svg" slot="icon" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Payment failed. Please update your billing information.</span>
+            </Alert>
+        </div>
+    </fieldset>
+
+    <!-- ── Without icon ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Without icon</h2>
+    <p class="mt-1 text-sm opacity-70">
+        The <code>icon</code> slot is optional — omit it for a text-only alert.
+    </p>
+
+    <fieldset>
+        <legend>alert no icon</legend>
+        <div class="flex flex-col gap-3">
+            <Alert color="info"><span>New features are available — check the changelog.</span></Alert>
+            <Alert color="warning"><span>Your account is pending email verification.</span></Alert>
+        </div>
+    </fieldset>
+
+    <!-- ── Soft variant ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Soft variant</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>variant="soft"</code> uses a muted background tint — less
+        visually heavy than the default filled style.
+    </p>
+
+    <fieldset>
+        <legend>alert soft</legend>
+        <div class="flex flex-col gap-3">
+            {(["info", "success", "warning", "error"] as const).map((c) => (
+                <Alert color={c} variant="soft">
+                    <span>{c.charAt(0).toUpperCase() + c.slice(1)} soft alert.</span>
+                </Alert>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Outline variant ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Outline variant</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>variant="outline"</code> — transparent background with a
+        colored border.
+    </p>
+
+    <fieldset>
+        <legend>alert outline</legend>
+        <div class="flex flex-col gap-3">
+            {(["info", "success", "warning", "error"] as const).map((c) => (
+                <Alert color={c} variant="outline">
+                    <span>{c.charAt(0).toUpperCase() + c.slice(1)} outline alert.</span>
+                </Alert>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Dash variant ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Dash variant</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>variant="dash"</code> — left border accent only.
+    </p>
+
+    <fieldset>
+        <legend>alert dash</legend>
+        <div class="flex flex-col gap-3">
+            {(["info", "success", "warning", "error"] as const).map((c) => (
+                <Alert color={c} variant="dash">
+                    <span>{c.charAt(0).toUpperCase() + c.slice(1)} dash alert.</span>
+                </Alert>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Vertical ───────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Vertical</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>vertical</code> stacks the icon above the message content.
+    </p>
+
+    <fieldset>
+        <legend>alert vertical</legend>
+        <div class="flex flex-wrap gap-4">
+            {(["info", "success", "warning", "error"] as const).map((c) => (
+                <Alert color={c} vertical classes="max-w-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" slot="icon" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <div>
+                        <h3 class="font-bold capitalize">{c}</h3>
+                        <div class="text-xs">Vertical layout with title and body text.</div>
+                    </div>
+                </Alert>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── With action button ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With action</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Place a button inside the default slot alongside the message text.
+    </p>
+
+    <fieldset>
+        <legend>alert with action</legend>
+        <Alert color="warning">
+            <svg xmlns="http://www.w3.org/2000/svg" slot="icon" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <span>Your subscription expires in 3 days.</span>
+            <div>
+                <button class="btn btn-sm btn-warning">Renew now</button>
+                <button class="btn btn-sm btn-ghost">Dismiss</button>
+            </div>
+        </Alert>
+    </fieldset>
+
+    <!-- ── In a form context ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Form validation</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Real-world usage: a top-of-form error summary.
+    </p>
+
+    <fieldset>
+        <legend>alert form error</legend>
+        <div class="card bg-base-100 shadow p-6 max-w-md flex flex-col gap-4">
+            <Alert color="error" variant="soft">
+                <svg xmlns="http://www.w3.org/2000/svg" slot="icon" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <div>
+                    <p class="font-bold">Please fix the following errors:</p>
+                    <ul class="list-disc list-inside text-sm mt-1">
+                        <li>Email address is required</li>
+                        <li>Password must be at least 8 characters</li>
+                    </ul>
+                </div>
+            </Alert>
+            <label class="form-control w-full">
+                <span class="label-text mb-1">Email</span>
+                <input type="email" placeholder="you@example.com" class="input input-error input-bordered w-full" />
+            </label>
+            <label class="form-control w-full">
+                <span class="label-text mb-1">Password</span>
+                <input type="password" placeholder="••••••••" class="input input-error input-bordered w-full" />
+            </label>
+            <button class="btn btn-primary">Sign in</button>
+        </div>
+    </fieldset>
+</AppLayout>

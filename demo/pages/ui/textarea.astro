@@ -1,0 +1,154 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Textarea from "neokit/components/Textarea.astro";
+---
+
+<AppLayout title="Textarea">
+    <h1 id="top" class="text-5xl">Textarea</h1>
+    <p class="mt-2 opacity-70">
+        A multi-line styled text input. Built on the native{" "}
+        <code>&lt;textarea&gt;</code> element with DaisyUI's{" "}
+        <code>textarea</code> class. Supports sizes, color tokens, and
+        bordered/ghost variants.
+    </p>
+
+    <!-- ── Default ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">Basic textarea with placeholder.</p>
+
+    <fieldset>
+        <legend>textarea default</legend>
+        <Textarea placeholder="Write your message…" classes="w-full max-w-lg" />
+    </fieldset>
+
+    <!-- ── Sizes ───────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes: <code>xs</code> → <code>xl</code>.
+    </p>
+
+    <fieldset>
+        <legend>textarea sizes</legend>
+        <div class="flex flex-col gap-3 max-w-lg">
+            {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
+                <div class="flex items-start gap-3">
+                    <span class="w-6 text-xs opacity-60 shrink-0 mt-2">{s}</span>
+                    <Textarea size={s} placeholder={`size-${s}`} classes="flex-1" />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Colors ──────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">All eight DaisyUI color tokens.</p>
+
+    <fieldset>
+        <legend>textarea colors</legend>
+        <div class="flex flex-col gap-3 max-w-lg">
+            {(["primary","secondary","accent","info","success","warning","error","neutral"] as const).map((c) => (
+                <div class="flex items-start gap-3">
+                    <span class="w-20 text-xs capitalize opacity-60 shrink-0 mt-2">{c}</span>
+                    <Textarea color={c} placeholder={c} classes="flex-1" />
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Bordered ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Bordered</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>variant="bordered"</code> — visible border at rest.
+    </p>
+
+    <fieldset>
+        <legend>textarea bordered</legend>
+        <div class="flex flex-col gap-3 max-w-lg">
+            <Textarea variant="bordered" placeholder="Bordered textarea" />
+            <Textarea variant="bordered" color="primary" placeholder="Bordered + primary" />
+        </div>
+    </fieldset>
+
+    <!-- ── Ghost ───────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Ghost</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>variant="ghost"</code> — transparent background.
+    </p>
+
+    <fieldset>
+        <legend>textarea ghost</legend>
+        <Textarea variant="ghost" placeholder="Ghost textarea — click me" classes="w-full max-w-lg" />
+    </fieldset>
+
+    <!-- ── Custom rows ─────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Custom rows</h2>
+    <p class="mt-1 text-sm opacity-70">Control height via the <code>rows</code> prop.</p>
+
+    <fieldset>
+        <legend>textarea rows</legend>
+        <div class="flex flex-col gap-3 max-w-lg">
+            <Textarea rows={2} placeholder="2 rows" variant="bordered" />
+            <Textarea rows={6} placeholder="6 rows" variant="bordered" />
+            <Textarea rows={10} placeholder="10 rows" variant="bordered" />
+        </div>
+    </fieldset>
+
+    <!-- ── States ──────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">States</h2>
+    <p class="mt-1 text-sm opacity-70">Disabled and read-only.</p>
+
+    <fieldset>
+        <legend>textarea states</legend>
+        <div class="flex flex-col gap-3 max-w-lg">
+            <Textarea disabled placeholder="Disabled textarea" />
+            <Textarea readonly value="This content is read-only and cannot be edited." />
+        </div>
+    </fieldset>
+
+    <!-- ── With label + helper ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With label</h2>
+    <p class="mt-1 text-sm opacity-70">Full form control with label and character hint.</p>
+
+    <fieldset>
+        <legend>textarea labeled</legend>
+        <label class="form-control w-full max-w-lg">
+            <div class="label">
+                <span class="label-text">Your bio</span>
+                <span class="label-text-alt opacity-60">max 280 chars</span>
+            </div>
+            <Textarea
+                rows={4}
+                placeholder="Tell us a little about yourself…"
+                variant="bordered"
+                color="primary"
+            />
+            <div class="label">
+                <span class="label-text-alt opacity-60">This will appear on your public profile.</span>
+            </div>
+        </label>
+    </fieldset>
+
+    <!-- ── In a form ───────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Contact form</h2>
+    <p class="mt-1 text-sm opacity-70">Real-world usage inside a card form.</p>
+
+    <fieldset>
+        <legend>textarea form</legend>
+        <div class="card bg-base-100 shadow max-w-md">
+            <div class="card-body gap-4">
+                <h2 class="card-title">Contact us</h2>
+                <label class="form-control w-full">
+                    <div class="label"><span class="label-text">Subject</span></div>
+                    <input type="text" placeholder="How can we help?" class="input input-bordered w-full" />
+                </label>
+                <label class="form-control w-full">
+                    <div class="label"><span class="label-text">Message</span></div>
+                    <Textarea rows={5} placeholder="Describe your issue in detail…" variant="bordered" />
+                </label>
+                <div class="card-actions justify-end">
+                    <button class="btn btn-primary">Send message</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</AppLayout>

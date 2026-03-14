@@ -1,0 +1,114 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Pagination — DaisyUI `join` + `btn` pagination component.
+ *
+ * Renders a row of page buttons inside a `<div class="join">`.
+ * Active page is highlighted with `btn-primary`.
+ *
+ * Basic usage (buttons):
+ * ```astro
+ * <Pagination total={10} current={3} />
+ * ```
+ *
+ * As links (renders `<a>` instead of `<button>`):
+ * ```astro
+ * <Pagination total={10} current={3} href={(p) => `/posts?page=${p}`} />
+ * ```
+ *
+ * Sizes: `"xs"` | `"sm"` | `"md"` | `"lg"` | `"xl"`
+ * Variants: `"outline"` — adds `btn-outline` to non-active items
+ *
+ * showPrevNext (default true) — renders « / » buttons.
+ *
+ * The component automatically computes a smart page window:
+ * always shows first, last, ±2 around current, with `…` gaps.
+ */
+
+interface Props {
+    /** Total number of pages. */
+    total: number;
+    /** Currently active page (1-indexed). */
+    current: number;
+    /**
+     * If provided, each page item renders as an `<a>` tag using the
+     * returned href string. Receives the page number.
+     */
+    href?: (page: number) => string;
+    /** Button size applied to every item. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Add `btn-outline` to non-active items. */
+    variant?: "outline";
+    /** Render « prev / next » buttons. Default: true. */
+    showPrevNext?: boolean;
+    /** Extra classes on the root `<div class="join">` wrapper. */
+    classes?: string;
+}
+
+const {
+    total,
+    current,
+    href,
+    size,
+    variant,
+    showPrevNext = true,
+    classes,
+} = Astro.props;
+
+// Build the list of page tokens: numbers or "..." gaps.
+function buildPages(total: number, current: number): (number | "...")[] {
+    if (total <= 7) {
+        return Array.from({ length: total }, (_, i) => i + 1);
+    }
+    const pages: (number | "...")[] = [];
+    const window = new Set([1, total, current - 2, current - 1, current, current + 1, current + 2].filter(p => p >= 1 && p <= total));
+    const sorted = Array.from(window).sort((a, b) => a - b);
+    for (let i = 0; i < sorted.length; i++) {
+        if (i > 0 && sorted[i] - sorted[i - 1] > 1) pages.push("...");
+        pages.push(sorted[i]);
+    }
+    return pages;
+}
+
+const pages = buildPages(total, current);
+
+const sizeClass = size ? `btn-${size}` : "";
+const baseItemClass = twMerge("join-item btn", sizeClass);
+const inactiveClass = twMerge(baseItemClass, variant === "outline" ? "btn-outline" : "");
+const activeClass = twMerge(baseItemClass, "btn-primary");
+const disabledClass = twMerge(baseItemClass, "btn-disabled opacity-50");
+const ellipsisClass = twMerge(baseItemClass, "btn-disabled pointer-events-none");
+
+const rootClass = twMerge("join", classes);
+---
+
+<div class={rootClass}>
+    {showPrevNext && (
+        current <= 1
+            ? <button class={disabledClass} disabled aria-disabled="true">«</button>
+            : href
+                ? <a class={inactiveClass} href={href(current - 1)} aria-label="Previous page">«</a>
+                : <button class={inactiveClass} data-page={current - 1} aria-label="Previous page">«</button>
+    )}
+
+    {pages.map((page) =>
+        page === "..."
+            ? <button class={ellipsisClass} aria-hidden="true">…</button>
+            : page === current
+                ? href
+                    ? <a class={activeClass} href={href(page)} aria-current="page" aria-label={`Page ${page}`}>{page}</a>
+                    : <button class={activeClass} aria-current="page" aria-label={`Page ${page}`}>{page}</button>
+                : href
+                    ? <a class={inactiveClass} href={href(page)} aria-label={`Page ${page}`}>{page}</a>
+                    : <button class={inactiveClass} data-page={page} aria-label={`Page ${page}`}>{page}</button>
+    )}
+
+    {showPrevNext && (
+        current >= total
+            ? <button class={disabledClass} disabled aria-disabled="true">»</button>
+            : href
+                ? <a class={inactiveClass} href={href(current + 1)} aria-label="Next page">»</a>
+                : <button class={inactiveClass} data-page={current + 1} aria-label="Next page">»</button>
+    )}
+</div>

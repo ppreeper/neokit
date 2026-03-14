@@ -1,0 +1,87 @@
+---
+
+---
+
+<label class="swap swap-rotate btn btn-ghost btn-circle">
+    <input id="theme-button" type="checkbox" class="theme-controller" />
+
+    <svg
+        class="swap-off h-8 w-8 fill-current"
+        aria-label="sun"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+    >
+        <g
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            stroke-width="2"
+            fill="none"
+            stroke="currentColor"
+        >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+        </g>
+    </svg>
+
+    <svg
+        class="swap-on h-8 w-8 fill-current"
+        aria-label="moon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+    >
+        <g
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            stroke-width="2"
+            fill="none"
+            stroke="currentColor"
+        >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </g>
+    </svg>
+</label>
+
+<script >
+    const lightTheme = "corporate";
+    const darkTheme = "business";
+
+    const handleToggle = () => {
+        // const currentTheme =
+        //     document.documentElement.getAttribute("data-theme");
+        // const nextTheme = currentTheme === lightTheme ? darkTheme : lightTheme;
+
+        // document.documentElement.setAttribute("data-theme", nextTheme);
+        // localStorage.setItem("theme", nextTheme);
+        const toggle = document.querySelector(
+            "#theme-button",
+        ) as HTMLInputElement;
+        if (!toggle) return;
+
+        // 1. Sync checkbox state with current actual theme on load
+        const currentTheme =
+            document.documentElement.getAttribute("data-theme");
+        toggle.checked = currentTheme === darkTheme;
+
+        // 2. Listen for changes
+        toggle.addEventListener("change", () => {
+            const nextTheme = toggle.checked ? darkTheme : lightTheme;
+            document.documentElement.setAttribute("data-theme", nextTheme);
+            localStorage.setItem("theme", nextTheme);
+        });
+    };
+    // document
+    //     .getElementById("theme-button")
+    //     ?.addEventListener("click", handleToggle);
+    //
+    // Run on initial load
+    handleToggle();
+    // Run after Astro View Transitions swap
+    document.addEventListener("astro:after-swap", handleToggle);
+</script>

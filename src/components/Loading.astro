@@ -1,0 +1,47 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Loading — DaisyUI `loading` spinner component.
+ *
+ * Renders a `<span class="loading">` element. No children needed —
+ * the animation is purely CSS.
+ *
+ * Types: `"spinner"` (default) | `"dots"` | `"ring"` | `"ball"` |
+ *        `"bars"` | `"infinity"`
+ *
+ * Sizes: `"xs"` | `"sm"` | `"md"` | `"lg"` | `"xl"`
+ *
+ * Color: any DaisyUI color token (applied via `text-{color}`)
+ * e.g. `color="primary"` → `text-primary`
+ *
+ * ```astro
+ * <Loading />
+ * <Loading type="dots" size="lg" color="primary" />
+ * <Loading type="ring" size="sm" color="error" />
+ * ```
+ */
+
+interface Props {
+    /** Spinner style. Default: `"spinner"`. */
+    type?: "spinner" | "dots" | "ring" | "ball" | "bars" | "infinity";
+    /** Size. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Color token — applied as `text-{color}`. */
+    color?: string;
+    /** Extra classes. */
+    classes?: string;
+}
+
+const { type = "spinner", size, color, classes } = Astro.props;
+
+const rootClass = twMerge(
+    "loading",
+    `loading-${type}`,
+    size && `loading-${size}`,
+    color && `text-${color}`,
+    classes,
+);
+---
+
+<span class={rootClass}></span>

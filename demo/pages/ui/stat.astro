@@ -1,0 +1,234 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Stat from "neokit/components/Stat.astro";
+import Stats from "neokit/components/Stats.astro";
+---
+
+<AppLayout title="Stat">
+    <h1 id="top" class="text-5xl">Stat</h1>
+    <p class="mt-2 opacity-70">
+        Display numerical data at a glance. Use <code>Stats</code> as a
+        container for one or more <code>Stat</code> items. Each stat has a
+        title, value, description, optional figure slot, and optional actions
+        slot.
+    </p>
+
+    <!-- ── Single stat ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Single stat</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Minimal: title + value + description.
+    </p>
+
+    <fieldset>
+        <legend>stat</legend>
+        <Stats>
+            <Stat
+                title="Total downloads"
+                value="31,200"
+                desc="Jan 1st – Feb 1st"
+            />
+        </Stats>
+    </fieldset>
+
+    <!-- ── Stats with figures ────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With figures (icons)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use the <code>figure</code> slot for an icon, avatar, or badge beside
+        the stat value.
+    </p>
+
+    <fieldset>
+        <legend>stat with figures</legend>
+        <Stats classes="w-full">
+            <Stat title="New users" value="4,200" desc="↗︎ 400 (22%)">
+                <!-- Heart icon -->
+                <svg slot="figure" xmlns="http://www.w3.org/2000/svg" class="inline-block h-8 w-8 stroke-current" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+            </Stat>
+            <Stat title="Page views" value="1.2M" desc="↗︎ 90,000 (21%)">
+                <!-- Eye icon -->
+                <svg slot="figure" xmlns="http://www.w3.org/2000/svg" class="inline-block h-8 w-8 stroke-current" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+            </Stat>
+            <Stat title="Tasks done" value="86%" desc="↘︎ 1 task remaining">
+                <!-- Lightning icon -->
+                <svg slot="figure" xmlns="http://www.w3.org/2000/svg" class="inline-block h-8 w-8 stroke-current" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+            </Stat>
+        </Stats>
+    </fieldset>
+
+    <!-- ── Colored values ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colored values</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use DaisyUI color classes inside the <code>value</code> prop — or pass
+        raw HTML via the default slot to color specific text.
+    </p>
+
+    <fieldset>
+        <legend>colored values</legend>
+        <Stats classes="w-full">
+            <Stat title="Revenue" desc="Total earned this month" classes="text-primary">
+                <svg slot="figure" xmlns="http://www.w3.org/2000/svg" class="inline-block h-8 w-8 stroke-current text-primary" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <!-- colored value via slot -->
+                <div class="stat-value text-primary">$89,400</div>
+            </Stat>
+            <Stat title="Refunds" desc="Claims processed" classes="text-error">
+                <svg slot="figure" xmlns="http://www.w3.org/2000/svg" class="inline-block h-8 w-8 stroke-current text-error" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div class="stat-value text-error">12</div>
+            </Stat>
+            <Stat title="Active users" desc="Online right now" classes="text-success">
+                <svg slot="figure" xmlns="http://www.w3.org/2000/svg" class="inline-block h-8 w-8 stroke-current text-success" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <div class="stat-value text-success">1,843</div>
+            </Stat>
+        </Stats>
+    </fieldset>
+
+    <!-- ── Centered ───────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Centered</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add <code>centered</code> to align all content to the center of each
+        stat cell.
+    </p>
+
+    <fieldset>
+        <legend>stat centered</legend>
+        <Stats>
+            <Stat title="Downloads" value="31K" desc="Jan 1st – Feb 1st" centered>
+                <svg slot="figure" xmlns="http://www.w3.org/2000/svg" class="inline-block h-8 w-8 stroke-current" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+            </Stat>
+            <Stat title="New register" value="4,200" desc="↗︎ 400 (22%)" centered>
+                <svg slot="figure" xmlns="http://www.w3.org/2000/svg" class="inline-block h-8 w-8 stroke-current" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+            </Stat>
+        </Stats>
+    </fieldset>
+
+    <!-- ── Vertical layout ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Vertical layout</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Pass <code>direction="vertical"</code> to stack stats in a column.
+    </p>
+
+    <fieldset>
+        <legend>stats vertical</legend>
+        <Stats direction="vertical">
+            <Stat title="Downloads" value="31K" desc="Jan 1st – Feb 1st" />
+            <Stat title="New users" value="4,200" desc="↗︎ 400 (22%)" />
+            <Stat title="New registers" value="1,700" desc="↗︎ 90 (14%)" />
+        </Stats>
+    </fieldset>
+
+    <!-- ── Responsive ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Responsive</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Stack vertically on small screens, horizontal on larger screens via
+        Tailwind responsive classes on <code>classes</code>.
+    </p>
+
+    <fieldset>
+        <legend>stat responsive</legend>
+        <Stats classes="stats-vertical lg:stats-horizontal w-full">
+            <Stat title="Downloads" value="31K" desc="Jan 1st – Feb 1st" />
+            <Stat title="New users" value="4,200" desc="↗︎ 400 (22%)" />
+            <Stat title="New registers" value="1,700" desc="↗︎ 90 (14%)" />
+        </Stats>
+    </fieldset>
+
+    <!-- ── With actions ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With actions</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use the <code>actions</code> slot to add buttons or links inside the
+        stat.
+    </p>
+
+    <fieldset>
+        <legend>stat actions</legend>
+        <Stats>
+            <Stat title="Account balance" value="$89,400" desc="Current balance">
+                <svg slot="figure" xmlns="http://www.w3.org/2000/svg" class="inline-block h-8 w-8 stroke-current" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <button slot="actions" class="btn btn-sm btn-success">Add funds</button>
+            </Stat>
+            <Stat title="Sales" value="1,200" desc="21% more than last month">
+                <svg slot="figure" xmlns="http://www.w3.org/2000/svg" class="inline-block h-8 w-8 stroke-current" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div slot="actions" class="flex gap-2">
+                    <button class="btn btn-sm btn-primary">View</button>
+                    <button class="btn btn-sm btn-ghost">Export</button>
+                </div>
+            </Stat>
+        </Stats>
+    </fieldset>
+
+    <!-- ── Colored backgrounds ───────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colored backgrounds</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Apply a background color to individual stat cells via <code>classes</code>.
+    </p>
+
+    <fieldset>
+        <legend>stat colors</legend>
+        <Stats classes="w-full">
+            <Stat
+                title="New messages"
+                value="71"
+                desc="21 unread"
+                classes="bg-primary text-primary-content"
+            />
+            <Stat
+                title="New purchases"
+                value="56"
+                desc="↗︎ 12 (31%)"
+                classes="bg-secondary text-secondary-content"
+            />
+            <Stat
+                title="New tasks"
+                value="4"
+                desc="↘︎ 2 (10%)"
+                classes="bg-accent text-accent-content"
+            />
+        </Stats>
+    </fieldset>
+
+    <!-- ── Avatar figure ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Avatar figure</h2>
+    <p class="mt-1 text-sm opacity-70">
+        The figure slot accepts any element — here using an avatar image.
+    </p>
+
+    <fieldset>
+        <legend>stat avatar</legend>
+        <Stats>
+            <Stat title="Profile views" value="3,200" desc="21% more than last month">
+                <div slot="figure" class="avatar">
+                    <div class="w-16 rounded-full">
+                        <img src="https://img.daisyui.com/images/profile/demo/1@94.webp" alt="avatar" />
+                    </div>
+                </div>
+            </Stat>
+            <Stat title="Total followers" value="12.6K" desc="↗︎ 1,200 (12%)">
+                <div slot="figure" class="avatar">
+                    <div class="w-16 rounded-full">
+                        <img src="https://img.daisyui.com/images/profile/demo/2@94.webp" alt="avatar" />
+                    </div>
+                </div>
+            </Stat>
+        </Stats>
+    </fieldset>
+</AppLayout>

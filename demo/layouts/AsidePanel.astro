@@ -1,0 +1,33 @@
+---
+interface Props {
+  hidden?: boolean;
+  class?: string;
+}
+
+const { hidden = false, class: className = "" } = Astro.props;
+---
+
+<aside
+  data-hidden={hidden}
+  class={`
+    min-h-0
+    overflow-y-auto
+    transition-[flex,opacity]
+    duration-300
+    ease-in-out
+    ${className}
+  `}
+>
+  <slot />
+</aside>
+
+<style>
+  aside[data-hidden="true"] {
+    flex: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  aside[data-hidden="false"] {
+    flex: 1;
+  }
+</style>

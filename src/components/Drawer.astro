@@ -1,0 +1,47 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    /**
+     * Unique id used to wire the hidden checkbox, the drawer-toggle,
+     * and the drawer-overlay together.
+     */
+    id: string;
+    /** Render the sidebar on the right instead of the left. */
+    end?: boolean;
+    classes?: string;
+    /** Extra classes on the drawer-content wrapper */
+    contentClasses?: string;
+    /** Extra classes on the drawer-side wrapper */
+    sideClasses?: string;
+}
+
+const {
+    id,
+    end = false,
+    classes,
+    contentClasses,
+    sideClasses,
+} = Astro.props;
+
+const drawerClass = twMerge("drawer", end ? "drawer-end" : "", classes);
+const contentClass = twMerge("drawer-content", contentClasses);
+const sideClass = twMerge("drawer-side", sideClasses);
+---
+
+<div class={drawerClass}>
+    <!-- Hidden checkbox toggle -->
+    <input id={id} type="checkbox" class="drawer-toggle" />
+
+    <!-- Page content -->
+    <div class={contentClass}>
+        <slot name="content" />
+    </div>
+
+    <!-- Sidebar -->
+    <div class={sideClass}>
+        <!-- Overlay — clicking closes drawer -->
+        <label for={id} aria-label="close sidebar" class="drawer-overlay"></label>
+        <slot name="side" />
+    </div>
+</div>

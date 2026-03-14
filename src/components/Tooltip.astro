@@ -1,0 +1,35 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    /** The tooltip label text shown in the tip bubble. */
+    tip: string;
+    /**
+     * Tip position.
+     * @default "top"
+     */
+    position?: "top" | "bottom" | "left" | "right";
+    /**
+     * Semantic color of the tip bubble.
+     * Omit for default (neutral).
+     */
+    color?: "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error";
+    /** Force the tooltip to always be visible (tooltip-open). */
+    open?: boolean;
+    classes?: string;
+}
+
+const { tip, position, color, open = false, classes } = Astro.props;
+
+const wrapClass = twMerge(
+    "tooltip",
+    position && position !== "top" && `tooltip-${position}`,
+    color && `tooltip-${color}`,
+    open && "tooltip-open",
+    classes
+);
+---
+
+<div class={wrapClass} data-tip={tip}>
+    <slot />
+</div>

@@ -1,0 +1,31 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Sidemenu from "../modules/Sidemenu.astro";
+import Navbar from "../modules/Navbar.astro";
+
+const { title } = Astro.props;
+---
+
+<BaseLayout title={title}>
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 shrink-0"><Navbar /></header>
+        <div class="flex min-h-0">
+            <!-- Drawer Left -->
+            <aside
+                class="flex-1 min-h-0 overflow-y-auto scrollbar-none
+                    transition-[flex,opacity]
+                    h-max
+                    duration-300
+                    data-[hidden=true]:flex-[0]
+                    data-[hidden=true]:opacity-0
+                    data-[hidden=true]:pointer-events-none"
+                data-hidden="false"
+            >
+            <Sidemenu />
+            </aside>
+            <!-- Main content -->
+            <main class="flex-[4] overflow-y-auto scrollbar-none p-4">
+                <slot />
+            </main>
+        </div>
+</BaseLayout>

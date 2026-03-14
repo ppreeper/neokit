@@ -1,0 +1,83 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import MockupBrowser from "neokit/components/MockupBrowser.astro";
+import Card from "neokit/components/Card.astro";
+---
+
+<AppLayout title="Mockup Browser">
+    <h1 id="top" class="text-5xl">Mockup Browser</h1>
+    <p class="mt-2 opacity-70">
+        A browser window chrome for showcasing web UI in context.
+        Wraps a <code>&lt;div class="mockup-browser"&gt;</code> with a
+        <code>&lt;div class="mockup-browser-toolbar"&gt;</code> address bar.
+    </p>
+
+    <!-- ── With border ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With border</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add a <code>border</code> class via <code>classes</code> to show a visible chrome outline.
+    </p>
+
+    <fieldset>
+        <legend>Browser with border</legend>
+        <MockupBrowser url="https://example.com" classes="border border-base-300">
+            <div class="flex justify-center items-center h-36 bg-base-200">
+                Hello world!
+            </div>
+        </MockupBrowser>
+    </fieldset>
+
+    <!-- ── With background color ────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With background color</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use Tailwind bg utilities on the wrapper or on the content area to style the chrome.
+    </p>
+
+    <fieldset>
+        <legend>Browser with bg-base-300 chrome</legend>
+        <MockupBrowser url="https://daisyui.com" classes="bg-base-300">
+            <div class="flex justify-center items-center h-36 bg-base-200">
+                Hello world!
+            </div>
+        </MockupBrowser>
+    </fieldset>
+
+    <!-- ── With real content ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With real content</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Any HTML can go in the default slot — great for showcasing components in a browser context.
+    </p>
+
+    <fieldset>
+        <legend>Browser showing a card</legend>
+        <MockupBrowser url="https://neokit.dev" classes="border border-base-300">
+            <div class="flex justify-center items-center py-8 bg-base-100">
+                <Card classes="w-72 card-border shadow">
+                    <div class="card-body">
+                        <h2 class="card-title">Welcome to neokit</h2>
+                        <p class="opacity-70">A component library built on DaisyUI and Tailwind v4.</p>
+                        <div class="card-actions justify-end mt-2">
+                            <button class="btn btn-primary">Get Started</button>
+                        </div>
+                    </div>
+                </Card>
+            </div>
+        </MockupBrowser>
+    </fieldset>
+
+    <!-- ── Without URL ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Without URL</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Omit the <code>url</code> prop to render an empty address bar area.
+        Use the <code>toolbar</code> named slot for custom toolbar content.
+    </p>
+
+    <fieldset>
+        <legend>Browser without URL</legend>
+        <MockupBrowser classes="border border-base-300">
+            <div class="flex justify-center items-center h-36 bg-base-200 text-base-content opacity-60">
+                No address bar URL
+            </div>
+        </MockupBrowser>
+    </fieldset>
+</AppLayout>

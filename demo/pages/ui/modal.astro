@@ -1,0 +1,171 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Modal from "neokit/components/Modal.astro";
+---
+
+<AppLayout title="Modal">
+    <h1 id="top" class="text-5xl">Modal</h1>
+
+    <!-- ── Basic dialog modal ───────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic dialog modal</h2>
+
+    <fieldset>
+        <legend>Open with external trigger</legend>
+        <button class="btn" onclick="modal_basic.showModal()">Open modal</button>
+        <Modal id="modal_basic" title="Hello!">
+            <p class="py-4">Press ESC key or click the button below to close.</p>
+            <form slot="actions" method="dialog">
+                <button class="btn">Close</button>
+            </form>
+        </Modal>
+    </fieldset>
+
+    <fieldset>
+        <legend>Using trigger slot (self-contained)</legend>
+        <Modal id="modal_trigger_slot" title="Hello!">
+            <span slot="trigger">Open modal</span>
+            <p class="py-4">This modal uses the trigger slot — button is rendered by the component.</p>
+            <form slot="actions" method="dialog">
+                <button class="btn">Close</button>
+            </form>
+        </Modal>
+    </fieldset>
+
+    <!-- ── Close behaviours ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Close behaviours</h2>
+
+    <fieldset>
+        <legend>Close on backdrop click</legend>
+        <Modal id="modal_backdrop" title="Hello!" closeOnBackdrop>
+            <span slot="trigger">Open modal</span>
+            <p class="py-4">Press ESC key or click outside to close.</p>
+        </Modal>
+    </fieldset>
+
+    <fieldset>
+        <legend>Corner close button</legend>
+        <Modal id="modal_close_btn" title="Hello!" showCloseButton>
+            <span slot="trigger">Open modal</span>
+            <p class="py-4">Press ESC key or click the ✕ button to close.</p>
+        </Modal>
+    </fieldset>
+
+    <fieldset>
+        <legend>Both: backdrop + corner button</legend>
+        <Modal id="modal_both" title="Hello!" closeOnBackdrop showCloseButton>
+            <span slot="trigger">Open modal</span>
+            <p class="py-4">Press ESC, click outside, or click ✕ to close.</p>
+        </Modal>
+    </fieldset>
+
+    <!-- ── Placements ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Placements</h2>
+
+    <fieldset>
+        <legend>Middle (default)</legend>
+        <Modal id="modal_middle" title="Middle" placement="middle" closeOnBackdrop>
+            <span slot="trigger">Open modal</span>
+            <p class="py-4">This modal appears in the middle of the screen.</p>
+        </Modal>
+    </fieldset>
+
+    <fieldset>
+        <legend>Top</legend>
+        <Modal id="modal_top" title="Top" placement="top" closeOnBackdrop>
+            <span slot="trigger">Open modal</span>
+            <p class="py-4">This modal slides down from the top.</p>
+            <form slot="actions" method="dialog">
+                <button class="btn">Close</button>
+            </form>
+        </Modal>
+    </fieldset>
+
+    <fieldset>
+        <legend>Bottom</legend>
+        <Modal id="modal_bottom" title="Bottom" placement="bottom" closeOnBackdrop>
+            <span slot="trigger">Open modal</span>
+            <p class="py-4">This modal slides up from the bottom.</p>
+            <form slot="actions" method="dialog">
+                <button class="btn">Close</button>
+            </form>
+        </Modal>
+    </fieldset>
+
+    <fieldset>
+        <legend>Start (left)</legend>
+        <Modal id="modal_start" title="Start" placement="start" closeOnBackdrop>
+            <span slot="trigger">Open modal</span>
+            <p class="py-4">This modal appears on the left side.</p>
+        </Modal>
+    </fieldset>
+
+    <fieldset>
+        <legend>End (right)</legend>
+        <Modal id="modal_end" title="End" placement="end" closeOnBackdrop>
+            <span slot="trigger">Open modal</span>
+            <p class="py-4">This modal appears on the right side.</p>
+        </Modal>
+    </fieldset>
+
+    <fieldset>
+        <legend>Responsive — bottom on mobile, middle on sm+</legend>
+        <Modal id="modal_responsive" title="Hello!" placement="bottom" classes="sm:modal-middle" closeOnBackdrop>
+            <span slot="trigger">Open modal</span>
+            <p class="py-4">Press ESC key or click the button below to close.</p>
+            <form slot="actions" method="dialog">
+                <button class="btn">Close</button>
+            </form>
+        </Modal>
+    </fieldset>
+
+    <!-- ── Custom width ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Custom width</h2>
+
+    <fieldset>
+        <legend>Wide modal (w-11/12 max-w-5xl)</legend>
+        <Modal id="modal_wide" title="Wide modal" boxClass="w-11/12 max-w-5xl" closeOnBackdrop>
+            <span slot="trigger">Open wide modal</span>
+            <p class="py-4">
+                You can use any <code>w-*</code> and <code>max-w-*</code> utility classes via
+                the <code>boxClass</code> prop to customise the width.
+            </p>
+            <form slot="actions" method="dialog">
+                <button class="btn">Close</button>
+            </form>
+        </Modal>
+    </fieldset>
+
+    <!-- ── Actions ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Actions</h2>
+
+    <fieldset>
+        <legend>Confirm dialog</legend>
+        <Modal id="modal_confirm" title="Are you sure?" closeOnBackdrop showCloseButton>
+            <span slot="trigger">Delete item</span>
+            <p class="py-4">This action cannot be undone. Do you want to continue?</p>
+            <div slot="actions" class="flex gap-2">
+                <form method="dialog">
+                    <button class="btn">Cancel</button>
+                </form>
+                <form method="dialog">
+                    <button class="btn btn-error">Delete</button>
+                </form>
+            </div>
+        </Modal>
+    </fieldset>
+
+    <fieldset>
+        <legend>Scrollable long content</legend>
+        <Modal id="modal_scroll" title="Long content" closeOnBackdrop showCloseButton>
+            <span slot="trigger">Open scrollable modal</span>
+            <div class="py-4 space-y-3">
+                {Array.from({ length: 12 }, (_, i) => (
+                    <p>Paragraph {i + 1} — lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                ))}
+            </div>
+            <form slot="actions" method="dialog">
+                <button class="btn">Close</button>
+            </form>
+        </Modal>
+    </fieldset>
+</AppLayout>

@@ -1,0 +1,209 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Status from "neokit/components/Status.astro";
+---
+
+<AppLayout title="Status">
+    <h1 id="top" class="text-5xl">Status</h1>
+    <p class="mt-2 opacity-70">
+        A small colored dot for indicating presence, state, or alerts. Supports
+        all DaisyUI semantic colors, five sizes, and optional ping / bounce
+        animations.
+    </p>
+
+    <!-- ── Basic ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic</h2>
+    <p class="mt-1 text-sm opacity-70">A single dot with no color modifier.</p>
+
+    <fieldset>
+        <legend>status</legend>
+        <Status />
+    </fieldset>
+
+    <!-- ── All colors ────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">
+        All eight semantic color tokens.
+    </p>
+
+    <fieldset>
+        <legend>status colors</legend>
+        <div class="flex items-center gap-3 flex-wrap">
+            {(["neutral","primary","secondary","accent","info","success","warning","error"] as const).map((c) => (
+                <div class="flex items-center gap-1.5">
+                    <Status color={c} />
+                    <span class="text-sm opacity-70">{c}</span>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes: <code>xs</code>, <code>sm</code>, <code>md</code> (default),
+        <code>lg</code>, <code>xl</code>.
+    </p>
+
+    <fieldset>
+        <legend>status sizes</legend>
+        <div class="flex items-center gap-4">
+            {(["xs","sm","md","lg","xl"] as const).map((s) => (
+                <div class="flex flex-col items-center gap-1">
+                    <Status color="success" size={s} />
+                    <span class="text-xs opacity-60">{s}</span>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Ping animation ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Ping animation</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>animate="ping"</code> uses the stacked-grid trick to layer an
+        outer ripple on top of a solid inner dot.
+    </p>
+
+    <fieldset>
+        <legend>status ping</legend>
+        <div class="flex items-center gap-6 flex-wrap">
+            {(["primary","success","warning","error"] as const).map((c) => (
+                <div class="flex flex-col items-center gap-2">
+                    <Status color={c} animate="ping" size="md" />
+                    <span class="text-xs opacity-60">{c}</span>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Bounce animation ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Bounce animation</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>animate="bounce"</code> adds <code>animate-bounce</code> for a
+        gentle vertical bounce.
+    </p>
+
+    <fieldset>
+        <legend>status bounce</legend>
+        <div class="flex items-end gap-4">
+            <Status color="info" animate="bounce" size="xs" />
+            <Status color="info" animate="bounce" size="sm" />
+            <Status color="info" animate="bounce" size="md" />
+            <Status color="info" animate="bounce" size="lg" />
+            <Status color="info" animate="bounce" size="xl" />
+        </div>
+    </fieldset>
+
+    <!-- ── User presence list ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">User presence list</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Classic online/away/offline indicator beside an avatar.
+    </p>
+
+    <fieldset>
+        <legend>status in context — user list</legend>
+        <ul class="list bg-base-100 rounded-box shadow-md max-w-xs">
+            {[
+                { img: "https://img.daisyui.com/images/profile/demo/1@94.webp", name: "Alice Chen",   role: "Designer",    status: "success" as const, label: "Online" },
+                { img: "https://img.daisyui.com/images/profile/demo/2@94.webp", name: "Bob Russo",    role: "Engineer",    status: "warning" as const, label: "Away" },
+                { img: "https://img.daisyui.com/images/profile/demo/3@94.webp", name: "Carol Kim",    role: "PM",          status: "error"   as const, label: "Busy" },
+                { img: "https://img.daisyui.com/images/profile/demo/4@94.webp", name: "Dan Mitchell", role: "DevOps",      status: "neutral" as const, label: "Offline" },
+            ].map(({ img, name, role, status, label }) => (
+                <li class="list-row items-center">
+                    <div class="relative">
+                        <img class="size-10 rounded-full" src={img} alt={name} />
+                        <span class="absolute bottom-0 right-0">
+                            <Status color={status} size="sm" label={label} />
+                        </span>
+                    </div>
+                    <div class="list-col-grow">
+                        <div class="font-medium">{name}</div>
+                        <div class="text-xs opacity-60">{role}</div>
+                    </div>
+                    <span class="text-xs opacity-50">{label}</span>
+                </li>
+            ))}
+        </ul>
+    </fieldset>
+
+    <!-- ── Server status dashboard ───────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Server status dashboard</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Ping animation on operational services draws the eye to live systems.
+    </p>
+
+    <fieldset>
+        <legend>status dashboard</legend>
+        <ul class="list bg-base-100 rounded-box shadow-md max-w-sm">
+            <li class="p-4 pb-2 text-xs opacity-60 tracking-widest uppercase">
+                Infrastructure
+            </li>
+            {[
+                { name: "API Gateway",     region: "us-east-1",   color: "success" as const, animate: "ping" as const,  label: "Operational" },
+                { name: "Database",        region: "us-east-1",   color: "success" as const, animate: "ping" as const,  label: "Operational" },
+                { name: "CDN",             region: "Global",       color: "warning" as const, animate: "none" as const,  label: "Degraded" },
+                { name: "Auth Service",    region: "eu-west-1",    color: "success" as const, animate: "ping" as const,  label: "Operational" },
+                { name: "Email Worker",    region: "us-west-2",    color: "error"   as const, animate: "none" as const,  label: "Outage" },
+            ].map(({ name, region, color, animate, label }) => (
+                <li class="list-row items-center">
+                    <Status color={color} animate={animate} label={label} />
+                    <div class="list-col-grow">
+                        <div class="font-medium text-sm">{name}</div>
+                        <div class="text-xs opacity-50">{region}</div>
+                    </div>
+                    <span class={`badge badge-sm ${color === "success" ? "badge-success" : color === "warning" ? "badge-warning" : "badge-error"} badge-soft`}>
+                        {label}
+                    </span>
+                </li>
+            ))}
+        </ul>
+    </fieldset>
+
+    <!-- ── Notification badge ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Notification indicator</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Overlay a pinging status dot on a button to indicate pending
+        notifications.
+    </p>
+
+    <fieldset>
+        <legend>status notification</legend>
+        <div class="flex gap-6 items-center">
+            <!-- Ping on icon button -->
+            <div class="relative inline-flex">
+                <button class="btn btn-ghost btn-square">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                    </svg>
+                </button>
+                <span class="absolute top-1 right-1">
+                    <Status color="error" animate="ping" size="xs" label="3 unread notifications" />
+                </span>
+            </div>
+
+            <!-- Ping on avatar -->
+            <div class="relative inline-flex">
+                <div class="avatar">
+                    <div class="w-12 rounded-full">
+                        <img src="https://img.daisyui.com/images/profile/demo/1@94.webp" alt="user" />
+                    </div>
+                </div>
+                <span class="absolute bottom-0.5 right-0.5">
+                    <Status color="success" animate="ping" size="sm" label="Online" />
+                </span>
+            </div>
+
+            <!-- Static dot on avatar -->
+            <div class="relative inline-flex">
+                <div class="avatar">
+                    <div class="w-12 rounded-full">
+                        <img src="https://img.daisyui.com/images/profile/demo/4@94.webp" alt="user" />
+                    </div>
+                </div>
+                <span class="absolute bottom-0.5 right-0.5">
+                    <Status color="neutral" size="sm" label="Offline" />
+                </span>
+            </div>
+        </div>
+    </fieldset>
+</AppLayout>

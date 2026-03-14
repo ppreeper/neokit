@@ -1,0 +1,115 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { twMerge } from "tailwind-merge";
+
+interface Props extends HTMLAttributes<"button"> {
+    theme?:
+        | "primary"
+        | "secondary"
+        | "accent"
+        | "info"
+        | "success"
+        | "warning"
+        | "error"
+        | "neutral";
+    type?: "button" | "submit";
+    size?: "xsmall" | "small" | "medium" | "large" | "xlarge";
+    shape?: "rounded" | "rectangle" | "pill" | "square" | "circle";
+    animation?: "pulse" | "bounce" | "none";
+    outline?: boolean;
+    dash?: boolean;
+    ghost?: boolean;
+    link?: boolean;
+    active?: boolean;
+    disabled?: boolean;
+    href?: string;
+    classes?: string;
+}
+
+const {
+    theme = "primary",
+    type = "button",
+    size = "medium",
+    shape = "rounded",
+    animation = "none",
+    outline = false,
+    dash = false,
+    ghost = false,
+    link = false,
+    active = false,
+    disabled = false,
+    href,
+    classes,
+    ...rest
+} = Astro.props;
+
+const baseClass = "btn";
+const sizeClass = {
+    xsmall: "btn-xs",
+    small: "btn-sm",
+    medium: "",
+    large: "btn-lg",
+    xlarge: "btn-xl",
+}[size];
+const shapeClass = {
+    rounded: "rounded-btn",
+    rectangle: "rounded-none",
+    pill: "rounded-full",
+    square: "btn-square",
+    circle: "btn-circle",
+}[shape];
+const animationClass = {
+    pulse: "animate-pulse",
+    bounce: "animate-bounce",
+    none: "",
+}[animation];
+const themeClass = {
+    primary: "btn-primary",
+    secondary: "btn-secondary",
+    accent: "btn-accent",
+    info: "btn-info",
+    success: "btn-success",
+    warning: "btn-warning",
+    error: "btn-error",
+    neutral: "btn-neutral",
+}[theme] || "";
+const outlineClass = outline ? "btn-outline" : "";
+const dashClass = dash ? "btn-dash" : "";
+const ghostClass = ghost ? "btn-ghost" : "";
+const linkClass = link ? "btn-link" : "";
+const activeClass = active ? "btn-active" : "";
+const disabledClass = disabled ? "btn-disabled" : "";
+const classesList = twMerge(
+    baseClass,
+    activeClass,
+    dashClass,
+    themeClass,
+    sizeClass,
+    shapeClass,
+    animationClass,
+    outlineClass,
+    ghostClass,
+    linkClass,
+    disabledClass,
+    classes,
+);
+---
+
+{
+    href ? (
+        <a
+            href={disabled ? undefined : href}
+            role="button"
+            class={classesList}
+            aria-disabled={disabled ? "true" : undefined}
+            tabindex={disabled ? -1 : undefined}
+            {...rest}
+        >
+            <slot />
+        </a>
+    ) : (
+        <button type={type} disabled={disabled} class={classesList} aria-disabled={disabled ? "true" : undefined} {...rest}>
+            <slot />
+        </button>
+    )
+}

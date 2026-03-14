@@ -1,0 +1,300 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Table from "neokit/components/Table.astro";
+import Badge from "neokit/components/Badge.astro";
+
+const people = [
+    { id: 1,  name: "Cy Ganderton",    job: "Quality Control Specialist", company: "Littel, Schaden and Vandervort", location: "Canada",        color: "blue",   img: "https://img.daisyui.com/images/profile/demo/1@94.webp" },
+    { id: 2,  name: "Hart Hagerty",    job: "Desktop Support Technician",  company: "Zemlak, Daniel and Leannon",   location: "United States", color: "purple", img: "https://img.daisyui.com/images/profile/demo/2@94.webp" },
+    { id: 3,  name: "Brice Swyre",     job: "Tax Accountant",              company: "Carroll Group",                location: "China",         color: "red",    img: "https://img.daisyui.com/images/profile/demo/3@94.webp" },
+    { id: 4,  name: "Marjy Ferencz",   job: "Office Assistant I",          company: "Rowe-Schoen",                  location: "Russia",        color: "crimson",img: "https://img.daisyui.com/images/profile/demo/4@94.webp" },
+    { id: 5,  name: "Yancy Tear",      job: "Community Outreach Specialist",company: "Wyman-Ledner",                location: "Brazil",        color: "indigo", img: "https://img.daisyui.com/images/profile/demo/5@94.webp" },
+];
+
+const statuses = ["Active", "Pending", "Inactive", "Active", "Active"] as const;
+const statusColor = { Active: "success", Pending: "warning", Inactive: "error" } as const;
+---
+
+<AppLayout title="Table">
+    <h1 id="top" class="text-5xl">Table</h1>
+    <p class="mt-2 opacity-70">
+        A styled <code>&lt;table&gt;</code> wrapper using DaisyUI's{" "}
+        <code>table</code> class. Use standard HTML table elements inside —
+        DaisyUI handles the theming. Pass <code>zebra</code>,{" "}
+        <code>pinRows</code>, <code>pinCols</code>, or a <code>size</code> prop
+        to adjust behaviour.
+    </p>
+
+    <!-- ── Basic table ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Default styling — no size or modifier props.
+    </p>
+
+    <fieldset>
+        <legend>table</legend>
+        <Table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Job</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                {people.slice(0, 3).map((p, i) => (
+                    <tr>
+                        <th>{i + 1}</th>
+                        <td>{p.name}</td>
+                        <td>{p.job}</td>
+                        <td>{p.location}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </Table>
+    </fieldset>
+
+    <!-- ── With avatar ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With avatar</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Embed avatars and badges directly inside table cells.
+    </p>
+
+    <fieldset>
+        <legend>table with avatar</legend>
+        <Table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Job</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {people.map((p, i) => (
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="avatar">
+                                    <div class="mask mask-squircle h-12 w-12">
+                                        <img src={p.img} alt={p.name} />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="font-bold">{p.name}</div>
+                                    <div class="text-sm opacity-50">{p.location}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            {p.job}
+                            <br />
+                            <span class="badge badge-ghost badge-sm">{p.company}</span>
+                        </td>
+                        <td>
+                            <Badge
+                                color={statusColor[statuses[i]]}
+                                variant="soft"
+                                size="sm"
+                            >
+                                {statuses[i]}
+                            </Badge>
+                        </td>
+                        <td>
+                            <button class="btn btn-ghost btn-xs">details</button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </Table>
+    </fieldset>
+
+    <!-- ── Zebra ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Zebra stripes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>zebra</code> adds alternating row backgrounds for easier scanning.
+    </p>
+
+    <fieldset>
+        <legend>table zebra</legend>
+        <Table zebra>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                {people.map((p, i) => (
+                    <tr>
+                        <th>{i + 1}</th>
+                        <td>{p.name}</td>
+                        <td>{p.company}</td>
+                        <td>{p.location}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </Table>
+    </fieldset>
+
+    <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes: <code>xs</code>, <code>sm</code>, <code>md</code>,
+        <code>lg</code>, <code>xl</code>.
+    </p>
+
+    {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+        <fieldset>
+            <legend>table size="{size}"</legend>
+            <Table size={size} zebra>
+                <thead>
+                    <tr><th>#</th><th>Name</th><th>Job</th><th>Location</th></tr>
+                </thead>
+                <tbody>
+                    {people.slice(0, 3).map((p, i) => (
+                        <tr>
+                            <th>{i + 1}</th>
+                            <td>{p.name}</td>
+                            <td>{p.job}</td>
+                            <td>{p.location}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+        </fieldset>
+    ))}
+
+    <!-- ── Pin rows (sticky header) ──────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Pinned rows</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>pinRows</code> makes <code>&lt;thead&gt;</code> and{" "}
+        <code>&lt;tfoot&gt;</code> sticky inside a scrollable container.
+    </p>
+
+    <fieldset>
+        <legend>table pinRows</legend>
+        <div class="h-48 overflow-y-auto rounded-box border border-base-300">
+            <Table pinRows scrollable={false}>
+                <thead>
+                    <tr><th>#</th><th>Name</th><th>Job</th><th>Location</th></tr>
+                </thead>
+                <tbody>
+                    {[...people, ...people, ...people].map((p, i) => (
+                        <tr>
+                            <th>{i + 1}</th>
+                            <td>{p.name}</td>
+                            <td>{p.job}</td>
+                            <td>{p.location}</td>
+                        </tr>
+                    ))}
+                </tbody>
+                <tfoot>
+                    <tr><th>#</th><th>Name</th><th>Job</th><th>Location</th></tr>
+                </tfoot>
+            </Table>
+        </div>
+    </fieldset>
+
+    <!-- ── Pin cols (sticky first/last col) ──────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Pinned columns</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>pinCols</code> makes the first and last column sticky when the
+        table overflows horizontally. The first and last <code>&lt;th&gt;</code>{" "}
+        in each row become sticky.
+    </p>
+
+    <fieldset>
+        <legend>table pinCols</legend>
+        <Table pinCols classes="w-full">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Job Title</th>
+                    <th>Company</th>
+                    <th>Location</th>
+                    <th>Color</th>
+                    <th>Favourite animal</th>
+                    <th>Favourite song</th>
+                    <th>Favourite actor</th>
+                    <th>Eye color</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {people.map((p) => (
+                    <tr>
+                        <th>{p.name}</th>
+                        <td>{p.job}</td>
+                        <td>{p.company}</td>
+                        <td>{p.location}</td>
+                        <td>{p.color}</td>
+                        <td>Cat</td>
+                        <td>I Will Survive</td>
+                        <td>Cate Blanchett</td>
+                        <td>Blue</td>
+                        <th><button class="btn btn-ghost btn-xs">details</button></th>
+                    </tr>
+                ))}
+            </tbody>
+        </Table>
+    </fieldset>
+
+    <!-- ── With footer ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With footer</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add a <code>&lt;tfoot&gt;</code> to repeat headings or show totals.
+    </p>
+
+    <fieldset>
+        <legend>table with tfoot</legend>
+        <Table zebra size="sm">
+            <thead>
+                <tr><th>#</th><th>Name</th><th>Job</th><th>Location</th></tr>
+            </thead>
+            <tbody>
+                {people.map((p, i) => (
+                    <tr>
+                        <th>{i + 1}</th>
+                        <td>{p.name}</td>
+                        <td>{p.job}</td>
+                        <td>{p.location}</td>
+                    </tr>
+                ))}
+            </tbody>
+            <tfoot>
+                <tr><th>#</th><th>Name</th><th>Job</th><th>Location</th></tr>
+            </tfoot>
+        </Table>
+    </fieldset>
+
+    <!-- ── Highlighted row / col ─────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Highlighted rows</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add <code>hover</code> to <code>&lt;tr&gt;</code> for row highlight on
+        hover. Add <code>active</code> to mark a selected row.
+    </p>
+
+    <fieldset>
+        <legend>table row highlight</legend>
+        <Table>
+            <thead>
+                <tr><th>#</th><th>Name</th><th>Job</th><th>Location</th></tr>
+            </thead>
+            <tbody>
+                {people.map((p, i) => (
+                    <tr class={`hover${i === 1 ? " active" : ""}`}>
+                        <th>{i + 1}</th>
+                        <td>{p.name}</td>
+                        <td>{p.job}</td>
+                        <td>{p.location}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </Table>
+    </fieldset>
+</AppLayout>

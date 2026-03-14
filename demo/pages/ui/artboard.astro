@@ -1,0 +1,72 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Artboard from "neokit/components/Artboard.astro";
+---
+
+<AppLayout title="Artboard">
+    <h1 id="top" class="text-5xl">Artboard</h1>
+    <p class="mt-2 opacity-70">
+        Phone-sized canvas frames for prototyping mobile UI. Wraps a <code>&lt;div class="artboard"&gt;</code> with
+        optional <code>artboard-phone-N</code> sizing, <code>artboard-horizontal</code>, and <code>artboard-demo</code>.
+    </p>
+
+    <!-- ── Phone sizes ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Phone sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Six preset sizes (<code>phone=1</code> through <code>phone=6</code>). Scroll horizontally to see all.
+    </p>
+
+    <fieldset>
+        <legend>All phone sizes — portrait</legend>
+        <div class="flex gap-4 overflow-x-auto pb-2">
+            {[1, 2, 3, 4, 5, 6].map((n) => (
+                <div class="flex flex-col items-center gap-1 shrink-0">
+                    <Artboard phone={n as 1|2|3|4|5|6} demo classes="bg-base-200 justify-center items-center text-sm">
+                        Phone {n}
+                    </Artboard>
+                    <span class="text-xs opacity-50">phone={n}</span>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Horizontal (landscape) ───────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Horizontal (landscape)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Add <code>horizontal</code> prop to flip the artboard to landscape orientation.
+    </p>
+
+    <fieldset>
+        <legend>phone=1 horizontal</legend>
+        <div class="overflow-x-auto pb-2">
+            <Artboard phone={1} horizontal demo classes="bg-base-200 justify-center items-center text-sm">
+                Landscape
+            </Artboard>
+        </div>
+    </fieldset>
+
+    <!-- ── Custom content ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Custom content</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Slot any content inside — the artboard is just a sized container.
+    </p>
+
+    <fieldset>
+        <legend>phone=3 with a mock UI</legend>
+        <Artboard phone={3} classes="bg-base-100 border border-base-300 flex-col gap-0 overflow-hidden">
+            <div class="navbar bg-primary text-primary-content shrink-0">
+                <div class="navbar-start">
+                    <span class="text-sm font-semibold px-2">MyApp</span>
+                </div>
+            </div>
+            <div class="flex-1 p-4 flex flex-col gap-3 overflow-auto">
+                <div class="skeleton h-8 w-full"></div>
+                <div class="skeleton h-4 w-3/4"></div>
+                <div class="skeleton h-4 w-1/2"></div>
+                <div class="skeleton h-24 w-full mt-2"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-5/6"></div>
+            </div>
+        </Artboard>
+    </fieldset>
+</AppLayout>

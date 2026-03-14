@@ -1,0 +1,168 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Badge from "neokit/components/Badge.astro";
+import Button from "neokit/components/Button.astro";
+
+const colors = ["neutral", "primary", "secondary", "accent", "info", "success", "warning", "error"] as const;
+const variants = ["solid", "outline", "soft", "dash", "ghost"] as const;
+const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
+---
+
+<AppLayout title="Badge">
+    <h1 id="top" class="text-5xl">Badge</h1>
+    <p class="mt-2 opacity-70">
+        Small status and label indicators. Wraps a <code>&lt;span class="badge"&gt;</code> element.
+        Supports color, variant, and size props.
+    </p>
+
+    <!-- ── Default ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">No color or variant — the base badge style.</p>
+
+    <fieldset>
+        <legend>Default badge</legend>
+        <div class="flex flex-wrap gap-2 items-center">
+            <Badge>badge</Badge>
+        </div>
+    </fieldset>
+
+    <!-- ── Sizes ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes: <code>xs</code>, <code>sm</code>, <code>md</code> (default), <code>lg</code>, <code>xl</code>.
+    </p>
+
+    <fieldset>
+        <legend>All sizes</legend>
+        <div class="flex flex-wrap gap-2 items-center">
+            {sizes.map((s) => (
+                <Badge size={s}>badge-{s}</Badge>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Colors (solid) ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">All eight semantic color tokens, solid (default) variant.</p>
+
+    <fieldset>
+        <legend>Solid (default) — all colors</legend>
+        <div class="flex flex-wrap gap-2 items-center">
+            {colors.map((c) => (
+                <Badge color={c}>{c}</Badge>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Variants per color ────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Variants</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five variants: <code>solid</code>, <code>outline</code>, <code>soft</code>, <code>dash</code>, <code>ghost</code>.
+    </p>
+
+    {variants.map((v) => (
+        <fieldset>
+            <legend>{v}</legend>
+            <div class="flex flex-wrap gap-2 items-center">
+                {colors.map((c) => (
+                    <Badge color={c} variant={v}>{c}</Badge>
+                ))}
+            </div>
+        </fieldset>
+    ))}
+
+    <!-- ── Empty dot badges ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Empty (dot) badges</h2>
+    <p class="mt-1 text-sm opacity-70">
+        No slot content renders a small status dot. Useful for notification indicators.
+    </p>
+
+    <fieldset>
+        <legend>Dot badges — all colors, all sizes</legend>
+        <div class="space-y-3">
+            {sizes.map((s) => (
+                <div class="flex flex-wrap gap-2 items-center">
+                    <span class="text-xs opacity-50 w-6">{s}</span>
+                    {colors.map((c) => (
+                        <Badge color={c} size={s} />
+                    ))}
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Badges with icons ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With icons</h2>
+    <p class="mt-1 text-sm opacity-70">SVG icons inline with badge text.</p>
+
+    <fieldset>
+        <legend>Info / success / warning / error with icons</legend>
+        <div class="flex flex-wrap gap-2 items-center">
+            <Badge color="info">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                </svg>
+                info
+            </Badge>
+            <Badge color="success">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                success
+            </Badge>
+            <Badge color="warning">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                </svg>
+                warning
+            </Badge>
+            <Badge color="error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                error
+            </Badge>
+        </div>
+    </fieldset>
+
+    <!-- ── Badge in text / headings ──────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Badge in text</h2>
+    <p class="mt-1 text-sm opacity-70">Badges scale with surrounding text when nested in headings.</p>
+
+    <fieldset>
+        <legend>Inside headings h1–h4 and paragraph</legend>
+        <div class="space-y-2">
+            <h1 class="text-5xl font-bold">Heading 1 <Badge color="primary">New</Badge></h1>
+            <h2 class="text-4xl font-bold">Heading 2 <Badge color="secondary">Beta</Badge></h2>
+            <h3 class="text-3xl font-bold">Heading 3 <Badge color="accent">Hot</Badge></h3>
+            <h4 class="text-2xl font-bold">Heading 4 <Badge color="warning">WIP</Badge></h4>
+            <p>Paragraph text <Badge color="info" size="sm">inline</Badge> with a small badge inside.</p>
+        </div>
+    </fieldset>
+
+    <!-- ── Badge in a button ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Badge in a button</h2>
+    <p class="mt-1 text-sm opacity-70">Common notification pattern — button with a counter badge.</p>
+
+    <fieldset>
+        <legend>Button + badge combos</legend>
+        <div class="flex flex-wrap gap-4 items-center">
+            <Button theme="neutral">
+                Inbox
+                <Badge color="primary" size="sm">+99</Badge>
+            </Button>
+            <Button theme="primary">
+                Notifications
+                <Badge variant="outline" size="sm">6</Badge>
+            </Button>
+            <Button theme="ghost">
+                Messages
+                <Badge color="error" size="xs">3</Badge>
+            </Button>
+            <Button theme="secondary">
+                Updates
+                <Badge color="success" variant="soft" size="sm">New</Badge>
+            </Button>
+        </div>
+    </fieldset>
+</AppLayout>

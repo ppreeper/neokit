@@ -1,0 +1,89 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Join from "neokit/components/Join.astro";
+import Button from "neokit/components/Button.astro";
+import Input from "neokit/components/Input.astro";
+---
+
+<AppLayout title="Join">
+    <h1 id="top" class="text-5xl">Join</h1>
+    <p class="mt-2 opacity-70">
+        Groups child elements into a visually joined unit — merging borders and border-radius.
+        Children must have <code>join-item</code> class. Supports horizontal (default),
+        vertical, and responsive layouts.
+    </p>
+
+    <!-- ── Buttons ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Joined buttons</h2>
+    <p class="mt-1 text-sm opacity-70">Horizontal (default) — buttons share borders.</p>
+
+    <fieldset>
+        <legend>Button group</legend>
+        <Join>
+            <Button classes="join-item">Left</Button>
+            <Button classes="join-item">Center</Button>
+            <Button classes="join-item">Right</Button>
+        </Join>
+    </fieldset>
+
+    <fieldset>
+        <legend>Radio buttons group</legend>
+        <Join>
+            <input class="join-item btn" type="radio" name="options" aria-label="A" />
+            <input class="join-item btn" type="radio" name="options" aria-label="B" checked />
+            <input class="join-item btn" type="radio" name="options" aria-label="C" />
+        </Join>
+    </fieldset>
+
+    <!-- ── Vertical ─────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Vertical join</h2>
+    <p class="mt-1 text-sm opacity-70"><code>vertical</code> prop stacks children top-to-bottom.</p>
+
+    <fieldset>
+        <legend>Vertical button group</legend>
+        <Join vertical classes="w-32">
+            <Button classes="join-item w-full">Top</Button>
+            <Button classes="join-item w-full">Middle</Button>
+            <Button classes="join-item w-full">Bottom</Button>
+        </Join>
+    </fieldset>
+
+    <!-- ── Input + button ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Input with button</h2>
+    <p class="mt-1 text-sm opacity-70">Classic search bar pattern — input joined to a submit button.</p>
+
+    <fieldset>
+        <legend>Search bar</legend>
+        <Join>
+            <Input classes="join-item w-64" placeholder="Search..." variant="bordered" />
+            <Button theme="primary" classes="join-item">Search</Button>
+        </Join>
+    </fieldset>
+
+    <fieldset>
+        <legend>Select + button</legend>
+        <Join>
+            <select class="select select-bordered join-item">
+                <option>Sci-fi</option>
+                <option>Drama</option>
+                <option>Action</option>
+            </select>
+            <Button theme="primary" classes="join-item">Filter</Button>
+        </Join>
+    </fieldset>
+
+    <!-- ── Responsive ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Responsive</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>responsive</code> prop: vertical on mobile, horizontal on <code>lg+</code>.
+    </p>
+
+    <fieldset>
+        <legend>Responsive join — resize window to see it stack</legend>
+        <Join responsive>
+            <Button classes="join-item w-full lg:w-auto">First</Button>
+            <Button classes="join-item w-full lg:w-auto">Second</Button>
+            <Button classes="join-item w-full lg:w-auto">Third</Button>
+        </Join>
+    </fieldset>
+</AppLayout>

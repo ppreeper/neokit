@@ -1,0 +1,138 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Toggle from "neokit/components/Toggle.astro";
+---
+
+<AppLayout title="Toggle">
+    <h1 id="top" class="text-5xl">Toggle</h1>
+    <p class="mt-2 opacity-70">
+        A styled toggle switch. Built on{" "}
+        <code>&lt;input type="checkbox"&gt;</code> with DaisyUI's{" "}
+        <code>toggle</code> class. Renders as a sliding pill switch.
+        Wrap in a <code>&lt;label&gt;</code> for accessible labelling.
+    </p>
+
+    <!-- ── Default ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">Off and on states.</p>
+
+    <fieldset>
+        <legend>toggle default</legend>
+        <div class="flex items-center gap-6">
+            <label class="flex items-center gap-2 cursor-pointer">
+                <Toggle />
+                <span>Off</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+                <Toggle checked />
+                <span>On</span>
+            </label>
+        </div>
+    </fieldset>
+
+    <!-- ── Colors ──────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">All eight DaisyUI color tokens, each checked.</p>
+
+    <fieldset>
+        <legend>toggle colors</legend>
+        <div class="flex flex-wrap gap-4">
+            {(["primary","secondary","accent","info","success","warning","error","neutral"] as const).map((c) => (
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <Toggle color={c} checked />
+                    <span class="text-sm capitalize">{c}</span>
+                </label>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Sizes ───────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes: <code>xs</code> → <code>xl</code>.
+    </p>
+
+    <fieldset>
+        <legend>toggle sizes</legend>
+        <div class="flex items-end gap-6">
+            {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
+                <label class="flex flex-col items-center gap-1 cursor-pointer">
+                    <Toggle size={s} checked color="primary" />
+                    <span class="text-xs opacity-60">{s}</span>
+                </label>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Disabled ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Disabled</h2>
+    <p class="mt-1 text-sm opacity-70">Disabled off and on.</p>
+
+    <fieldset>
+        <legend>toggle disabled</legend>
+        <div class="flex items-center gap-6">
+            <label class="flex items-center gap-2 cursor-not-allowed">
+                <Toggle disabled />
+                <span class="opacity-50">Disabled off</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-not-allowed">
+                <Toggle disabled checked />
+                <span class="opacity-50">Disabled on</span>
+            </label>
+        </div>
+    </fieldset>
+
+    <!-- ── Settings panel ─────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Settings panel</h2>
+    <p class="mt-1 text-sm opacity-70">Real-world usage: notification preferences.</p>
+
+    <fieldset>
+        <legend>toggle settings</legend>
+        <div class="card bg-base-100 shadow max-w-sm">
+            <div class="card-body gap-0 divide-y divide-base-200">
+                {[
+                    { label: "Email notifications", desc: "Receive updates via email", checked: true, color: "primary" },
+                    { label: "Push notifications", desc: "Browser push alerts", checked: true, color: "primary" },
+                    { label: "Marketing emails", desc: "Product news and offers", checked: false, color: "primary" },
+                    { label: "Dark mode", desc: "Switch to dark theme", checked: false, color: "success" },
+                    { label: "2-factor auth", desc: "Extra security on sign-in", checked: true, color: "success" },
+                ].map(({ label, desc, checked, color }) => (
+                    <div class="flex items-center justify-between py-3">
+                        <div>
+                            <div class="font-medium text-sm">{label}</div>
+                            <div class="text-xs opacity-60">{desc}</div>
+                        </div>
+                        <label class="cursor-pointer ml-4">
+                            <Toggle color={color as any} checked={checked} />
+                        </label>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Label positions ────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Label positions</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Toggle on the left, right, or surrounded by labels.
+    </p>
+
+    <fieldset>
+        <legend>toggle label positions</legend>
+        <div class="flex flex-col gap-3">
+            <label class="flex items-center gap-2 cursor-pointer">
+                <Toggle color="primary" checked />
+                <span>Label after (default)</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+                <span>Label before</span>
+                <Toggle color="primary" checked />
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+                <span class="text-sm opacity-70">Off</span>
+                <Toggle color="success" checked />
+                <span class="text-sm font-medium text-success">On</span>
+            </label>
+        </div>
+    </fieldset>
+</AppLayout>

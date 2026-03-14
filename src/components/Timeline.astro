@@ -1,0 +1,47 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Timeline — DaisyUI `timeline` container component.
+ *
+ * Renders a `<ul class="timeline">` wrapper. Each item inside must be a
+ * `<li>` containing the DaisyUI timeline slot structure:
+ *   - `<hr>` — connector line (start)
+ *   - `<div class="timeline-start">` — content above/left the midpoint
+ *   - `<div class="timeline-middle">` — the dot/icon at the axis
+ *   - `<div class="timeline-end">` — content below/right the midpoint
+ *   - `<hr>` — connector line (end)
+ *
+ * Direction modifiers (via `classes`):
+ * - `timeline-vertical` (default) — items stacked top to bottom
+ * - `timeline-horizontal` — items flow left to right
+ * - `timeline-snap-icon` — snap icon to the start of each item
+ * - `timeline-compact` — content only on one side
+ *
+ * Usage:
+ * ```astro
+ * <Timeline>
+ *   <li>
+ *     <div class="timeline-start timeline-box">Event A</div>
+ *     <div class="timeline-middle">
+ *       <svg .../>
+ *     </div>
+ *     <hr />
+ *   </li>
+ * </Timeline>
+ * ```
+ */
+
+interface Props {
+    /** Extra classes on the `<ul>` element. */
+    classes?: string;
+}
+
+const { classes } = Astro.props;
+
+const rootClass = twMerge("timeline", classes);
+---
+
+<ul class={rootClass}>
+    <slot />
+</ul>

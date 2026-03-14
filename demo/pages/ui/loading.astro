@@ -1,0 +1,132 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Loading from "neokit/components/Loading.astro";
+---
+
+<AppLayout title="Loading">
+    <h1 id="top" class="text-5xl">Loading</h1>
+    <p class="mt-2 opacity-70">
+        An animated CSS-only loading indicator. Renders a{" "}
+        <code>&lt;span class="loading"&gt;</code> — no children needed. Six
+        animation types, five sizes, and full color token support.
+    </p>
+
+    <!-- ── Types ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Types</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Six animation styles.
+    </p>
+
+    <fieldset>
+        <legend>loading types</legend>
+        <div class="flex flex-wrap gap-8 items-center">
+            {(["spinner", "dots", "ring", "ball", "bars", "infinity"] as const).map((t) => (
+                <div class="flex flex-col items-center gap-2">
+                    <Loading type={t} size="lg" />
+                    <span class="text-xs opacity-50">{t}</span>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Sizes ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">Five sizes — xs through xl.</p>
+
+    <fieldset>
+        <legend>loading sizes</legend>
+        <div class="flex flex-wrap gap-6 items-end">
+            {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
+                <div class="flex flex-col items-center gap-2">
+                    <Loading type="spinner" size={s} />
+                    <span class="text-xs opacity-50">{s}</span>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Colors ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Any DaisyUI color token via the <code>color</code> prop (maps to{" "}
+        <code>text-{"{color}"}</code>).
+    </p>
+
+    <fieldset>
+        <legend>loading colors</legend>
+        <div class="flex flex-wrap gap-6 items-center">
+            {([
+                "primary", "secondary", "accent",
+                "info", "success", "warning", "error", "neutral",
+            ] as const).map((c) => (
+                <div class="flex flex-col items-center gap-2">
+                    <Loading type="spinner" size="lg" color={c} />
+                    <span class="text-xs opacity-50">{c}</span>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── All types × md × primary ──────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">All types colored</h2>
+    <p class="mt-1 text-sm opacity-70">
+        All six types at <code>md</code> size with <code>primary</code> color.
+    </p>
+
+    <fieldset>
+        <legend>loading types colored</legend>
+        <div class="flex flex-wrap gap-8 items-center">
+            {(["spinner", "dots", "ring", "ball", "bars", "infinity"] as const).map((t) => (
+                <div class="flex flex-col items-center gap-2">
+                    <Loading type={t} size="md" color="primary" />
+                    <span class="text-xs opacity-50">{t}</span>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Inside a button ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Inside a button</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use a small spinner inline with button text to show a pending state.
+    </p>
+
+    <fieldset>
+        <legend>loading in button</legend>
+        <div class="flex flex-wrap gap-3">
+            <button class="btn btn-primary">
+                <Loading type="spinner" size="xs" classes="text-primary-content" />
+                Saving…
+            </button>
+            <button class="btn btn-outline btn-secondary" disabled>
+                <Loading type="dots" size="xs" color="secondary" />
+                Processing
+            </button>
+            <button class="btn btn-ghost btn-sm">
+                <Loading type="spinner" size="xs" />
+                Loading
+            </button>
+        </div>
+    </fieldset>
+
+    <!-- ── Full-page overlay ──────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Full-page overlay</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Center a large spinner over a content area using{" "}
+        <code>inset-0 flex items-center justify-center</code>.
+    </p>
+
+    <fieldset>
+        <legend>loading overlay</legend>
+        <div class="relative h-40 rounded-box border border-base-300 bg-base-200 overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center bg-base-100/60 backdrop-blur-sm z-10">
+                <Loading type="spinner" size="xl" color="primary" />
+            </div>
+            <div class="p-4 opacity-30">
+                <div class="h-4 bg-base-content/20 rounded w-3/4 mb-2"></div>
+                <div class="h-4 bg-base-content/20 rounded w-1/2 mb-2"></div>
+                <div class="h-4 bg-base-content/20 rounded w-5/6"></div>
+            </div>
+        </div>
+    </fieldset>
+</AppLayout>

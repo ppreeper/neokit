@@ -1,0 +1,104 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Hero from "neokit/components/Hero.astro";
+import Button from "neokit/components/Button.astro";
+---
+
+<AppLayout title="Hero">
+    <h1 id="top" class="text-5xl">Hero</h1>
+    <p class="mt-2 opacity-70">
+        Full-width banner section for landing pages and marketing copy.
+        Wraps a <code>&lt;div class="hero"&gt;</code> with an inner
+        <code>hero-content</code> div. Supports background images and dark overlays.
+    </p>
+
+    <!-- ── Default ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">Minimal hero with heading and CTA.</p>
+
+    <fieldset>
+        <legend>Simple hero</legend>
+        <Hero classes="bg-base-200 min-h-48 rounded-lg">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold">Hello there</h1>
+                <p class="py-4 max-w-md">
+                    Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
+                    exercitationem quasi.
+                </p>
+                <Button theme="primary">Get Started</Button>
+            </div>
+        </Hero>
+    </fieldset>
+
+    <!-- ── With image ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With background image + overlay</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Pass a <code>bgImage</code> URL and set <code>overlay</code> for a dark overlay.
+    </p>
+
+    <fieldset>
+        <legend>Hero with background image</legend>
+        <Hero
+            bgImage="https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp"
+            overlay
+            classes="min-h-48 rounded-lg"
+            contentClasses="text-neutral-content text-center"
+        >
+            <div>
+                <h1 class="text-5xl font-bold">Box Office News!</h1>
+                <p class="py-4 max-w-md">
+                    Utra-realist CGI will make you question what's real and what isn't.
+                </p>
+                <Button theme="primary">Get Started</Button>
+                <Button theme="ghost" classes="ml-2 text-white">Learn more</Button>
+            </div>
+        </Hero>
+    </fieldset>
+
+    <!-- ── Text beside figure ───────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Text beside image</h2>
+    <p class="mt-1 text-sm opacity-70">
+        The <code>hero-content</code> div can hold any layout — flex row with an image and text.
+    </p>
+
+    <fieldset>
+        <legend>Image + text side by side</legend>
+        <Hero classes="bg-base-200 min-h-48 rounded-lg">
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <img
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    class="max-w-48 rounded-full shadow-2xl"
+                    alt="Person"
+                />
+                <div>
+                    <div class="badge badge-secondary mb-2">New</div>
+                    <h1 class="text-4xl font-bold">Meet the Team</h1>
+                    <p class="py-4 max-w-sm">
+                        We're a small, distributed team building great tools for developers.
+                        We love open source.
+                    </p>
+                    <div class="flex gap-2">
+                        <Button theme="primary">Get Started</Button>
+                        <Button theme="ghost">Learn More</Button>
+                    </div>
+                </div>
+            </div>
+        </Hero>
+    </fieldset>
+
+    <!-- ── Centered text-only ───────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Centered</h2>
+    <p class="mt-1 text-sm opacity-70">Use <code>contentClasses="text-center"</code> to center content.</p>
+
+    <fieldset>
+        <legend>Centered content</legend>
+        <Hero classes="bg-base-200 min-h-40 rounded-lg" contentClasses="text-center">
+            <div>
+                <h2 class="text-3xl font-bold">Centered Hero</h2>
+                <p class="mt-2 text-sm opacity-70 max-w-sm mx-auto">
+                    Great for simple landing sections without imagery.
+                </p>
+            </div>
+        </Hero>
+    </fieldset>
+</AppLayout>

@@ -1,0 +1,103 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Footer from "neokit/components/Footer.astro";
+import Button from "neokit/components/Button.astro";
+---
+
+<AppLayout title="Footer">
+    <h1 id="top" class="text-5xl">Footer</h1>
+    <p class="mt-2 opacity-70">
+        A semantic <code>&lt;footer&gt;</code> layout component.
+        Supports column (default), horizontal row, and centered layouts.
+        Slot any content — links, logos, copyright text.
+    </p>
+
+    <!-- ── Default (vertical, multi-column) ─────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default (vertical)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Grid columns defined via Tailwind utilities on the child elements.
+    </p>
+
+    <fieldset>
+        <legend>Multi-column footer</legend>
+        <Footer classes="bg-base-200 text-base-content p-4 rounded-lg">
+            <nav>
+                <h6 class="footer-title">Services</h6>
+                <a class="link link-hover">Branding</a>
+                <a class="link link-hover">Design</a>
+                <a class="link link-hover">Marketing</a>
+                <a class="link link-hover">Advertisement</a>
+            </nav>
+            <nav>
+                <h6 class="footer-title">Company</h6>
+                <a class="link link-hover">About us</a>
+                <a class="link link-hover">Contact</a>
+                <a class="link link-hover">Jobs</a>
+                <a class="link link-hover">Press kit</a>
+            </nav>
+            <nav>
+                <h6 class="footer-title">Legal</h6>
+                <a class="link link-hover">Terms of use</a>
+                <a class="link link-hover">Privacy policy</a>
+                <a class="link link-hover">Cookie policy</a>
+            </nav>
+        </Footer>
+    </fieldset>
+
+    <!-- ── Horizontal ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Horizontal</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>horizontal</code> prop — items arranged in a row.
+    </p>
+
+    <fieldset>
+        <legend>Horizontal footer</legend>
+        <Footer horizontal classes="bg-base-200 text-base-content p-4 rounded-lg items-center">
+            <aside class="grid-flow-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-8 fill-current" viewBox="0 0 24 24">
+                    <path d="M22.672 15.226l-2.432.811.841-2.515c.33-1.019.33-2.073 0-3.092l-.84-2.518 2.43.809c1.345.448 2.33 1.618 2.33 3.005 0 1.388-.985 2.558-2.33 3.005zm-21.044 0c-1.345-.447-2.33-1.617-2.33-3.004 0-1.388.985-2.558 2.33-3.005l2.43-.808-.84 2.517c-.33 1.02-.33 2.074 0 3.093l.84 2.518-2.43-.81zm9.344-19.226l-2.197 6.587-6.876.001 5.554 4.059-2.117 6.367 5.636-4.128 5.636 4.128-2.117-6.367 5.555-4.059-6.876-.001L11 -4z"/>
+                </svg>
+                <p class="ml-2 font-bold text-lg">ACME Industries Ltd.</p>
+            </aside>
+            <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+                <a class="link link-hover">Privacy policy</a>
+                <a class="link link-hover">Terms of use</a>
+                <a class="link link-hover">Sitemap</a>
+            </nav>
+        </Footer>
+    </fieldset>
+
+    <!-- ── Centered ─────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Centered</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>center</code> prop — items stacked in the center.
+    </p>
+
+    <fieldset>
+        <legend>Centered footer</legend>
+        <Footer center classes="bg-base-200 text-base-content p-4 rounded-lg gap-2">
+            <nav class="grid grid-flow-col gap-4">
+                <a class="link link-hover">About us</a>
+                <a class="link link-hover">Contact</a>
+                <a class="link link-hover">Jobs</a>
+                <a class="link link-hover">Press kit</a>
+            </nav>
+            <nav class="grid grid-flow-col gap-4">
+                <!-- Social icons (placeholder SVGs) -->
+                <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                    </svg>
+                </a>
+                <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.77a4.85 4.85 0 01-1.01-.08z"/>
+                    </svg>
+                </a>
+            </nav>
+            <aside>
+                <p>Copyright © {new Date().getFullYear()} - All rights reserved by ACME Industries Ltd.</p>
+            </aside>
+        </Footer>
+    </fieldset>
+</AppLayout>

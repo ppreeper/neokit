@@ -1,0 +1,49 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Dock — DaisyUI `dock` component (bottom app bar / mobile nav).
+ *
+ * Renders a `<div class="dock">` wrapper. Place `<button>` or `<a>`
+ * children inside — each becomes a dock item. Mark the active item
+ * with `class="dock-active"` or the `active` attribute.
+ *
+ * Each item typically contains:
+ * - An SVG icon  (required for the icon slot)
+ * - A `<span class="dock-label">` for the label text (optional)
+ *
+ * Sizes: `"xs"` | `"sm"` | `"md"` | `"lg"` | `"xl"`
+ *
+ * ```astro
+ * <Dock>
+ *   <button class="active">
+ *     <svg .../>
+ *     <span class="dock-label">Home</span>
+ *   </button>
+ *   <button>
+ *     <svg .../>
+ *     <span class="dock-label">Search</span>
+ *   </button>
+ * </Dock>
+ * ```
+ */
+
+interface Props {
+    /** Dock size. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Extra classes on the root `<div class="dock">`. */
+    classes?: string;
+}
+
+const { size, classes } = Astro.props;
+
+const rootClass = twMerge(
+    "dock",
+    size && `dock-${size}`,
+    classes,
+);
+---
+
+<div class={rootClass}>
+    <slot />
+</div>

@@ -1,0 +1,103 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Accordion component — a single collapsible item using DaisyUI's `collapse`
+ * pattern. Group multiple items into an accordion by giving them the same
+ * `name` (radio method) or the same `name` on `<details>` elements
+ * (details method — browser-searchable).
+ *
+ * Radio method (default) — only one item open at a time per name group:
+ * ```astro
+ * <Accordion name="faq" title="Question 1" checked>Answer 1</Accordion>
+ * <Accordion name="faq" title="Question 2">Answer 2</Accordion>
+ * ```
+ *
+ * Details method — also only one open at a time (native browser behaviour);
+ * content is browser-searchable:
+ * ```astro
+ * <Accordion method="details" name="faq" title="Question 1" open>Answer 1</Accordion>
+ * <Accordion method="details" name="faq" title="Question 2">Answer 2</Accordion>
+ * ```
+ *
+ * Join wrapper — seamless connected accordion:
+ * ```astro
+ * <div class="join join-vertical w-full">
+ *   <Accordion name="faq" title="Q1" icon="arrow" classes="join-item" checked>A1</Accordion>
+ *   <Accordion name="faq" title="Q2" icon="arrow" classes="join-item">A2</Accordion>
+ * </div>
+ * ```
+ */
+
+interface Props extends HTMLAttributes<"div"> {
+    /**
+     * Shared name for the radio group (or details exclusion group).
+     * All items with the same name act as a single accordion.
+     */
+    name: string;
+    /** Title shown in the collapse header. */
+    title: string;
+    /**
+     * Method used for the accordion mechanism.
+     * - `"radio"`   — hidden radio input (default); only one open per name
+     * - `"details"` — native `<details>/<summary>`; browser-searchable
+     * @default "radio"
+     */
+    method?: "radio" | "details";
+    /**
+     * Icon shown at the right of the title.
+     * - `"none"`  — no icon (default)
+     * - `"arrow"` — animated chevron arrow
+     * - `"plus"`  — plus/minus toggle
+     * @default "none"
+     */
+    icon?: "none" | "arrow" | "plus";
+    /** Start in the open/checked state. @default false */
+    open?: boolean;
+    /** Extra classes on the root collapse element. */
+    classes?: string;
+}
+
+const {
+    name,
+    title,
+    method = "radio",
+    icon = "none",
+    open = false,
+    classes,
+    ...rest
+} = Astro.props;
+
+const iconClass = {
+    none: "",
+    arrow: "collapse-arrow",
+    plus: "collapse-plus",
+}[icon];
+
+const rootClass = twMerge(
+    "collapse",
+    "bg-base-100",
+    "border",
+    "border-base-300",
+    iconClass,
+    classes,
+);
+---
+
+{method === "details" ? (
+    <details class={rootClass} name={name} open={open || undefined} {...rest}>
+        <summary class="collapse-title font-semibold">{title}</summary>
+        <div class="collapse-content text-sm">
+            <slot />
+        </div>
+    </details>
+) : (
+    <div class={rootClass} {...rest}>
+        <input type="radio" name={name} checked={open || undefined} />
+        <div class="collapse-title font-semibold">{title}</div>
+        <div class="collapse-content text-sm">
+            <slot />
+        </div>
+    </div>
+)}

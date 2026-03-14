@@ -1,0 +1,53 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Tabs — DaisyUI `tabs` container component.
+ *
+ * Renders a `<div role="tablist" class="tabs">` wrapper.
+ * Place tab items inside as children.
+ *
+ * Simple tab items (no panels):
+ * ```astro
+ * <Tabs variant="bordered">
+ *   <a role="tab" class="tab tab-active">Tab 1</a>
+ *   <a role="tab" class="tab">Tab 2</a>
+ *   <a role="tab" class="tab">Tab 3</a>
+ * </Tabs>
+ * ```
+ *
+ * Radio-powered tabs with panels — use raw HTML inside:
+ * Each tab is `<input type="radio" class="tab" aria-label="Label" name="group" />`
+ * followed by `<div class="tab-content">...</div>`.
+ * The checked input shows its paired content panel.
+ *
+ * Variants:
+ * - `"bordered"` → `tabs-bordered`
+ * - `"lifted"`   → `tabs-lifted`
+ * - `"box"`      → `tabs-box`
+ *
+ * Sizes: `"xs"` | `"sm"` | `"md"` | `"lg"` | `"xl"`
+ */
+
+interface Props {
+    /** Visual style. Default: plain underline. */
+    variant?: "bordered" | "lifted" | "box";
+    /** Size. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Extra classes on the root element. */
+    classes?: string;
+}
+
+const { variant, size, classes } = Astro.props;
+
+const rootClass = twMerge(
+    "tabs",
+    variant && `tabs-${variant}`,
+    size && `tabs-${size}`,
+    classes,
+);
+---
+
+<div role="tablist" class={rootClass}>
+    <slot />
+</div>

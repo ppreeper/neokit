@@ -1,0 +1,24 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    /** URL shown in the address bar. */
+    url?: string;
+    classes?: string;
+    /** Extra classes on the toolbar div */
+    toolbarClasses?: string;
+}
+
+const { url, classes, toolbarClasses } = Astro.props;
+
+const wrapClass = twMerge("mockup-browser", classes);
+const tbClass = twMerge("mockup-browser-toolbar", toolbarClasses);
+---
+
+<div class={wrapClass}>
+    <div class={tbClass}>
+        {url && <div class="input">{url}</div>}
+        <slot name="toolbar" />
+    </div>
+    <slot />
+</div>

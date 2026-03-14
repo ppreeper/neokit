@@ -1,0 +1,24 @@
+---
+import { twMerge } from "tailwind-merge";
+
+interface Props {
+    /**
+     * Layout direction of the footer content.
+     * `horizontal` → `footer-horizontal` (items in a row)
+     * Defaults to vertical (column) layout.
+     */
+    horizontal?: boolean;
+    /** Stack items in the center of the footer */
+    center?: boolean;
+    classes?: string;
+}
+
+const { horizontal = false, center = false, classes } = Astro.props;
+
+const dirClass = horizontal ? "footer-horizontal" : "";
+const centerClass = center ? "footer-center" : "";
+
+const classList = twMerge("footer", dirClass, centerClass, classes);
+---
+
+<footer class={classList}><slot /></footer>

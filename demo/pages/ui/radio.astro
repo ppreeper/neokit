@@ -1,0 +1,128 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Radio from "neokit/components/Radio.astro";
+---
+
+<AppLayout title="Radio">
+    <h1 id="top" class="text-5xl">Radio</h1>
+    <p class="mt-2 opacity-70">
+        A styled radio button input. Built on{" "}
+        <code>&lt;input type="radio"&gt;</code> with DaisyUI's{" "}
+        <code>radio</code> class. Group multiple radios by sharing the same{" "}
+        <code>name</code> prop. Wrap in a <code>&lt;label&gt;</code> for
+        accessibility.
+    </p>
+
+    <!-- ── Default ─────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Default</h2>
+    <p class="mt-1 text-sm opacity-70">A basic radio group with one pre-selected.</p>
+
+    <fieldset>
+        <legend>radio default</legend>
+        <div class="flex flex-col gap-2">
+            <label class="flex items-center gap-2 cursor-pointer">
+                <Radio name="demo-default" value="a" checked />
+                <span>Option A</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+                <Radio name="demo-default" value="b" />
+                <span>Option B</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+                <Radio name="demo-default" value="c" />
+                <span>Option C</span>
+            </label>
+        </div>
+    </fieldset>
+
+    <!-- ── Colors ──────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Colors</h2>
+    <p class="mt-1 text-sm opacity-70">All eight DaisyUI color tokens, each checked.</p>
+
+    <fieldset>
+        <legend>radio colors</legend>
+        <div class="flex flex-wrap gap-4">
+            {(["primary","secondary","accent","info","success","warning","error","neutral"] as const).map((c) => (
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <Radio name={`radio-color-${c}`} color={c} checked />
+                    <span class="text-sm capitalize">{c}</span>
+                </label>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Sizes ───────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Sizes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Five sizes: <code>xs</code> → <code>xl</code>.
+    </p>
+
+    <fieldset>
+        <legend>radio sizes</legend>
+        <div class="flex items-end gap-6">
+            {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
+                <label class="flex flex-col items-center gap-1 cursor-pointer">
+                    <Radio name={`radio-size-${s}`} size={s} checked color="primary" />
+                    <span class="text-xs opacity-60">{s}</span>
+                </label>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Disabled ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Disabled</h2>
+    <p class="mt-1 text-sm opacity-70">Unselected and pre-selected disabled states.</p>
+
+    <fieldset>
+        <legend>radio disabled</legend>
+        <div class="flex items-center gap-6">
+            <label class="flex items-center gap-2 cursor-not-allowed">
+                <Radio name="radio-disabled" disabled />
+                <span class="opacity-50">Disabled</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-not-allowed">
+                <Radio name="radio-disabled2" disabled checked />
+                <span class="opacity-50">Disabled checked</span>
+            </label>
+        </div>
+    </fieldset>
+
+    <!-- ── Plan selector ──────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Plan selector</h2>
+    <p class="mt-1 text-sm opacity-70">Real-world pricing tier selection.</p>
+
+    <fieldset>
+        <legend>radio plan selector</legend>
+        <div class="flex flex-col gap-3 max-w-sm">
+            {[
+                { value: "free", label: "Free", desc: "Up to 3 projects, 1 GB storage", checked: false },
+                { value: "pro", label: "Pro — $9/mo", desc: "Unlimited projects, 100 GB storage", checked: true },
+                { value: "team", label: "Team — $29/mo", desc: "Everything in Pro + team features", checked: false },
+            ].map(({ value, label, desc, checked }) => (
+                <label class={`flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer transition-colors ${checked ? "border-primary bg-primary/5" : "border-base-300"}`}>
+                    <Radio name="plan" value={value} color="primary" checked={checked} classes="mt-0.5" />
+                    <div>
+                        <div class="font-semibold">{label}</div>
+                        <div class="text-sm opacity-60">{desc}</div>
+                    </div>
+                </label>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Horizontal group ───────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Horizontal group</h2>
+    <p class="mt-1 text-sm opacity-70">Radios laid out in a row.</p>
+
+    <fieldset>
+        <legend>radio horizontal</legend>
+        <div class="flex items-center gap-6">
+            {["Small", "Medium", "Large", "XL"].map((size, i) => (
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <Radio name="radio-size-pick" value={size.toLowerCase()} color="primary" checked={i === 1} />
+                    <span>{size}</span>
+                </label>
+            ))}
+        </div>
+    </fieldset>
+</AppLayout>

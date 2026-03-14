@@ -1,0 +1,201 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Countdown from "neokit/components/Countdown.astro";
+---
+
+<AppLayout title="Countdown">
+    <h1 id="top" class="text-5xl">Countdown</h1>
+    <p class="mt-2 opacity-70">
+        CSS-based digit flip animation. Set the <code>--value</code> CSS variable (0–999)
+        to display a number with a smooth transition effect. Drive live countdowns via JS.
+    </p>
+
+    <!-- ── Basic ────────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Basic</h2>
+    <p class="mt-1 text-sm opacity-70">
+        A single <code>value</code> renders the number with the transition animation.
+    </p>
+
+    <fieldset>
+        <legend>countdown</legend>
+        <Countdown value={59} />
+    </fieldset>
+
+    <!-- ── Large with 2 digits ──────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Large text with 2 digits</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>digits={2}</code> zero-pads to at least 2 characters. Combine with Tailwind
+        size utilities for large displays.
+    </p>
+
+    <fieldset>
+        <legend>countdown font-mono text-6xl digits=2</legend>
+        <Countdown value={59} digits={2} classes="font-mono text-6xl" />
+    </fieldset>
+
+    <!-- ── Clock with h/m/s labels ──────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Clock (h / m / s)</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Compose multiple <code>Countdown</code> units inline with label text between them.
+    </p>
+
+    <fieldset>
+        <legend>clock h/m/s</legend>
+        <span class="countdown font-mono text-2xl">
+            <Countdown value={10} />h
+            <Countdown value={24} />m
+            <Countdown value={59} />s
+        </span>
+    </fieldset>
+
+    <!-- ── Clock with colons ─────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Clock with colons</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Use <code>digits={2}</code> on minutes and seconds to keep two-digit formatting.
+    </p>
+
+    <fieldset>
+        <legend>clock HH:MM:SS</legend>
+        <span class="font-mono text-2xl flex items-center gap-0">
+            <Countdown value={10} />
+            <span class="mx-0.5">:</span>
+            <Countdown value={24} digits={2} />
+            <span class="mx-0.5">:</span>
+            <Countdown value={59} digits={2} />
+        </span>
+    </fieldset>
+
+    <!-- ── Large with inline labels ─────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Large with inline labels</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Label text placed after each countdown unit on the same line.
+    </p>
+
+    <fieldset>
+        <legend>large inline labels</legend>
+        <div class="flex gap-5">
+            <div>
+                <Countdown value={15} classes="font-mono text-4xl" />
+                days
+            </div>
+            <div>
+                <Countdown value={10} classes="font-mono text-4xl" />
+                hours
+            </div>
+            <div>
+                <Countdown value={24} classes="font-mono text-4xl" />
+                min
+            </div>
+            <div>
+                <Countdown value={59} classes="font-mono text-4xl" />
+                sec
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── Large with labels underneath ────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Large with labels underneath</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Stack the number above the label using <code>flex-col</code>.
+    </p>
+
+    <fieldset>
+        <legend>large labels below</legend>
+        <div class="grid auto-cols-max grid-flow-col gap-5 text-center">
+            <div class="flex flex-col">
+                <Countdown value={15} classes="font-mono text-5xl" />
+                <span class="text-sm">days</span>
+            </div>
+            <div class="flex flex-col">
+                <Countdown value={10} classes="font-mono text-5xl" />
+                <span class="text-sm">hours</span>
+            </div>
+            <div class="flex flex-col">
+                <Countdown value={24} classes="font-mono text-5xl" />
+                <span class="text-sm">min</span>
+            </div>
+            <div class="flex flex-col">
+                <Countdown value={59} classes="font-mono text-5xl" />
+                <span class="text-sm">sec</span>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- ── In boxes ──────────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">In boxes</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Wrap each unit in a card-style box using DaisyUI's <code>bg-neutral rounded-box</code>.
+    </p>
+
+    <fieldset>
+        <legend>boxed countdown</legend>
+        <div class="grid auto-cols-max grid-flow-col gap-5 text-center">
+            {[
+                { value: 15, label: "days" },
+                { value: 10, label: "hours" },
+                { value: 24, label: "min" },
+                { value: 59, label: "sec" },
+            ].map(({ value, label }) => (
+                <div class="bg-neutral rounded-box text-neutral-content flex flex-col p-2 min-w-[4rem]">
+                    <Countdown value={value} classes="font-mono text-5xl" />
+                    <span class="text-sm">{label}</span>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── Live countdown (JS) ───────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Live countdown</h2>
+    <p class="mt-1 text-sm opacity-70">
+        Update <code>--value</code> and <code>aria-label</code> via JS to drive a real
+        countdown. The CSS transition fires automatically on each value change.
+    </p>
+
+    <fieldset>
+        <legend>live JS-driven countdown</legend>
+        <div class="grid auto-cols-max grid-flow-col gap-5 text-center" id="live-timer">
+            <div class="bg-primary rounded-box text-primary-content flex flex-col p-2 min-w-[4rem]">
+                <span class="countdown font-mono text-5xl">
+                    <span id="live-h" style="--value:0;" aria-live="polite" aria-label="0">0</span>
+                </span>
+                <span class="text-sm">hours</span>
+            </div>
+            <div class="bg-primary rounded-box text-primary-content flex flex-col p-2 min-w-[4rem]">
+                <span class="countdown font-mono text-5xl">
+                    <span id="live-m" style="--value:0;" aria-live="polite" aria-label="0">0</span>
+                </span>
+                <span class="text-sm">min</span>
+            </div>
+            <div class="bg-primary rounded-box text-primary-content flex flex-col p-2 min-w-[4rem]">
+                <span class="countdown font-mono text-5xl">
+                    <span id="live-s" style="--value:0;" aria-live="polite" aria-label="0">0</span>
+                </span>
+                <span class="text-sm">sec</span>
+            </div>
+        </div>
+    </fieldset>
+
+    <script>
+        // Target: 24h from now
+        const target = Date.now() + 24 * 60 * 60 * 1000;
+
+        function setVal(el: HTMLElement | null, n: number) {
+            if (!el) return;
+            el.style.setProperty("--value", String(n));
+            el.setAttribute("aria-label", String(n));
+        }
+
+        function tick() {
+            const diff = Math.max(0, Math.floor((target - Date.now()) / 1000));
+            const h = Math.floor(diff / 3600);
+            const m = Math.floor((diff % 3600) / 60);
+            const s = diff % 60;
+            setVal(document.getElementById("live-h"), h);
+            setVal(document.getElementById("live-m"), m);
+            setVal(document.getElementById("live-s"), s);
+        }
+
+        tick();
+        setInterval(tick, 1000);
+    </script>
+</AppLayout>

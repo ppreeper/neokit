@@ -1,0 +1,88 @@
+---
+import AppLayout from "../../layouts/AppLayout.astro";
+import Mask from "neokit/components/Mask.astro";
+
+const shapes = [
+    "squircle", "heart", "hexagon", "hexagon-2", "decagon",
+    "pentagon", "diamond", "square", "circle",
+    "star", "star-2",
+    "triangle", "triangle-2", "triangle-3", "triangle-4",
+    "parallelogram", "parallelogram-2", "parallelogram-3", "parallelogram-4",
+] as const;
+---
+
+<AppLayout title="Mask">
+    <h1 id="top" class="text-5xl">Mask</h1>
+    <p class="mt-2 opacity-70">
+        Clips any element to a predefined CSS shape. Wraps a <code>&lt;div class="mask mask-[shape]"&gt;</code>.
+        Works on images, colored divs, avatars, and more.
+    </p>
+
+    <!-- ── All shapes ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">All shapes</h2>
+    <p class="mt-1 text-sm opacity-70">19 built-in shapes.</p>
+
+    <fieldset>
+        <legend>Shape grid</legend>
+        <div class="flex flex-wrap gap-6">
+            {shapes.map((s) => (
+                <div class="flex flex-col items-center gap-1">
+                    <Mask shape={s} classes="w-16 h-16">
+                        <img
+                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                            alt={s}
+                            class="w-full h-full object-cover"
+                        />
+                    </Mask>
+                    <span class="text-xs opacity-50 text-center w-20 leading-tight">{s}</span>
+                </div>
+            ))}
+        </div>
+    </fieldset>
+
+    <!-- ── With colored divs ────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">With colored backgrounds</h2>
+    <p class="mt-1 text-sm opacity-70">Mask clips any element, not just images.</p>
+
+    <fieldset>
+        <legend>Color tokens as filled shapes</legend>
+        <div class="flex flex-wrap gap-4 items-center">
+            <Mask shape="squircle" classes="w-16 h-16 bg-primary" />
+            <Mask shape="squircle" classes="w-16 h-16 bg-secondary" />
+            <Mask shape="squircle" classes="w-16 h-16 bg-accent" />
+            <Mask shape="squircle" classes="w-16 h-16 bg-info" />
+            <Mask shape="squircle" classes="w-16 h-16 bg-success" />
+            <Mask shape="squircle" classes="w-16 h-16 bg-warning" />
+            <Mask shape="squircle" classes="w-16 h-16 bg-error" />
+        </div>
+    </fieldset>
+
+    <!-- ── Half masks ───────────────────────────────────────────────────── -->
+    <h2 class="text-3xl mt-8">Half masks</h2>
+    <p class="mt-1 text-sm opacity-70">
+        <code>half-1</code> clips the left half, <code>half-2</code> clips the right half.
+        Used for star/rating half-fill.
+    </p>
+
+    <fieldset>
+        <legend>Half-1 and half-2</legend>
+        <div class="flex gap-4 items-center">
+            <div class="flex flex-col items-center gap-1">
+                <Mask shape="half-1" classes="w-16 h-16 bg-warning" />
+                <span class="text-xs opacity-50">half-1</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+                <Mask shape="half-2" classes="w-16 h-16 bg-warning" />
+                <span class="text-xs opacity-50">half-2</span>
+            </div>
+            <!-- Half masks side by side simulate a half-filled star -->
+            <div class="flex flex-col items-center gap-1">
+                <div class="flex">
+                    <Mask shape="half-1" classes="w-8 h-16 bg-warning" />
+                    <Mask shape="half-2" classes="w-8 h-16 bg-base-300" />
+                </div>
+                <span class="text-xs opacity-50">half star</span>
+            </div>
+        </div>
+    </fieldset>
+</AppLayout>

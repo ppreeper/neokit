@@ -1,0 +1,81 @@
+---
+import { twMerge } from "tailwind-merge";
+
+/**
+ * Checkbox — DaisyUI `checkbox` input component.
+ *
+ * Renders a styled `<input type="checkbox">`. Wrap in a `<label>` for
+ * accessible labelling.
+ *
+ * Sizes: `"xs"` | `"sm"` | `"md"` (default) | `"lg"` | `"xl"`
+ * Colors: `"primary"` | `"secondary"` | `"accent"` | `"info"` |
+ *         `"success"` | `"warning"` | `"error"` | `"neutral"`
+ *
+ * ```astro
+ * <label class="flex items-center gap-2">
+ *   <Checkbox checked />
+ *   <span>Accept terms</span>
+ * </label>
+ *
+ * <Checkbox color="primary" size="lg" />
+ * ```
+ */
+
+interface Props {
+    /** Checked state (static / SSR). */
+    checked?: boolean;
+    /** Indeterminate state (applied via JS/class workaround — sets `indeterminate` attr). */
+    indeterminate?: boolean;
+    /** Disabled state. */
+    disabled?: boolean;
+    /** Size token. Default: `"md"`. */
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    /** Color token. */
+    color?: "primary" | "secondary" | "accent" | "info" | "success" | "warning" | "error" | "neutral";
+    /** id attribute. */
+    id?: string;
+    /** name attribute. */
+    name?: string;
+    /** value attribute. */
+    value?: string;
+    /** Extra classes. */
+    classes?: string;
+}
+
+const {
+    checked,
+    indeterminate,
+    disabled,
+    size = "md",
+    color,
+    id,
+    name,
+    value,
+    classes,
+} = Astro.props;
+
+const rootClass = twMerge(
+    "checkbox",
+    size !== "md" && `checkbox-${size}`,
+    color && `checkbox-${color}`,
+    classes,
+);
+---
+
+<input
+    type="checkbox"
+    class={rootClass}
+    checked={checked}
+    disabled={disabled}
+    id={id}
+    name={name}
+    value={value}
+    data-indeterminate={indeterminate ? "true" : undefined}
+/>
+{indeterminate && (
+    <script>
+        document.querySelectorAll('[data-indeterminate="true"]').forEach((el) => {
+            (el as HTMLInputElement).indeterminate = true;
+        });
+    </script>
+)}

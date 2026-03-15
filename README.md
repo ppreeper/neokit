@@ -5,9 +5,9 @@ An [Astro](https://astro.build) component library built on [DaisyUI](https://dai
 ## Installation
 
 ```sh
-bun add neokit
+bun add @ppreeper/neokit
 # or
-npm install neokit
+npm install @ppreeper/neokit
 ```
 
 ## Setup
@@ -17,7 +17,7 @@ Add the integration to your `astro.config.mjs`:
 ```js
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
-import neokit from 'neokit';
+import neokit from '@ppreeper/neokit';
 
 export default defineConfig({
   integrations: [
@@ -37,9 +37,9 @@ Import any component directly by path:
 
 ```astro
 ---
-import Button from 'neokit/components/Button.astro';
-import Card from 'neokit/components/Card.astro';
-import Badge from 'neokit/components/Badge.astro';
+import Button from '@ppreeper/neokit/components/Button.astro';
+import Card from '@ppreeper/neokit/components/Card.astro';
+import Badge from '@ppreeper/neokit/components/Badge.astro';
 ---
 
 <Button color="primary">Click me</Button>
@@ -55,7 +55,7 @@ import Badge from 'neokit/components/Badge.astro';
 You can also import from the barrel (named exports):
 
 ```ts
-import { Button, Card, Badge } from 'neokit';
+import { Button, Card, Badge } from '@ppreeper/neokit';
 ```
 
 ## Components

@@ -1,6 +1,6 @@
 ---
 import AppLayout from "../../layouts/AppLayout.astro";
-import MockupCode from "neokit/components/MockupCode.astro";
+import MockupCode from "@ppreeper/neokit/components/MockupCode.astro";
 ---
 
 <AppLayout title="Mockup Code">
@@ -49,7 +49,7 @@ import MockupCode from "neokit/components/MockupCode.astro";
     <fieldset>
         <legend>Warning line highlighted</legend>
         <MockupCode>
-            <pre data-prefix="1"><code>import &#123;neokit&#125; from 'neokit'</code></pre>
+            <pre data-prefix="1"><code>import &#123;neokit&#125; from '@ppreeper/neokit'</code></pre>
             <pre data-prefix="2" class="bg-warning text-warning-content"><code>// deprecated API call below</code></pre>
             <pre data-prefix="3"><code>neokit.oldMethod()</code></pre>
         </MockupCode>

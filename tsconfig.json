@@ -4,8 +4,8 @@
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "neokit": ["./src/index.ts"],
-      "neokit/*": ["./src/*"]
+      "@ppreeper/neokit": ["./src/index.ts"],
+      "@ppreeper/neokit/*": ["./src/*"]
     }
   },
   "include": [

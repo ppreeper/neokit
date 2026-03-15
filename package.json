@@ -1,5 +1,5 @@
 {
-  "name": "neokit",
+  "name": "@ppreeper/neokit",
   "version": "1.0.3",
   "description": "An Astro component library extending DaisyUI and Tailwind CSS v4.",
   "author": "Peter Preeper",

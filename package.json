@@ -21,6 +21,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./integration": "./src/integration.ts",
+    "./components/*.astro": "./src/components/*.astro",
     "./components/*": "./src/components/*.astro"
   },
   "files": [

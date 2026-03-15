@@ -21,11 +21,33 @@
     const lightTheme = "corporate";
     const darkTheme = "business";
 
-    function init() {
+    function syncToggle() {
         const toggle = document.querySelector("#theme-button") as HTMLInputElement;
         if (!toggle) return;
         const current = document.documentElement.getAttribute("data-theme");
-        toggle.checked = current === darkTheme;
+        const shouldBeChecked = current === darkTheme;
+        if (toggle.checked === shouldBeChecked) return;
+
+        // The transition lives on the SVG children (.swap-on / .swap-off).
+        // Suppress it for one frame so the icon snaps to position without animating.
+        const icons = toggle.closest("label")?.querySelectorAll("svg") ?? [];
+        icons.forEach((el) => (el.style.transition = "none"));
+        toggle.checked = shouldBeChecked;
+        requestAnimationFrame(() => {
+            icons.forEach((el) => (el.style.transition = ""));
+        });
+    }
+
+    function init() {
+        const toggle = document.querySelector("#theme-button") as HTMLInputElement;
+        if (!toggle) return;
+
+        syncToggle();
+
+        // Only attach listener once — guard against duplicate registration
+        if ((toggle as any).__neokitTheme) return;
+        (toggle as any).__neokitTheme = true;
+
         toggle.addEventListener("change", () => {
             const next = toggle.checked ? darkTheme : lightTheme;
             document.documentElement.setAttribute("data-theme", next);

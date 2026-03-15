@@ -275,19 +275,19 @@ const statusColor = { Active: "success", Pending: "warning", Inactive: "error" }
     <!-- ── Highlighted row / col ─────────────────────────────────────────── -->
     <h2 class="text-3xl mt-8">Highlighted rows</h2>
     <p class="mt-1 text-sm opacity-70">
-        Add <code>hover</code> to <code>&lt;tr&gt;</code> for row highlight on
-        hover. Add <code>active</code> to mark a selected row.
+        Add <code>row-hover</code> to <code>&lt;tr&gt;</code> for a hover highlight
+        (DaisyUI v5). Use <code>bg-base-200</code> to mark a selected/active row.
     </p>
 
     <fieldset>
         <legend>table row highlight</legend>
-        <Table>
+        <Table classes="bg-base-100">
             <thead>
                 <tr><th>#</th><th>Name</th><th>Job</th><th>Location</th></tr>
             </thead>
             <tbody>
                 {people.map((p, i) => (
-                    <tr class={`hover${i === 1 ? " active" : ""}`}>
+                    <tr class={`row-hover${i === 1 ? " bg-base-200" : ""}`}>
                         <th>{i + 1}</th>
                         <td>{p.name}</td>
                         <td>{p.job}</td>

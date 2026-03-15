@@ -59,13 +59,13 @@ const tableClass = twMerge(
 ---
 
 {scrollable ? (
-    <div class="overflow-x-auto">
+    <div class={twMerge("overflow-x-auto", zebra && "bg-base-100")}>
         <table class={tableClass}>
             <slot />
         </table>
     </div>
 ) : (
-    <table class={tableClass}>
+    <table class={twMerge(tableClass, zebra && "bg-base-100")}>
         <slot />
     </table>
 )}

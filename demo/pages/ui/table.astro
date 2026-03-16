@@ -43,13 +43,8 @@ const statusColor = { Active: "success", Pending: "warning", Inactive: "error" }
                 </tr>
             </thead>
             <tbody>
-                {people.slice(0, 3).map((p, i) => (
-                    <tr>
-                        <th>{i + 1}</th>
-                        <td>{p.name}</td>
-                        <td>{p.job}</td>
-                        <td>{p.location}</td>
-                    </tr>
+                {people.map((p, i) => (
+                    <tr><th>{i + 1}</th><td>{p.name}</td><td>{p.job}</td><td>{p.location}</td></tr>
                 ))}
             </tbody>
         </Table>
@@ -65,12 +60,7 @@ const statusColor = { Active: "success", Pending: "warning", Inactive: "error" }
         <legend>table with avatar</legend>
         <Table>
             <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Job</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
+                <tr><th>Name</th><th>Job</th><th>Status</th><th>Action</th></tr>
             </thead>
             <tbody>
                 {people.map((p, i) => (
@@ -120,20 +110,13 @@ const statusColor = { Active: "success", Pending: "warning", Inactive: "error" }
     <fieldset>
         <legend>table zebra</legend>
         <Table zebra>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Company</th>
-                    <th>Location</th>
-                </tr>
-            </thead>
+            <thead><tr><th>#</th><th>Name</th><th>Job</th><th>Location</th></tr></thead>
             <tbody>
                 {people.map((p, i) => (
                     <tr>
                         <th>{i + 1}</th>
                         <td>{p.name}</td>
-                        <td>{p.company}</td>
+                        <td>{p.job}</td>
                         <td>{p.location}</td>
                     </tr>
                 ))}

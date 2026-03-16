@@ -4,8 +4,7 @@ import neokit from './src/integration.ts';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ppreeper.github.io',
-  base: 'neokit',
+  site: 'https://neokit.preeper.org',
   srcDir: './demo',
   integrations: [
     neokit({
